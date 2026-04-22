@@ -771,5 +771,410 @@
     document.getElementById(type + 'Success').style.display = 'block';
   }
 </script>
+
+<!-- ═══ HIDDEN ADMIN PANEL (CMS) ════════════════════════════ -->
+<style id="wm-admin-css">
+  #wm-admin-overlay { display:none; position:fixed; inset:0; z-index:999999; background:#0a0a0a; font-family:'Space Grotesk',sans-serif; overflow-y:auto; }
+  #wm-admin-overlay * { box-sizing:border-box; }
+
+  /* Auth */
+  #wm-admin-auth { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; gap:1.5rem; padding:2rem; }
+  .wm-admin-logo { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; letter-spacing:.15em; color:#fff; }
+  .wm-admin-logo span { color:#0066ff; }
+  .wm-admin-auth-sub { font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#555; }
+  .wm-admin-pwd-wrap { display:flex; gap:0; border:1px solid #1e1e1e; overflow:hidden; width:100%; max-width:340px; }
+  .wm-admin-pwd-wrap input { flex:1; background:#141414; border:none; color:#fff; padding:.85rem 1rem; font-size:.87rem; font-family:'Space Grotesk',sans-serif; outline:none; }
+  .wm-admin-pwd-wrap input::placeholder { color:#555; }
+  .wm-admin-pwd-wrap button { background:#0066ff; border:none; color:#fff; padding:0 1.5rem; font-family:'Space Grotesk',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:background .2s; white-space:nowrap; }
+  .wm-admin-pwd-wrap button:hover { background:#0052cc; }
+  .wm-admin-auth-error { font-size:.78rem; color:#ff4444; display:none; }
+
+  /* Panel shell */
+  #wm-admin-panel { max-width:860px; margin:0 auto; padding:4rem 2rem; }
+  .wm-admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:3rem; padding-bottom:1.5rem; border-bottom:1px solid #1e1e1e; }
+  .wm-admin-header-sub { font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:#555; margin-top:.3rem; }
+  .wm-admin-close { background:none; border:1px solid #1e1e1e; color:#555; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; transition:border-color .2s,color .2s; }
+  .wm-admin-close:hover { border-color:#fff; color:#fff; }
+
+  /* Sections */
+  .wm-admin-section { margin-bottom:3rem; padding-bottom:3rem; border-bottom:1px solid #1e1e1e; }
+  .wm-admin-section:last-child { border-bottom:none; margin-bottom:0; }
+  .wm-admin-section-title { font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#0066ff; font-weight:600; margin-bottom:1.5rem; display:flex; align-items:center; gap:.7rem; }
+  .wm-admin-section-title::before { content:''; width:18px; height:1px; background:#0066ff; }
+
+  /* Fields */
+  .wm-admin-field { margin-bottom:1.4rem; }
+  .wm-admin-label { display:block; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:#555; margin-bottom:.55rem; }
+  .wm-admin-input-row { display:flex; gap:.6rem; align-items:flex-start; }
+  .wm-admin-input, .wm-admin-textarea { flex:1; background:#141414; border:1px solid #1e1e1e; color:#fff; padding:.85rem 1rem; font-size:.87rem; font-family:'Space Grotesk',sans-serif; outline:none; transition:border-color .25s; border-radius:0; width:100%; }
+  .wm-admin-input:focus, .wm-admin-textarea:focus { border-color:#0066ff; }
+  .wm-admin-input::placeholder, .wm-admin-textarea::placeholder { color:#555; }
+  .wm-admin-textarea { resize:vertical; min-height:80px; }
+  .wm-admin-hint { font-size:.68rem; color:#555; margin-top:.4rem; }
+
+  /* Buttons */
+  .wm-admin-btn { background:#0066ff; border:none; color:#fff; padding:.85rem 1.4rem; font-family:'Space Grotesk',sans-serif; font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; transition:background .2s; white-space:nowrap; }
+  .wm-admin-btn:hover { background:#0052cc; }
+  .wm-admin-btn.outline { background:transparent; border:1px solid #1e1e1e; color:#999; }
+  .wm-admin-btn.outline:hover { border-color:#0066ff; color:#0066ff; background:transparent; }
+  .wm-admin-btn.wm-saved { background:#00a84a !important; }
+  .wm-admin-btn-col { display:flex; flex-direction:column; gap:.5rem; }
+
+  /* Toggle */
+  .wm-admin-toggle-wrap { display:flex; align-items:center; gap:1rem; }
+  .wm-admin-toggle { position:relative; width:48px; height:26px; cursor:pointer; flex-shrink:0; }
+  .wm-admin-toggle input { opacity:0; width:0; height:0; position:absolute; }
+  .wm-admin-slider { position:absolute; inset:0; background:#1e1e1e; border-radius:999px; transition:background .3s; }
+  .wm-admin-slider::before { content:''; position:absolute; width:18px; height:18px; border-radius:50%; background:#444; top:4px; left:4px; transition:transform .3s,background .3s; }
+  .wm-admin-toggle input:checked + .wm-admin-slider { background:rgba(0,102,255,.2); }
+  .wm-admin-toggle input:checked + .wm-admin-slider::before { transform:translateX(22px); background:#0066ff; }
+  .wm-admin-toggle-lbl { font-size:.83rem; color:#999; }
+
+  /* Stats grid */
+  .wm-admin-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#1e1e1e; border:1px solid #1e1e1e; }
+  .wm-admin-stat-cell { background:#141414; padding:1.2rem; display:flex; flex-direction:column; gap:.6rem; }
+  .wm-admin-stat-lbl { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:#555; }
+  .wm-admin-stat-row { display:flex; gap:.4rem; align-items:center; }
+  .wm-admin-stat-num { width:68px; background:#0a0a0a; border:1px solid #1e1e1e; color:#fff; padding:.6rem .7rem; font-size:.87rem; font-family:'Space Grotesk',sans-serif; outline:none; transition:border-color .25s; border-radius:0; }
+  .wm-admin-stat-num:focus { border-color:#0066ff; }
+  .wm-admin-stat-sfx { width:48px; background:#0a0a0a; border:1px solid #1e1e1e; color:#0066ff; padding:.6rem .5rem; font-size:.78rem; font-family:'Space Grotesk',sans-serif; outline:none; transition:border-color .25s; border-radius:0; text-align:center; }
+  .wm-admin-stat-sfx:focus { border-color:#0066ff; }
+  .wm-admin-stat-btn { background:#141414; border:1px solid #1e1e1e; color:#999; padding:.6rem .8rem; font-size:.6rem; font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s,background .2s; white-space:nowrap; }
+  .wm-admin-stat-btn:hover { border-color:#0066ff; color:#0066ff; }
+  .wm-admin-stat-btn.wm-saved { background:rgba(0,168,74,.15) !important; border-color:#00a84a !important; color:#00a84a !important; }
+
+  /* AI suggest loader */
+  .wm-suggest-loading { display:none; align-items:center; gap:.5rem; font-size:.72rem; color:#0066ff; margin-top:.5rem; }
+  @keyframes wm-spin { to { transform:rotate(360deg); } }
+  .wm-spinner { width:13px; height:13px; border:2px solid #1e1e1e; border-top-color:#0066ff; border-radius:50%; animation:wm-spin .7s linear infinite; flex-shrink:0; }
+</style>
+
+<div id="wm-admin-overlay">
+
+  <!-- AUTH SCREEN -->
+  <div id="wm-admin-auth">
+    <div class="wm-admin-logo">WARSAW MEDIA<span>.</span></div>
+    <div class="wm-admin-auth-sub">Admin Access</div>
+    <div class="wm-admin-pwd-wrap">
+      <input type="password" id="wm-admin-pwd" placeholder="Password" onkeydown="if(event.key==='Enter')wmAdminLogin()">
+      <button onclick="wmAdminLogin()">Enter</button>
+    </div>
+    <div class="wm-admin-auth-error" id="wm-admin-error">Incorrect password</div>
+  </div>
+
+  <!-- PANEL -->
+  <div id="wm-admin-panel" style="display:none;">
+    <div class="wm-admin-header">
+      <div>
+        <div class="wm-admin-logo">WARSAW MEDIA<span>.</span></div>
+        <div class="wm-admin-header-sub">CMS Admin Panel · Shift+A to open · Esc to close</div>
+      </div>
+      <button class="wm-admin-close" onclick="wmAdminClose()">✕</button>
+    </div>
+
+    <!-- HERO -->
+    <div class="wm-admin-section">
+      <div class="wm-admin-section-title">Hero Section</div>
+
+      <div class="wm-admin-field">
+        <label class="wm-admin-label">Accepting New Clients Tag</label>
+        <div class="wm-admin-toggle-wrap">
+          <label class="wm-admin-toggle">
+            <input type="checkbox" id="wm-admin-accepting" checked onchange="wmAdminSaveAccepting()">
+            <span class="wm-admin-slider"></span>
+          </label>
+          <span class="wm-admin-toggle-lbl" id="wm-accepting-lbl">Visible</span>
+        </div>
+      </div>
+
+      <div class="wm-admin-field">
+        <label class="wm-admin-label">Hero Headline</label>
+        <div class="wm-admin-input-row">
+          <textarea class="wm-admin-textarea" id="wm-admin-headline" rows="2" placeholder="I AM YOUR&#10;MEDIA SPECIALIST"></textarea>
+          <div class="wm-admin-btn-col">
+            <button class="wm-admin-btn" id="wm-save-headline" onclick="wmAdminSaveHeadline()">Save</button>
+            <button class="wm-admin-btn outline" id="wm-suggest-btn" onclick="wmAdminSuggest()">✦ AI Suggest</button>
+          </div>
+        </div>
+        <div class="wm-suggest-loading" id="wm-suggest-loading"><div class="wm-spinner"></div>Asking Claude…</div>
+        <div class="wm-admin-hint">The blue period ( . ) is always added automatically at the end.</div>
+      </div>
+
+      <div class="wm-admin-field">
+        <label class="wm-admin-label">Hero Description</label>
+        <div class="wm-admin-input-row">
+          <textarea class="wm-admin-textarea" id="wm-admin-desc" rows="3"></textarea>
+          <button class="wm-admin-btn" id="wm-save-desc" onclick="wmAdminSaveDesc()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="wm-admin-section">
+      <div class="wm-admin-section-title">Stats — Results Section</div>
+      <div class="wm-admin-stats-grid">
+        <div class="wm-admin-stat-cell">
+          <div class="wm-admin-stat-lbl">Organic Views (30 days)</div>
+          <div class="wm-admin-stat-row">
+            <input class="wm-admin-stat-num" id="wm-s0-num" type="text" value="10">
+            <input class="wm-admin-stat-sfx" id="wm-s0-sfx" type="text" value="K+">
+            <button class="wm-admin-stat-btn" id="wm-s0-btn" onclick="wmAdminSaveStat(0)">Save</button>
+          </div>
+        </div>
+        <div class="wm-admin-stat-cell">
+          <div class="wm-admin-stat-lbl">Days to First Results</div>
+          <div class="wm-admin-stat-row">
+            <input class="wm-admin-stat-num" id="wm-s1-num" type="text" value="30">
+            <button class="wm-admin-stat-btn" id="wm-s1-btn" onclick="wmAdminSaveStat(1)">Save</button>
+          </div>
+        </div>
+        <div class="wm-admin-stat-cell">
+          <div class="wm-admin-stat-lbl">Organic Growth</div>
+          <div class="wm-admin-stat-row">
+            <input class="wm-admin-stat-num" id="wm-s2-num" type="text" value="100">
+            <input class="wm-admin-stat-sfx" id="wm-s2-sfx" type="text" value="%">
+            <button class="wm-admin-stat-btn" id="wm-s2-btn" onclick="wmAdminSaveStat(2)">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="wm-admin-section">
+      <div class="wm-admin-section-title">Contact</div>
+      <div class="wm-admin-field">
+        <label class="wm-admin-label">Contact Email Address</label>
+        <div class="wm-admin-input-row">
+          <input class="wm-admin-input" id="wm-admin-email" type="email" placeholder="your@email.com">
+          <button class="wm-admin-btn" id="wm-save-email" onclick="wmAdminSaveEmail()">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  /* ── API KEY ─────────────────────────────────────────── */
+  const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE'; // ← replace with your Anthropic API key
+
+  /* ── PASSWORD ────────────────────────────────────────── */
+  const WM_PASS = 'warsawmedia2026';
+
+  /* ── FLASH HELPER ────────────────────────────────────── */
+  function wmFlash(id, isStatBtn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const orig = el.textContent;
+    el.classList.add('wm-saved');
+    el.textContent = isStatBtn ? '✓' : '✓ Saved';
+    setTimeout(() => { el.classList.remove('wm-saved'); el.textContent = orig; }, 1500);
+  }
+
+  /* ── OPEN / CLOSE ────────────────────────────────────── */
+  window.wmAdminOpen = function () {
+    const ov = document.getElementById('wm-admin-overlay');
+    ov.style.display = 'block';
+    document.getElementById('wm-admin-auth').style.display = 'flex';
+    document.getElementById('wm-admin-panel').style.display = 'none';
+    document.getElementById('wm-admin-error').style.display = 'none';
+    document.getElementById('wm-admin-pwd').value = '';
+    setTimeout(() => document.getElementById('wm-admin-pwd').focus(), 50);
+  };
+  window.wmAdminClose = function () {
+    document.getElementById('wm-admin-overlay').style.display = 'none';
+  };
+
+  /* ── LOGIN ───────────────────────────────────────────── */
+  window.wmAdminLogin = function () {
+    if (document.getElementById('wm-admin-pwd').value === WM_PASS) {
+      document.getElementById('wm-admin-auth').style.display = 'none';
+      document.getElementById('wm-admin-panel').style.display = 'block';
+      wmAdminPopulate();
+    } else {
+      const err = document.getElementById('wm-admin-error');
+      err.style.display = 'block';
+      document.getElementById('wm-admin-pwd').value = '';
+      document.getElementById('wm-admin-pwd').focus();
+      setTimeout(() => { err.style.display = 'none'; }, 2500);
+    }
+  };
+
+  /* ── POPULATE FIELDS WITH CURRENT VALUES ─────────────── */
+  function wmAdminPopulate() {
+    // Headline: strip blue span, split on <br>
+    const h1 = document.querySelector('.hero-headline');
+    if (h1) {
+      const clone = h1.cloneNode(true);
+      clone.querySelectorAll('.blue').forEach(el => el.remove());
+      const lines = clone.innerHTML.split(/<br\s*\/?>/i).map(l => l.replace(/\s+/g,' ').trim()).filter(Boolean);
+      document.getElementById('wm-admin-headline').value = lines.join('\n');
+    }
+
+    // Description
+    const desc = document.querySelector('.hero-desc');
+    if (desc) document.getElementById('wm-admin-desc').value = desc.textContent.trim();
+
+    // Accepting tag toggle
+    const tag = document.querySelector('.hero-tag');
+    const on = !tag || tag.style.display !== 'none';
+    document.getElementById('wm-admin-accepting').checked = on;
+    document.getElementById('wm-accepting-lbl').textContent = on ? 'Visible' : 'Hidden';
+
+    // Stats
+    const cells = document.querySelectorAll('.stat-cell');
+    const s0c = cells[0] && cells[0].querySelector('.counter');
+    const s0f = cells[0] && cells[0].querySelector('.stat-sfx');
+    if (s0c) document.getElementById('wm-s0-num').value = s0c.dataset.target || s0c.textContent;
+    if (s0f) document.getElementById('wm-s0-sfx').value = s0f.textContent;
+
+    const s1s = cells[1] && cells[1].querySelector('.stat-num span');
+    if (s1s) document.getElementById('wm-s1-num').value = s1s.textContent;
+
+    const s2c = cells[2] && cells[2].querySelector('.counter');
+    const s2f = cells[2] && cells[2].querySelector('.stat-sfx');
+    if (s2c) document.getElementById('wm-s2-num').value = s2c.dataset.target || s2c.textContent;
+    if (s2f) document.getElementById('wm-s2-sfx').value = s2f.textContent;
+
+    // Email
+    const emailLink = document.querySelector('.contact-val a');
+    if (emailLink) document.getElementById('wm-admin-email').value = emailLink.textContent;
+  }
+
+  /* ── SAVE: HEADLINE ──────────────────────────────────── */
+  window.wmAdminSaveHeadline = function () {
+    const val = document.getElementById('wm-admin-headline').value.trim();
+    if (!val) return;
+    const lines = val.split('\n').map(l => l.trim()).filter(Boolean);
+    const h1 = document.querySelector('.hero-headline');
+    if (h1) h1.innerHTML = lines.join('<br>\n      ') + '<span class="blue">.</span>';
+    localStorage.setItem('wm_headline', val);
+    wmFlash('wm-save-headline');
+  };
+
+  /* ── SAVE: DESCRIPTION ───────────────────────────────── */
+  window.wmAdminSaveDesc = function () {
+    const val = document.getElementById('wm-admin-desc').value.trim();
+    if (!val) return;
+    const desc = document.querySelector('.hero-desc');
+    if (desc) desc.textContent = val;
+    localStorage.setItem('wm_desc', val);
+    wmFlash('wm-save-desc');
+  };
+
+  /* ── SAVE: ACCEPTING TOGGLE ──────────────────────────── */
+  window.wmAdminSaveAccepting = function () {
+    const on = document.getElementById('wm-admin-accepting').checked;
+    const tag = document.querySelector('.hero-tag');
+    if (tag) tag.style.display = on ? '' : 'none';
+    document.getElementById('wm-accepting-lbl').textContent = on ? 'Visible' : 'Hidden';
+    localStorage.setItem('wm_accepting', on ? '1' : '0');
+  };
+
+  /* ── SAVE: STAT ──────────────────────────────────────── */
+  window.wmAdminSaveStat = function (i) {
+    const cells = document.querySelectorAll('.stat-cell');
+    if (!cells[i]) return;
+    if (i === 0) {
+      const num = document.getElementById('wm-s0-num').value.trim();
+      const sfx = document.getElementById('wm-s0-sfx').value.trim();
+      const c = cells[0].querySelector('.counter'), f = cells[0].querySelector('.stat-sfx');
+      if (c) { c.dataset.target = num; c.textContent = num; c.dataset.done = '1'; }
+      if (f) f.textContent = sfx;
+      localStorage.setItem('wm_stat0', JSON.stringify({ num, sfx }));
+    } else if (i === 1) {
+      const num = document.getElementById('wm-s1-num').value.trim();
+      const s = cells[1].querySelector('.stat-num span');
+      if (s) s.textContent = num;
+      localStorage.setItem('wm_stat1', JSON.stringify({ num }));
+    } else if (i === 2) {
+      const num = document.getElementById('wm-s2-num').value.trim();
+      const sfx = document.getElementById('wm-s2-sfx').value.trim();
+      const c = cells[2].querySelector('.counter'), f = cells[2].querySelector('.stat-sfx');
+      if (c) { c.dataset.target = num; c.textContent = num; c.dataset.done = '1'; }
+      if (f) f.textContent = sfx;
+      localStorage.setItem('wm_stat2', JSON.stringify({ num, sfx }));
+    }
+    wmFlash('wm-s' + i + '-btn', true);
+  };
+
+  /* ── SAVE: EMAIL ─────────────────────────────────────── */
+  window.wmAdminSaveEmail = function () {
+    const val = document.getElementById('wm-admin-email').value.trim();
+    if (!val) return;
+    document.querySelectorAll('.contact-val a').forEach(a => { a.href = 'mailto:' + val; a.textContent = val; });
+    localStorage.setItem('wm_email', val);
+    wmFlash('wm-save-email');
+  };
+
+  /* ── CLAUDE AI SUGGEST ───────────────────────────────── */
+  window.wmAdminSuggest = async function () {
+    const btn = document.getElementById('wm-suggest-btn');
+    const loader = document.getElementById('wm-suggest-loading');
+    btn.disabled = true; btn.textContent = '…';
+    loader.style.display = 'flex';
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 60,
+          messages: [{ role: 'user', content: 'Write a short punchy hero headline for a social media growth agency. Exactly 2 lines. Max 4 words per line. ALL CAPS. No punctuation. Reply with only the headline, a single line break between the two lines, nothing else.' }]
+        })
+      });
+      const data = await res.json();
+      if (data.content && data.content[0]) {
+        document.getElementById('wm-admin-headline').value = data.content[0].text.trim();
+      } else {
+        alert('No response — check your API key.');
+      }
+    } catch (err) {
+      alert('Request failed: ' + err.message);
+    } finally {
+      btn.disabled = false; btn.textContent = '✦ AI Suggest';
+      loader.style.display = 'none';
+    }
+  };
+
+  /* ── RESTORE FROM localStorage ON LOAD ──────────────── */
+  (function wmRestore() {
+    const hl = localStorage.getItem('wm_headline');
+    if (hl) {
+      const h1 = document.querySelector('.hero-headline');
+      if (h1) h1.innerHTML = hl.split('\n').map(l=>l.trim()).filter(Boolean).join('<br>\n      ') + '<span class="blue">.</span>';
+    }
+    const dc = localStorage.getItem('wm_desc');
+    if (dc) { const d = document.querySelector('.hero-desc'); if (d) d.textContent = dc; }
+
+    if (localStorage.getItem('wm_accepting') === '0') {
+      const t = document.querySelector('.hero-tag'); if (t) t.style.display = 'none';
+    }
+    const cells = document.querySelectorAll('.stat-cell');
+    const s0 = localStorage.getItem('wm_stat0');
+    if (s0 && cells[0]) { const v=JSON.parse(s0); const c=cells[0].querySelector('.counter'),f=cells[0].querySelector('.stat-sfx'); if(c){c.dataset.target=v.num;} if(f&&v.sfx)f.textContent=v.sfx; }
+    const s1 = localStorage.getItem('wm_stat1');
+    if (s1 && cells[1]) { const v=JSON.parse(s1); const s=cells[1].querySelector('.stat-num span'); if(s)s.textContent=v.num; }
+    const s2 = localStorage.getItem('wm_stat2');
+    if (s2 && cells[2]) { const v=JSON.parse(s2); const c=cells[2].querySelector('.counter'),f=cells[2].querySelector('.stat-sfx'); if(c){c.dataset.target=v.num;} if(f&&v.sfx)f.textContent=v.sfx; }
+
+    const em = localStorage.getItem('wm_email');
+    if (em) document.querySelectorAll('.contact-val a').forEach(a=>{ a.href='mailto:'+em; a.textContent=em; });
+  })();
+
+  /* ── KEYBOARD TRIGGER ────────────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    if (e.shiftKey && e.key === 'A') { e.preventDefault(); wmAdminOpen(); }
+    if (e.key === 'Escape' && document.getElementById('wm-admin-overlay').style.display !== 'none') wmAdminClose();
+  });
+
+})();
+</script>
 </body>
 </html>
