@@ -52,17 +52,18 @@
     .nav-logo img { width: 26px; height: 26px; }
     .back-btn {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .5rem 1.2rem;
-      border: 1px solid var(--border);
+      padding: .6rem 1.4rem;
+      border: 1px solid rgba(137,62,245,.55);
       border-radius: 8px;
-      color: var(--dim);
+      color: #c49eff;
+      background: rgba(137,62,245,.1);
       text-decoration: none;
       font-size: .82rem;
       font-weight: 500;
       letter-spacing: .03em;
       transition: color .2s, border-color .2s;
     }
-    .back-btn:hover { color: var(--text); border-color: var(--blue); }
+    .back-btn:hover { color: #fff; border-color: var(--blue); background: rgba(137,62,245,.22); }
     .back-btn svg { transition: transform .2s; }
     .back-btn:hover svg { transform: translateX(-3px); }
 
@@ -353,8 +354,8 @@
   <div class="process-cta">
     <p>Ready to hand it off? Pick a path below.</p>
     <div class="cta-group">
-      <a href="index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem('openTab','social'); sessionStorage.setItem('openSub','direct');">Let's Start Directly →</a>
-      <a href="index.html#contact" class="btn btn-ghost" onclick="sessionStorage.setItem('openTab','social'); sessionStorage.setItem('openSub','trial');">Start With Free Trial</a>
+      <a href="index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem('openSvc','sm-direct');">Let's Start Directly →</a>
+      <a href="index.html#contact" class="btn btn-ghost" onclick="sessionStorage.setItem('openSvc','sm-trial');">Start With Free Trial</a>
     </div>
   </div>
 

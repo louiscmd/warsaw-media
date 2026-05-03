@@ -74,9 +74,11 @@
     .hero-divider { width:48px; height:2px; background:var(--blue); margin:0 auto 2.2rem; opacity:0; animation:enterUp .5s .6s forwards; }
     .hero-desc { font-size:clamp(.95rem,1.3vw,1.15rem); color:var(--muted); line-height:1.75; max-width:500px; margin:0 auto 3rem; opacity:0; animation:enterUp .6s .75s forwards; }
     /* Scroll arrow */
-    .hero-scroll { display:flex; flex-direction:column; align-items:center; gap:.7rem; opacity:0; animation:enterUp .6s .9s forwards; cursor:pointer; }
-    .hero-scroll-label { font-size:.6rem; letter-spacing:.25em; text-transform:uppercase; color:var(--dim); }
-    .hero-scroll-arrow { width:36px; height:36px; border:1px solid rgba(137,62,245,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--blue); animation:bounce 2s ease-in-out infinite; }
+    .hero-scroll { display:flex; flex-direction:column; align-items:center; gap:.8rem; opacity:0; animation:enterUp .6s .9s forwards; cursor:pointer; }
+    .hero-scroll-label { font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+    .hero-scroll-arrow { width:46px; height:46px; border:2px solid rgba(137,62,245,.65); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--blue); animation:bounce 2s ease-in-out infinite; box-shadow:0 0 18px rgba(137,62,245,.25); }
+    .hero-scroll:hover .hero-scroll-label { color:var(--text); }
+    .hero-scroll:hover .hero-scroll-arrow { border-color:var(--blue); box-shadow:0 0 28px rgba(137,62,245,.45); }
 
     /* ── SECTION DEFAULTS ── */
     section { padding:8rem 5%; }
@@ -101,21 +103,16 @@
     .video-card { display:flex; flex-direction:column; gap:.85rem; }
     .video-wrap { position:relative; border-radius:10px; overflow:hidden; background:#000; cursor:pointer; aspect-ratio:9/16; border:1px solid var(--border); }
     .video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
-    .video-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35); transition:opacity .25s; }
+    .video-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.4); transition:opacity .3s; }
     .video-wrap.playing .video-overlay { opacity:0; pointer-events:none; }
-    .video-wrap.playing:hover .video-overlay { opacity:1; pointer-events:auto; }
-    .play-btn { width:52px; height:52px; border-radius:50%; background:rgba(137,62,245,.85); display:flex; align-items:center; justify-content:center; transition:transform .2s, background .2s; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,.2); }
+    .play-btn { width:56px; height:56px; border-radius:50%; background:rgba(137,62,245,.9); display:flex; align-items:center; justify-content:center; transition:transform .2s, background .2s; backdrop-filter:blur(6px); border:2px solid rgba(255,255,255,.25); box-shadow:0 4px 20px rgba(137,62,245,.4); }
     .play-btn svg { transform:translateX(2px); }
-    .pause-icon { display:none; }
-    .play-icon { display:block; }
-    .video-wrap.playing .pause-icon { display:block; }
-    .video-wrap.playing .play-icon { display:none; }
-    .video-wrap:hover .play-btn { transform:scale(1.1); background:rgba(137,62,245,1); }
+    .video-wrap:hover .play-btn { transform:scale(1.1); background:var(--blue); }
     .video-label { font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); text-align:center; }
     @media(max-width:700px){ .video-row { grid-template-columns:1fr; max-width:300px; margin:0 auto; } }
 
     /* Shared offer block */
-    .offer-block { background:var(--card); border:1px solid var(--border); padding:4rem; }
+    .offer-block { background:var(--card); border:1px solid var(--border); border-bottom:2px solid var(--blue); padding:4rem; }
     .offer-block-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2.5rem; gap:2rem; flex-wrap:wrap; }
     .offer-block-meta { display:flex; align-items:center; gap:1rem; margin-bottom:.9rem; }
     .offer-block-icon { width:48px; height:48px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); flex-shrink:0; }
@@ -132,9 +129,9 @@
     .offer-check.gfx { border-color:#a060ff; color:#a060ff; }
     .offer-item-text { font-size:.84rem; color:var(--muted); }
     .offer-block-footer { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
-    /* Process button (ghost, links to process.html) */
-    .btn-process { background:transparent; color:var(--dim); border:1px solid var(--border); font-size:.7rem; }
-    .btn-process:hover { border-color:var(--blue); color:var(--blue); }
+    /* Process button */
+    .btn-process { background:rgba(137,62,245,.12); color:#c49eff; border:1px solid rgba(137,62,245,.55); font-size:.7rem; }
+    .btn-process:hover { background:rgba(137,62,245,.22); border-color:var(--blue); color:#fff; }
 
     /* Web / GFX block accent overrides */
     .offer-block-web { border-top:2px solid var(--blue); }
@@ -166,28 +163,9 @@
     .contact-top .section-eyebrow { justify-content:center; }
     .contact-top .section-eyebrow::before { display:none; }
 
-    /* Primary tabs (3 services) */
-    .form-tabs { display:flex; justify-content:center; gap:0; border-bottom:1px solid var(--border); margin-bottom:0; }
-    .form-tab { background:none; border:none; padding:1.1rem 2rem; font-family:'Space Grotesk',sans-serif; font-size:.7rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); cursor:pointer; position:relative; transition:color .25s; white-space:nowrap; }
-    .form-tab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px; background:var(--blue); transform:scaleX(0); transform-origin:center; transition:transform .3s cubic-bezier(.22,1,.36,1); }
-    .form-tab.active { color:var(--blue); }
-    .form-tab.active::after { transform:scaleX(1); }
-    .form-tab:hover:not(.active) { color:var(--muted); }
-
-    /* Sub-tabs (for social media panel) */
-    .sub-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:3rem; }
-    .sub-tab { background:none; border:none; padding:.85rem 1.6rem; font-family:'Space Grotesk',sans-serif; font-size:.65rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); cursor:pointer; position:relative; transition:color .25s; }
-    .sub-tab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px; background:var(--blue); transform:scaleX(0); transform-origin:center; transition:transform .3s; }
-    .sub-tab.active { color:var(--blue); }
-    .sub-tab.active::after { transform:scaleX(1); }
-
-    .form-panel { display:none; padding-top:3rem; }
-    .form-panel.active { display:block; }
-    .sub-panel { display:none; }
-    .sub-panel.active { display:grid; grid-template-columns:1fr 1.25fr; gap:7rem; align-items:start; }
-
-    /* Single-col panels (web / gfx) */
-    .form-panel-grid { display:grid; grid-template-columns:1fr 1.25fr; gap:7rem; align-items:start; padding-top:0; }
+    /* Unified contact layout */
+    .contact-unified { display:grid; grid-template-columns:1fr 1.4fr; gap:7rem; align-items:start; padding-top:3.5rem; }
+    @media(max-width:1100px){ .contact-unified { grid-template-columns:1fr; gap:4rem; } }
 
     .panel-info-box { background:var(--bg-alt); border:1px solid var(--border); border-left:3px solid var(--blue); padding:1.4rem 1.6rem; margin-bottom:1rem; }
     .panel-info-box-lbl { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:.4rem; }
@@ -282,7 +260,7 @@
     <div class="hero-scroll" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
       <span class="hero-scroll-label">Scroll to see more</span>
       <div class="hero-scroll-arrow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
     </div>
   </div>
@@ -326,9 +304,9 @@
           <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">10,000+ organic views guaranteed in your first month</span></div>
         </div>
         <div class="offer-block-footer">
-          <a href="#contact" class="btn btn-solid" onclick="switchTab('social');switchSub('direct')">Let's Start &nbsp;→</a>
-          <a href="#contact" class="btn btn-ghost" onclick="switchTab('social');switchSub('trial')">Free Trial</a>
-          <a href="process.html" class="btn btn-process">How It Works &nbsp;↗</a>
+          <a href="#contact" class="btn btn-solid" onclick="selectService('sm-direct')">Let's Start &nbsp;→</a>
+          <a href="#contact" class="btn btn-ghost" onclick="selectService('sm-trial')">Free Trial</a>
+          <a href="process.html" class="btn btn-process">How It Works</a>
         </div>
       </div>
 
@@ -342,8 +320,7 @@
               <video id="vid1" src="video-restaurant.mp4" preload="metadata" playsinline></video>
               <div class="video-overlay">
                 <div class="play-btn">
-                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
               </div>
             </div>
@@ -355,8 +332,7 @@
               <video id="vid2" src="video-barbershop.mp4" preload="metadata" playsinline></video>
               <div class="video-overlay">
                 <div class="play-btn">
-                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
               </div>
             </div>
@@ -368,8 +344,7 @@
               <video id="vid3" src="video-english.mp4" preload="metadata" playsinline></video>
               <div class="video-overlay">
                 <div class="play-btn">
-                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
               </div>
             </div>
@@ -405,7 +380,7 @@
           <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Delivered on time, every time</span></div>
         </div>
         <div class="offer-block-footer">
-          <a href="#contact" class="btn btn-solid" onclick="switchTab('web')">Get a Quote &nbsp;→</a>
+          <a href="#contact" class="btn btn-solid" onclick="selectService('web')">Get a Quote &nbsp;→</a>
         </div>
       </div>
 
@@ -435,7 +410,7 @@
           <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Fast delivery &amp; revisions until it's perfect</span></div>
         </div>
         <div class="offer-block-footer">
-          <a href="#contact" class="btn btn-solid" style="background:#a060ff;" onmouseover="this.style.background='#7030d0'" onmouseout="this.style.background='#a060ff'" onclick="switchTab('gfx')">Get a Quote &nbsp;→</a>
+          <a href="#contact" class="btn btn-solid" style="background:#a060ff;" onmouseover="this.style.background='#7030d0'" onmouseout="this.style.background='#a060ff'" onclick="selectService('gfx')">Get a Quote &nbsp;→</a>
         </div>
       </div>
 
@@ -505,134 +480,57 @@
       <p class="section-sub" style="margin:0 auto;">Choose your service below and I'll get back to you within 24 hours.</p>
     </div>
 
-    <div class="form-tabs">
-      <button class="form-tab active" data-tab="social" onclick="switchTab('social')">Social Media</button>
-      <button class="form-tab" data-tab="web"    onclick="switchTab('web')">Website Creation</button>
-      <button class="form-tab" data-tab="gfx"    onclick="switchTab('gfx')">Graphic Design</button>
-    </div>
+    <!-- ── UNIFIED CONTACT FORM ── -->
+    <div class="contact-unified reveal-up">
 
-    <!-- ── SOCIAL MEDIA PANEL ── -->
-    <div class="form-panel active" id="panel-social">
-      <div class="sub-tabs">
-        <button class="sub-tab active" data-sub="direct" onclick="switchSub('direct')">Let's Start Directly</button>
-        <button class="sub-tab" data-sub="trial" onclick="switchSub('trial')">Free Trial</button>
-      </div>
-
-      <!-- Sub: Let's Start Directly -->
-      <div class="sub-panel active" id="sub-direct">
-        <div class="reveal">
-          <div class="contact-detail">
-            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="contact-lbl">Location</div><div class="contact-val">Wilanów, Warsaw</div></div>
-          </div>
-          <div class="panel-info-box" style="margin-top:1.5rem;">
-            <div class="panel-info-box-lbl">Ready to start?</div>
-            <div class="panel-info-box-desc">Tell me about your business and goals. I'll put together a tailored plan and reply within 24 hours.</div>
-          </div>
+      <!-- Left: info -->
+      <div>
+        <div class="contact-detail">
+          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
         </div>
-        <div class="reveal rd1">
-          <div id="directForm">
-            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
-            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
-            <div class="form-group"><label class="form-lbl">Your Main Platform</label>
-              <select class="form-select"><option value="" disabled selected>Select a platform...</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Multiple platforms</option><option>Not on social media yet</option></select>
-            </div>
-            <div class="form-group"><label class="form-lbl">Tell me about your business</label><textarea class="form-textarea" placeholder="What do you do? What are your goals? What's your niche?"></textarea></div>
-            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('direct')">Let's Start &nbsp;→</button></div>
-          </div>
-          <div class="form-success" id="directSuccess"><div class="form-success-ico">✓</div><h3>Message Received.</h3><p>Thanks — I'll get back to you within 24 hours with a plan.</p></div>
+        <div class="contact-detail">
+          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="contact-lbl">Location</div><div class="contact-val">Wilanów, Warsaw</div></div>
+        </div>
+        <div class="panel-info-box" style="margin-top:1.8rem;">
+          <div class="panel-info-box-lbl">What happens next?</div>
+          <div class="panel-info-box-desc">Fill in the form, choose your service, and I'll get back to you within 24 hours with a tailored plan — no commitment needed.</div>
+        </div>
+        <div class="panel-info-box">
+          <div class="panel-info-box-lbl">Free Trial Available</div>
+          <div class="panel-info-box-desc">Interested in social media management? Select the free trial option and see real results before committing. No contract, no credit card.</div>
         </div>
       </div>
 
-      <!-- Sub: Free Trial -->
-      <div class="sub-panel" id="sub-trial">
-        <div class="reveal">
-          <div class="contact-detail">
-            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
+      <!-- Right: form -->
+      <div>
+        <div id="unifiedForm">
+          <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
+          <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+          <div class="form-group">
+            <label class="form-lbl">Service <span class="req">*</span></label>
+            <select class="form-select" id="serviceSelect">
+              <option value="" disabled selected>Choose a service...</option>
+              <option value="sm-direct">Social media management — direct partnership</option>
+              <option value="sm-trial">Social media management — free trial</option>
+              <option value="sm-website">Social media management + website</option>
+              <option value="sm-gfx">Social media management + graphic design</option>
+              <option value="web-gfx">Website + graphic design</option>
+              <option value="web">Website</option>
+              <option value="gfx">Graphic design</option>
+            </select>
           </div>
-          <div class="panel-info-box" style="margin-top:1.5rem;">
-            <div class="panel-info-box-lbl">What's the Free Trial?</div>
-            <div class="panel-info-box-desc">I'll manage your social media for a short period at zero cost — see real results before committing. No contract, no credit card, no pressure.</div>
-          </div>
-          <div class="panel-info-box">
-            <div class="panel-info-box-lbl">What happens next?</div>
-            <div class="panel-info-box-desc">I'll review your message and reply within 24 hours to schedule a quick call and kick things off.</div>
-          </div>
+          <div class="form-group"><label class="form-lbl">Tell me about your business <span class="req">*</span></label><textarea class="form-textarea" placeholder="What do you do? What are your goals? Any references or specific needs?"></textarea></div>
+          <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('unified')">Send Message &nbsp;→</button></div>
         </div>
-        <div class="reveal rd1">
-          <div id="trialForm">
-            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
-            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
-            <div class="form-group"><label class="form-lbl">Your Main Platform</label>
-              <select class="form-select"><option value="" disabled selected>Select a platform...</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Multiple platforms</option><option>Not on social media yet</option></select>
-            </div>
-            <div class="form-group"><label class="form-lbl">Tell me about your business</label><textarea class="form-textarea" placeholder="What do you do? What results are you looking for?"></textarea></div>
-            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('trial')">Start My Free Trial &nbsp;→</button></div>
-          </div>
-          <div class="form-success" id="trialSuccess"><div class="form-success-ico">✓</div><h3>You're In.</h3><p>I'll get back to you within 24 hours to get your free trial started.</p></div>
+        <div class="form-success" id="unifiedSuccess">
+          <div class="form-success-ico">✓</div>
+          <h3>Message Received.</h3>
+          <p>Thanks — I'll get back to you within 24 hours with a tailored plan.</p>
         </div>
       </div>
-    </div>
 
-    <!-- ── WEBSITE CREATION PANEL ── -->
-    <div class="form-panel" id="panel-web">
-      <div class="form-panel-grid">
-        <div class="reveal">
-          <div class="contact-detail">
-            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
-          </div>
-          <div class="panel-info-box" style="margin-top:1.5rem;">
-            <div class="panel-info-box-lbl">Website Creation</div>
-            <div class="panel-info-box-desc">Tell me about your project — what you need, your industry, and any reference sites you like. I'll come back with a clear scope and quote.</div>
-          </div>
-        </div>
-        <div class="reveal rd1">
-          <div id="webForm">
-            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
-            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
-            <div class="form-group"><label class="form-lbl">Type of Website</label>
-              <select class="form-select"><option value="" disabled selected>Select type...</option><option>Business / Portfolio</option><option>E-commerce</option><option>Landing Page</option><option>Blog</option><option>Other</option></select>
-            </div>
-            <div class="form-group"><label class="form-lbl">Tell me about your project <span class="req">*</span></label><textarea class="form-textarea" placeholder="What's your business? Any reference sites? Budget or timeline?"></textarea></div>
-            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('web')">Get a Quote &nbsp;→</button></div>
-          </div>
-          <div class="form-success" id="webSuccess"><div class="form-success-ico">✓</div><h3>Request Received.</h3><p>I'll review your project and reply within 24 hours with a clear plan and quote.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── GRAPHIC DESIGN PANEL ── -->
-    <div class="form-panel" id="panel-gfx">
-      <div class="form-panel-grid">
-        <div class="reveal">
-          <div class="contact-detail">
-            <div class="contact-ico" style="color:#a060ff;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
-          </div>
-          <div class="panel-info-box" style="margin-top:1.5rem;border-left-color:#a060ff;">
-            <div class="panel-info-box-lbl" style="color:#a060ff;">Graphic Design</div>
-            <div class="panel-info-box-desc">Logos, brand kits, social templates, or marketing materials — tell me what you need and I'll deliver fast with revisions until it's perfect.</div>
-          </div>
-        </div>
-        <div class="reveal rd1">
-          <div id="gfxForm">
-            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
-            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
-            <div class="form-group"><label class="form-lbl">What do you need?</label>
-              <select class="form-select"><option value="" disabled selected>Select type...</option><option>Logo &amp; Brand Identity</option><option>Social Media Graphics</option><option>Marketing Materials</option><option>Thumbnails &amp; Covers</option><option>Business Cards</option><option>Other</option></select>
-            </div>
-            <div class="form-group"><label class="form-lbl">Tell me about your project <span class="req">*</span></label><textarea class="form-textarea" placeholder="Describe what you need. Any style references, colours, or brand guidelines?"></textarea></div>
-            <div class="form-submit"><button class="btn btn-solid" style="background:#a060ff;" onmouseover="this.style.background='#7030d0'" onmouseout="this.style.background='#a060ff'" onclick="submitForm('gfx')">Get a Quote &nbsp;→</button></div>
-          </div>
-          <div class="form-success" id="gfxSuccess"><div class="form-success-ico" style="background:rgba(160,96,255,.1);border-color:#a060ff;color:#a060ff;">✓</div><h3>Request Received.</h3><p>I'll review your project and reply within 24 hours.</p></div>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -684,17 +582,10 @@
   }, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
   document.querySelectorAll('.reveal, .reveal-up').forEach(el => obs.observe(el));
 
-  /* Primary tab switch */
-  window.switchTab = function (name) {
-    document.querySelectorAll('.form-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
-    document.querySelectorAll('.form-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
-    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
-  };
-
-  /* Sub-tab switch (social media) */
-  window.switchSub = function (name) {
-    document.querySelectorAll('.sub-tab').forEach(t => t.classList.toggle('active', t.dataset.sub === name));
-    document.querySelectorAll('.sub-panel').forEach(p => p.classList.toggle('active', p.id === 'sub-' + name));
+  /* Pre-select service in unified contact form */
+  window.selectService = function (val) {
+    const sel = document.getElementById('serviceSelect');
+    if (sel) sel.value = val;
   };
 
   /* Video toggle — click to play/pause */
@@ -724,19 +615,16 @@
     });
   });
 
-  /* Handle return from process.html — open correct tab/sub-tab */
+  /* Handle return from process.html — pre-select service */
   (function () {
-    const tab = sessionStorage.getItem('openTab');
-    const sub = sessionStorage.getItem('openSub');
-    if (tab) { sessionStorage.removeItem('openTab'); sessionStorage.removeItem('openSub'); window.switchTab(tab); if (sub) window.switchSub(sub); }
+    const svc = sessionStorage.getItem('openSvc');
+    if (svc) { sessionStorage.removeItem('openSvc'); window.selectService(svc); document.getElementById('contact').scrollIntoView({ behavior:'smooth' }); }
   })();
 
   /* Form submit */
-  window.submitForm = function (type) {
-    const formMap = { direct:'directForm', trial:'trialForm', web:'webForm', gfx:'gfxForm' };
-    const sucMap  = { direct:'directSuccess', trial:'trialSuccess', web:'webSuccess', gfx:'gfxSuccess' };
-    document.getElementById(formMap[type]).style.display = 'none';
-    document.getElementById(sucMap[type]).style.display  = 'block';
+  window.submitForm = function () {
+    document.getElementById('unifiedForm').style.display    = 'none';
+    document.getElementById('unifiedSuccess').style.display = 'block';
   };
 </script>
 
