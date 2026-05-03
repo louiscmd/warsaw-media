@@ -91,7 +91,28 @@
     .services-header { text-align:center; max-width:640px; margin:0 auto 5rem; }
     .services-header .section-eyebrow { justify-content:center; }
     .services-header .section-eyebrow::before { display:none; }
-    .services-stack { display:flex; flex-direction:column; gap:2px; }
+    .services-stack { display:flex; flex-direction:column; gap:2.5rem; }
+
+    /* ── VIDEO SHOWCASE ── */
+    .showcase { padding:3rem 0 1rem; }
+    .showcase-slogan { font-size:clamp(1.05rem,2vw,1.4rem); font-weight:700; letter-spacing:-.01em; color:var(--text); margin-bottom:2.2rem; text-align:center; }
+    .showcase-slogan em { font-style:normal; color:var(--blue); }
+    .video-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+    .video-card { display:flex; flex-direction:column; gap:.85rem; }
+    .video-wrap { position:relative; border-radius:10px; overflow:hidden; background:#000; cursor:pointer; aspect-ratio:9/16; border:1px solid var(--border); }
+    .video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
+    .video-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35); transition:opacity .25s; }
+    .video-wrap.playing .video-overlay { opacity:0; pointer-events:none; }
+    .video-wrap.playing:hover .video-overlay { opacity:1; pointer-events:auto; }
+    .play-btn { width:52px; height:52px; border-radius:50%; background:rgba(137,62,245,.85); display:flex; align-items:center; justify-content:center; transition:transform .2s, background .2s; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,.2); }
+    .play-btn svg { transform:translateX(2px); }
+    .pause-icon { display:none; }
+    .play-icon { display:block; }
+    .video-wrap.playing .pause-icon { display:block; }
+    .video-wrap.playing .play-icon { display:none; }
+    .video-wrap:hover .play-btn { transform:scale(1.1); background:rgba(137,62,245,1); }
+    .video-label { font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); text-align:center; }
+    @media(max-width:700px){ .video-row { grid-template-columns:1fr; max-width:300px; margin:0 auto; } }
 
     /* Shared offer block */
     .offer-block { background:var(--card); border:1px solid var(--border); padding:4rem; }
@@ -308,6 +329,53 @@
           <a href="#contact" class="btn btn-solid" onclick="switchTab('social');switchSub('direct')">Let's Start &nbsp;→</a>
           <a href="#contact" class="btn btn-ghost" onclick="switchTab('social');switchSub('trial')">Free Trial</a>
           <a href="process.html" class="btn btn-process">How It Works &nbsp;↗</a>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SHOWCASE (under Social Media box) ── -->
+      <div class="showcase reveal-up">
+        <p class="showcase-slogan">I can do anything for <em>any business.</em></p>
+        <div class="video-row">
+
+          <div class="video-card">
+            <div class="video-wrap" id="vw1" onclick="toggleVideo('vw1')">
+              <video id="vid1" src="video-restaurant.mp4" preload="metadata" playsinline></video>
+              <div class="video-overlay">
+                <div class="play-btn">
+                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">Asian Restaurant</p>
+          </div>
+
+          <div class="video-card">
+            <div class="video-wrap" id="vw2" onclick="toggleVideo('vw2')">
+              <video id="vid2" src="video-barbershop.mp4" preload="metadata" playsinline></video>
+              <div class="video-overlay">
+                <div class="play-btn">
+                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">Barber Shop</p>
+          </div>
+
+          <div class="video-card">
+            <div class="video-wrap" id="vw3" onclick="toggleVideo('vw3')">
+              <video id="vid3" src="video-english.mp4" preload="metadata" playsinline></video>
+              <div class="video-overlay">
+                <div class="play-btn">
+                  <svg class="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <svg class="pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">English School</p>
+          </div>
+
         </div>
       </div>
 
@@ -628,6 +696,33 @@
     document.querySelectorAll('.sub-tab').forEach(t => t.classList.toggle('active', t.dataset.sub === name));
     document.querySelectorAll('.sub-panel').forEach(p => p.classList.toggle('active', p.id === 'sub-' + name));
   };
+
+  /* Video toggle — click to play/pause */
+  window.toggleVideo = function (wrapId) {
+    const wrap = document.getElementById(wrapId);
+    const vid  = wrap.querySelector('video');
+    if (vid.paused) {
+      // Pause any other playing video first
+      document.querySelectorAll('.video-wrap video').forEach(v => {
+        if (v !== vid && !v.paused) {
+          v.pause();
+          v.closest('.video-wrap').classList.remove('playing');
+        }
+      });
+      vid.play();
+      wrap.classList.add('playing');
+    } else {
+      vid.pause();
+      wrap.classList.remove('playing');
+    }
+  };
+  // Re-show overlay when video ends
+  document.querySelectorAll('.video-wrap video').forEach(vid => {
+    vid.addEventListener('ended', function () {
+      this.closest('.video-wrap').classList.remove('playing');
+      this.currentTime = 0;
+    });
+  });
 
   /* Handle return from process.html — open correct tab/sub-tab */
   (function () {
