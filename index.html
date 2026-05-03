@@ -501,23 +501,24 @@
       <!-- Right: form -->
       <div>
         <div id="unifiedForm">
-          <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
-          <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+          <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input id="inputName" type="text" class="form-input" placeholder="John Smith"></div>
+          <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input id="inputEmail" type="email" class="form-input" placeholder="your@email.com"></div>
           <div class="form-group">
             <label class="form-lbl">Service <span class="req">*</span></label>
             <select class="form-select" id="serviceSelect">
               <option value="" disabled selected>Choose a service...</option>
-              <option value="sm-direct">Social media management — direct partnership</option>
-              <option value="sm-trial">Social media management — free trial</option>
-              <option value="sm-website">Social media management + website</option>
-              <option value="sm-gfx">Social media management + graphic design</option>
-              <option value="web-gfx">Website + graphic design</option>
-              <option value="web">Website</option>
-              <option value="gfx">Graphic design</option>
+              <option value="Social media management — direct partnership">Social media management — direct partnership</option>
+              <option value="Social media management — free trial">Social media management — free trial</option>
+              <option value="Social media management + website">Social media management + website</option>
+              <option value="Social media management + graphic design">Social media management + graphic design</option>
+              <option value="Website + graphic design">Website + graphic design</option>
+              <option value="Website">Website</option>
+              <option value="Graphic design">Graphic design</option>
             </select>
           </div>
-          <div class="form-group"><label class="form-lbl">Tell me about your business <span class="req">*</span></label><textarea class="form-textarea" placeholder="What do you do? What are your goals? Any references or specific needs?"></textarea></div>
-          <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('unified')">Send Message &nbsp;→</button></div>
+          <div class="form-group"><label class="form-lbl">Tell me about your business <span class="req">*</span></label><textarea id="inputMessage" class="form-textarea" placeholder="What do you do? What are your goals? Any references or specific needs?"></textarea></div>
+          <div id="formError" style="display:none;font-size:.8rem;color:#ff5555;margin-bottom:1rem;padding:.7rem 1rem;background:rgba(255,85,85,.08);border:1px solid rgba(255,85,85,.25);">Please fill in all required fields.</div>
+          <div class="form-submit"><button class="btn btn-solid" onclick="submitForm()">Send Message &nbsp;→</button></div>
         </div>
         <div class="form-success" id="unifiedSuccess">
           <div class="form-success-ico">✓</div>
@@ -578,9 +579,18 @@
   document.querySelectorAll('.reveal, .reveal-up').forEach(el => obs.observe(el));
 
   /* Pre-select service in unified contact form */
-  window.selectService = function (val) {
+  const serviceMap = {
+    'sm-direct':  'Social media management — direct partnership',
+    'sm-trial':   'Social media management — free trial',
+    'sm-website': 'Social media management + website',
+    'sm-gfx':     'Social media management + graphic design',
+    'web-gfx':    'Website + graphic design',
+    'web':        'Website',
+    'gfx':        'Graphic design'
+  };
+  window.selectService = function (key) {
     const sel = document.getElementById('serviceSelect');
-    if (sel) sel.value = val;
+    if (sel) sel.value = serviceMap[key] || key;
   };
 
   /* Video toggle — click to play/pause */
@@ -616,10 +626,54 @@
     if (svc) { sessionStorage.removeItem('openSvc'); window.selectService(svc); document.getElementById('contact').scrollIntoView({ behavior:'smooth' }); }
   })();
 
-  /* Form submit */
+  /* Form submit → Web3Forms → warsawmedia.pl@gmail.com */
   window.submitForm = function () {
-    document.getElementById('unifiedForm').style.display    = 'none';
-    document.getElementById('unifiedSuccess').style.display = 'block';
+    const name    = document.getElementById('inputName').value.trim();
+    const email   = document.getElementById('inputEmail').value.trim();
+    const service = document.getElementById('serviceSelect').value;
+    const message = document.getElementById('inputMessage').value.trim();
+    const errBox  = document.getElementById('formError');
+
+    // Validate
+    if (!name || !email || !service || !message) {
+      errBox.style.display = 'block';
+      return;
+    }
+    errBox.style.display = 'none';
+
+    // Disable button while sending
+    const btn = document.querySelector('#unifiedForm .btn-solid');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const body = new FormData();
+    body.append('access_key',  'YOUR_WEB3FORMS_KEY'); // ← replace with your key
+    body.append('subject',     'New enquiry — ' + service + ' | Warsaw Media');
+    body.append('name',        name);
+    body.append('email',       email);
+    body.append('service',     service);
+    body.append('message',     message);
+    body.append('from_name',   'Warsaw Media Website');
+
+    fetch('https://api.web3forms.com/submit', { method:'POST', body })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('unifiedForm').style.display    = 'none';
+          document.getElementById('unifiedSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Send Message →';
+          btn.disabled = false;
+          errBox.textContent = 'Something went wrong. Please try again or email warsawmedia.pl@gmail.com directly.';
+          errBox.style.display = 'block';
+        }
+      })
+      .catch(() => {
+        btn.textContent = 'Send Message →';
+        btn.disabled = false;
+        errBox.textContent = 'Connection error. Please email warsawmedia.pl@gmail.com directly.';
+        errBox.style.display = 'block';
+      });
   };
 </script>
 
