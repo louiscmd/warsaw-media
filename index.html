@@ -148,12 +148,10 @@
     .about-trait:hover .about-trait-ico { border-color:var(--blue); background:rgba(137,62,245,.1); }
     .about-trait-title { font-size:.88rem; font-weight:700; margin-bottom:.25rem; color:var(--text); }
     .about-trait-desc { font-size:.8rem; color:var(--dim); line-height:1.6; }
-    .about-mono-col { display:flex; align-items:center; justify-content:center; }
-    .about-mono { width:100%; aspect-ratio:1; max-width:320px; background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.8rem; position:relative; overflow:hidden; }
-    .about-mono::before { content:''; position:absolute; inset:8px; border:1px solid var(--border); pointer-events:none; }
-    .about-mono-letters { font-family:'Bebas Neue',sans-serif; font-size:8rem; line-height:1; color:rgba(137,62,245,.15); letter-spacing:.05em; }
-    .about-mono-lbl { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
-    .about-mono-badge { position:absolute; bottom:1.4rem; right:1.4rem; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--blue); font-weight:600; background:rgba(137,62,245,.08); border:1px solid rgba(137,62,245,.2); padding:.28rem .65rem; border-radius:999px; }
+    .about-mono-col { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2rem; }
+    .about-photo-wrap { width:100%; max-width:320px; aspect-ratio:3/4; border:2px solid var(--blue); overflow:hidden; position:relative; box-shadow:0 0 40px rgba(137,62,245,.15); }
+    .about-photo-wrap img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .about-photo-name { font-family:'Space Grotesk',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); text-align:center; }
 
     /* ── CONTACT ── */
     #contact { background:var(--card); }
@@ -458,11 +456,10 @@
         </div>
       </div>
       <div class="about-mono-col reveal rd1">
-        <div class="about-mono">
-          <div class="about-mono-letters">LD</div>
-          <div class="about-mono-lbl">Warsaw Media</div>
-          <span class="about-mono-badge">Est. 2024</span>
+        <div class="about-photo-wrap">
+          <img src="photo-louis.jpg" alt="Louis Destrebecq">
         </div>
+        <p class="about-photo-name">Louis Destrebecq</p>
       </div>
     </div>
   </div>
