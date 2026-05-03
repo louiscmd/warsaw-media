@@ -52,8 +52,9 @@
     .btn-ghost:hover { border-color: var(--text); }
 
     /* ── ANIMATIONS ── */
-    @keyframes blink  { 0%,100%{opacity:1;}50%{opacity:.35;} }
-    @keyframes enterUp { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes blink    { 0%,100%{opacity:1;}50%{opacity:.35;} }
+    @keyframes enterUp  { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes bounce   { 0%,100%{transform:translateY(0);}50%{transform:translateY(8px);} }
 
     .reveal { opacity:0; transform:translateX(-28px); transition:opacity .7s cubic-bezier(.25,1,.4,1),transform .7s cubic-bezier(.25,1,.4,1); }
     .reveal.visible { opacity:1; transform:none; }
@@ -72,87 +73,53 @@
     .hero-headline .blue { color:var(--blue); }
     .hero-divider { width:48px; height:2px; background:var(--blue); margin:0 auto 2.2rem; opacity:0; animation:enterUp .5s .6s forwards; }
     .hero-desc { font-size:clamp(.95rem,1.3vw,1.15rem); color:var(--muted); line-height:1.75; max-width:500px; margin:0 auto 3rem; opacity:0; animation:enterUp .6s .75s forwards; }
-    .hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; opacity:0; animation:enterUp .6s .9s forwards; }
+    /* Scroll arrow */
+    .hero-scroll { display:flex; flex-direction:column; align-items:center; gap:.7rem; opacity:0; animation:enterUp .6s .9s forwards; cursor:pointer; }
+    .hero-scroll-label { font-size:.6rem; letter-spacing:.25em; text-transform:uppercase; color:var(--dim); }
+    .hero-scroll-arrow { width:36px; height:36px; border:1px solid rgba(137,62,245,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--blue); animation:bounce 2s ease-in-out infinite; }
 
     /* ── SECTION DEFAULTS ── */
     section { padding:8rem 5%; }
-    .section-inner { max-width:1200px; margin:0 auto; }
+    .section-inner { max-width:1100px; margin:0 auto; }
     .section-eyebrow { font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; color:var(--blue); font-weight:600; margin-bottom:.9rem; display:flex; align-items:center; gap:.7rem; }
     .section-eyebrow::before { content:''; width:18px; height:1px; background:var(--blue); }
     .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.2rem,4vw,3.6rem); font-weight:700; line-height:1.08; color:var(--text); margin-bottom:.9rem; }
     .section-sub { font-size:.93rem; color:var(--dim); line-height:1.8; max-width:480px; }
 
-    /* ── SOCIAL MEDIA ── */
-    #social { background:var(--card); }
-    .social-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:4rem; gap:2rem; flex-wrap:wrap; }
-    .social-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:5rem; }
-    .social-card { background:var(--card); padding:2.8rem 2.6rem; position:relative; overflow:hidden; transition:background .35s; }
-    .social-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#5c25b8,var(--blue),#a060ff); transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.22,1,.36,1); }
-    .social-card:hover::before { transform:scaleX(1); }
-    .social-card:hover { background:rgba(137,62,245,.07); }
-    .card-num { font-family:'Bebas Neue',sans-serif; font-size:5rem; color:rgba(255,255,255,.04); position:absolute; top:.3rem; right:1rem; line-height:1; user-select:none; transition:color .35s; }
-    .social-card:hover .card-num { color:rgba(137,62,245,.14); }
-    .card-icon { width:52px; height:52px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; margin-bottom:1.8rem; color:var(--dim); transition:border-color .3s,background .3s,color .3s; }
-    .social-card:hover .card-icon { border-color:var(--blue); background:rgba(137,62,245,.1); color:var(--blue); }
-    .card-title { font-size:1.35rem; font-weight:700; color:var(--text); margin-bottom:.4rem; }
-    .card-desc { font-size:.86rem; color:var(--muted); line-height:1.7; }
+    /* ── SERVICES — 3 stacked offer blocks ── */
+    #services { background:var(--bg); padding-top:6rem; }
+    .services-header { text-align:center; max-width:640px; margin:0 auto 5rem; }
+    .services-header .section-eyebrow { justify-content:center; }
+    .services-header .section-eyebrow::before { display:none; }
+    .services-stack { display:flex; flex-direction:column; gap:2px; }
 
-    /* ── OFFER ── */
-    .offer-block { background:var(--bg-alt); border:1px solid var(--border); padding:4rem; }
-    .offer-block-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:3rem; gap:2rem; flex-wrap:wrap; }
-    .offer-block-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:700; color:var(--text); line-height:1.1; }
-    .offer-block-sub { font-size:.88rem; color:var(--dim); line-height:1.7; max-width:340px; }
-    .offer-list { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); background:var(--card); margin-bottom:2.5rem; }
+    /* Shared offer block */
+    .offer-block { background:var(--card); border:1px solid var(--border); padding:4rem; }
+    .offer-block-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2.5rem; gap:2rem; flex-wrap:wrap; }
+    .offer-block-meta { display:flex; align-items:center; gap:1rem; margin-bottom:.9rem; }
+    .offer-block-icon { width:48px; height:48px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); flex-shrink:0; }
+    .offer-block-icon.gfx { color:#a060ff; border-color:rgba(160,96,255,.25); }
+    .offer-block-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:700; color:var(--text); line-height:1.1; }
+    .offer-block-tagline { font-size:.72rem; color:var(--dim); letter-spacing:.1em; margin-top:.3rem; }
+    .offer-block-sub { font-size:.88rem; color:var(--dim); line-height:1.7; max-width:320px; }
+    .offer-list { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); background:var(--bg-alt); margin-bottom:2.5rem; }
     .offer-item { display:flex; align-items:center; gap:.9rem; padding:1rem 1.5rem; border-bottom:1px solid var(--border); border-right:1px solid var(--border); transition:background .25s; }
     .offer-item:nth-child(even) { border-right:none; }
     .offer-item:nth-last-child(-n+2) { border-bottom:none; }
-    .offer-item:hover { background:rgba(137,62,245,.05); }
+    .offer-item:hover { background:rgba(137,62,245,.04); }
     .offer-check { width:20px; height:20px; border-radius:50%; border:1px solid var(--blue); display:flex; align-items:center; justify-content:center; color:var(--blue); font-size:.5rem; font-weight:700; flex-shrink:0; }
+    .offer-check.gfx { border-color:#a060ff; color:#a060ff; }
     .offer-item-text { font-size:.84rem; color:var(--muted); }
+    .offer-block-footer { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+    /* Process button (ghost, links to process.html) */
+    .btn-process { background:transparent; color:var(--dim); border:1px solid var(--border); font-size:.7rem; }
+    .btn-process:hover { border-color:var(--blue); color:var(--blue); }
 
-    /* ── RESULTS ── */
-    #results { background:var(--bg); }
-    .results-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:4.5rem; flex-wrap:wrap; gap:2rem; }
-    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin-bottom:4rem; }
-    .stat-cell { padding:4rem 2rem; text-align:center; border-right:1px solid var(--border); position:relative; }
-    .stat-cell:last-child { border-right:none; }
-    .stat-cell::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--blue); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
-    .stat-cell:hover::after { transform:scaleX(1); }
-    .stat-num { font-family:'Bebas Neue',sans-serif; font-size:5.5rem; line-height:1; color:var(--text); display:flex; align-items:baseline; justify-content:center; gap:.05em; }
-    .stat-sfx { color:var(--blue); font-size:2.8rem; }
-    .stat-lbl { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-top:.7rem; line-height:1.5; }
-    .quote-strip { border-top:2px solid var(--blue); background:var(--card); padding:3rem 3.5rem; }
-    .quote-text { font-size:1.05rem; font-style:italic; color:var(--muted); line-height:1.8; margin-bottom:1.8rem; max-width:700px; }
-    .quote-meta { display:flex; align-items:center; gap:1rem; }
-    .quote-avatar { width:42px; height:42px; border-radius:50%; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700; flex-shrink:0; }
-    .quote-name { font-weight:600; font-size:.88rem; color:var(--text); margin-bottom:.15rem; }
-    .quote-role { font-size:.7rem; color:var(--dim); margin-bottom:.4rem; }
-    .quote-pill { display:inline-flex; align-items:center; gap:.35rem; border:1px solid rgba(0,196,90,.35); color:#00c45a; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600; padding:.25rem .65rem; border-radius:999px; background:rgba(0,196,90,.08); }
-    .qpd { width:4px; height:4px; border-radius:50%; background:#00c45a; animation:blink 2s ease-in-out infinite; }
-
-    /* ── ADDITIONAL SERVICES ── */
-    #additional { background:var(--card); }
-    .additional-header { text-align:center; max-width:640px; margin:0 auto 4.5rem; }
-    .additional-header .section-eyebrow { justify-content:center; }
-    .additional-header .section-eyebrow::before { display:none; }
-    .additional-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); border:1px solid var(--border); }
-    .add-panel { background:var(--card); padding:3.5rem 3rem 3rem; display:flex; flex-direction:column; }
-    .add-panel-icon { width:56px; height:56px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; margin-bottom:1.8rem; }
-    .add-panel-web .add-panel-icon { color:var(--blue); }
-    .add-panel-gfx .add-panel-icon { color:#7830dc; }
-    .add-panel-title { font-size:1.7rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
-    .add-panel-tagline { font-size:.75rem; color:var(--dim); letter-spacing:.08em; margin-bottom:1.8rem; }
-    .add-panel-divider { width:32px; height:1px; margin-bottom:1.8rem; }
-    .add-panel-web .add-panel-divider { background:var(--blue); }
-    .add-panel-gfx .add-panel-divider { background:#7830dc; }
-    .add-features { list-style:none; flex:1; margin-bottom:2.5rem; }
-    .add-features li { font-size:.83rem; color:var(--muted); padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.05); display:flex; align-items:center; gap:.75rem; line-height:1.35; }
-    .add-panel-web .add-features li::before { content:''; width:3px; height:3px; background:var(--blue); border-radius:50%; flex-shrink:0; }
-    .add-panel-gfx .add-features li::before { content:''; width:3px; height:3px; background:#7830dc; border-radius:50%; flex-shrink:0; }
-    .add-panel-cta .btn-solid { width:100%; justify-content:center; }
-    .add-panel-web .add-panel-cta .btn-solid { background:var(--blue); }
-    .add-panel-gfx .add-panel-cta .btn-solid { background:#7830dc; }
-    .add-panel-gfx .add-panel-cta .btn-solid:hover { background:#6020bb; }
+    /* Web / GFX block accent overrides */
+    .offer-block-web { border-top:2px solid var(--blue); }
+    .offer-block-gfx { border-top:2px solid #a060ff; }
+    .offer-block-gfx .offer-check { border-color:#a060ff; color:#a060ff; }
+    .offer-block-gfx .offer-item:hover { background:rgba(160,96,255,.04); }
 
     /* ── ABOUT ── */
     #about { background:var(--bg-alt); }
@@ -172,40 +139,37 @@
     .about-mono-lbl { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
     .about-mono-badge { position:absolute; bottom:1.4rem; right:1.4rem; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--blue); font-weight:600; background:rgba(137,62,245,.08); border:1px solid rgba(137,62,245,.2); padding:.28rem .65rem; border-radius:999px; }
 
-    /* ── PROCESS ── */
-    #process { background:var(--bg); }
-    .process-header { max-width:540px; margin-bottom:4.5rem; }
-    .process-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 6rem; }
-    .process-item { display:flex; gap:1.5rem; padding:2.8rem 0; border-bottom:1px solid var(--border); }
-    .process-item:nth-child(1), .process-item:nth-child(2) { border-top:1px solid var(--border); }
-    .proc-left { flex-shrink:0; }
-    .proc-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; line-height:1; color:rgba(255,255,255,.06); transition:color .3s; }
-    .process-item:hover .proc-num { color:rgba(137,62,245,.22); }
-    .proc-dot { width:8px; height:8px; border-radius:50%; background:var(--blue); margin-top:.5rem; box-shadow:0 0 0 3px rgba(137,62,245,.18); }
-    .proc-title { font-size:1.05rem; font-weight:700; margin-bottom:.6rem; color:var(--text); }
-    .proc-desc { font-size:.83rem; color:var(--dim); line-height:1.7; }
-    .process-cta { margin-top:4rem; }
-
     /* ── CONTACT ── */
     #contact { background:var(--card); }
     .contact-top { text-align:center; max-width:600px; margin:0 auto 3.5rem; }
     .contact-top .section-eyebrow { justify-content:center; }
     .contact-top .section-eyebrow::before { display:none; }
-    .form-tabs { display:flex; justify-content:center; gap:0; margin-bottom:4rem; border-bottom:1px solid var(--border); }
-    .form-tab { background:none; border:none; padding:1.1rem 2.5rem; font-family:'Space Grotesk',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); cursor:pointer; position:relative; transition:color .25s; }
+
+    /* Primary tabs (3 services) */
+    .form-tabs { display:flex; justify-content:center; gap:0; border-bottom:1px solid var(--border); margin-bottom:0; }
+    .form-tab { background:none; border:none; padding:1.1rem 2rem; font-family:'Space Grotesk',sans-serif; font-size:.7rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); cursor:pointer; position:relative; transition:color .25s; white-space:nowrap; }
     .form-tab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px; background:var(--blue); transform:scaleX(0); transform-origin:center; transition:transform .3s cubic-bezier(.22,1,.36,1); }
     .form-tab.active { color:var(--blue); }
     .form-tab.active::after { transform:scaleX(1); }
     .form-tab:hover:not(.active) { color:var(--muted); }
-    .form-panel { display:none; grid-template-columns:1fr 1.25fr; gap:7rem; align-items:start; }
-    .form-panel.active { display:grid; }
-    .panel-info { margin-top:2.5rem; }
-    .panel-info-title { font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:.6rem; }
-    .panel-info-desc { font-size:.87rem; color:var(--muted); line-height:1.75; margin-bottom:2rem; }
+
+    /* Sub-tabs (for social media panel) */
+    .sub-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:3rem; }
+    .sub-tab { background:none; border:none; padding:.85rem 1.6rem; font-family:'Space Grotesk',sans-serif; font-size:.65rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); cursor:pointer; position:relative; transition:color .25s; }
+    .sub-tab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px; background:var(--blue); transform:scaleX(0); transform-origin:center; transition:transform .3s; }
+    .sub-tab.active { color:var(--blue); }
+    .sub-tab.active::after { transform:scaleX(1); }
+
+    .form-panel { display:none; padding-top:3rem; }
+    .form-panel.active { display:block; }
+    .sub-panel { display:none; }
+    .sub-panel.active { display:grid; grid-template-columns:1fr 1.25fr; gap:7rem; align-items:start; }
+
+    /* Single-col panels (web / gfx) */
+    .form-panel-grid { display:grid; grid-template-columns:1fr 1.25fr; gap:7rem; align-items:start; padding-top:0; }
+
     .panel-info-box { background:var(--bg-alt); border:1px solid var(--border); border-left:3px solid var(--blue); padding:1.4rem 1.6rem; margin-bottom:1rem; }
-    .panel-info-box.purple { border-left-color:#7830dc; }
     .panel-info-box-lbl { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blue); font-weight:700; margin-bottom:.4rem; }
-    .panel-info-box.purple .panel-info-box-lbl { color:#7830dc; }
     .panel-info-box-desc { font-size:.82rem; color:var(--muted); line-height:1.6; }
     .contact-detail { display:flex; gap:1.1rem; align-items:flex-start; margin-bottom:1.2rem; }
     .contact-ico { width:40px; height:40px; border:1px solid var(--border); background:var(--bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--blue); }
@@ -229,7 +193,7 @@
 
     /* ── FOOTER ── */
     footer { background:var(--bg-alt); border-top:1px solid var(--border); padding:2.8rem 5%; }
-    .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+    .footer-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
     .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:.1em; color:var(--text); display:block; margin-bottom:.3rem; }
     .footer-logo .dot { color:var(--blue); }
     .footer-copy { font-size:.7rem; color:var(--dim); }
@@ -239,14 +203,9 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width:1100px) {
-      .social-grid       { grid-template-columns:1fr; }
-      .additional-grid   { grid-template-columns:1fr; }
       .about-layout      { grid-template-columns:1fr; gap:3rem; }
       .about-mono-col    { display:none; }
-      .process-grid      { grid-template-columns:1fr; gap:0; }
-      .process-item:nth-child(2) { border-top:none; }
-      .form-panel.active { grid-template-columns:1fr; gap:4rem; }
-      .stats-row         { grid-template-columns:repeat(3,1fr); }
+      .sub-panel.active, .form-panel-grid { grid-template-columns:1fr; gap:4rem; }
       .offer-block       { padding:2.5rem; }
       .offer-list        { grid-template-columns:1fr; }
       .offer-item        { border-right:none; }
@@ -254,18 +213,14 @@
       .offer-item:last-child { border-bottom:none; }
     }
     @media (max-width:768px) {
-      .nav-links { display:none; }
-      .nav-hamburger { display:flex; }
-      .hero-headline { font-size:clamp(2.8rem,10vw,5rem); }
-      section { padding:5.5rem 5%; }
-      .social-header { flex-direction:column; align-items:flex-start; }
+      .nav-links         { display:none; }
+      .nav-hamburger     { display:flex; }
+      .hero-headline     { font-size:clamp(2.8rem,10vw,5rem); }
+      section            { padding:5.5rem 5%; }
+      #services          { padding-top:4rem; }
       .offer-block-header { flex-direction:column; }
-      .stats-row { grid-template-columns:1fr; }
-      .stat-cell { border-right:none; border-bottom:1px solid var(--border); }
-      .stat-cell:last-child { border-bottom:none; }
-      .add-panel { padding:2.5rem 2rem 2rem; }
-      .footer-inner { flex-direction:column; align-items:flex-start; }
-      .form-tabs { overflow-x:auto; }
+      .form-tabs         { overflow-x:auto; justify-content:flex-start; }
+      .footer-inner      { flex-direction:column; align-items:flex-start; }
     }
 
     .nav-mobile-open { display:flex !important; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(10,10,10,.98); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); box-shadow:0 8px 24px rgba(0,0,0,.6); padding:2rem 5%; gap:1.4rem; }
@@ -280,12 +235,9 @@
   <a href="#hero" class="nav-logo">WARSAW MEDIA<span class="dot">.</span></a>
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
-      <li><a href="#social">Social Media</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#additional">Other Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+      <li><a href="#services">My Services</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#contact" class="nav-cta">Let's Connect</a></li>
     </ul>
     <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </div>
@@ -306,178 +258,119 @@
     <p class="hero-desc">
       I manage your social media end-to-end — short-form video, content strategy, filming &amp; editing — and grow your audience with proven, organic-first methods.
     </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-solid" id="btnTrial">Start Free Trial &nbsp;→</a>
-      <a href="#contact" class="btn btn-ghost" id="btnWork">Work With Me &nbsp;→</a>
+    <div class="hero-scroll" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      <span class="hero-scroll-label">Scroll to see more</span>
+      <div class="hero-scroll-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SOCIAL MEDIA — main service ═══════════════════════════ -->
-<section id="social">
+<!-- ═══ SERVICES — 3 stacked boxes ══════════════════════════ -->
+<section id="services">
   <div class="section-inner">
-    <div class="social-header reveal">
-      <div>
-        <p class="section-eyebrow">My Main Service</p>
-        <h2 class="section-title">Social Media<br>Management.</h2>
-      </div>
-      <p class="section-sub">I take over your social media completely — from strategy and filming to posting and growth. You focus on your business, I handle the rest.</p>
+
+    <div class="services-header reveal">
+      <p class="section-eyebrow">What I Offer</p>
+      <h2 class="section-title">My Services.</h2>
+      <p class="section-sub" style="margin:0 auto;">Three distinct services — each with its own scope, pricing, and process. Choose what fits your business.</p>
     </div>
 
-    <div class="social-grid">
-      <div class="social-card reveal">
-        <div class="card-num">01</div>
-        <div class="card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3 class="card-title">Full Management</h3>
-        <p class="card-desc">End-to-end management of all your platforms — Instagram, TikTok, YouTube. Content calendar, consistent posting schedule, and engagement strategy all handled for you.</p>
-      </div>
-      <div class="social-card reveal rd1">
-        <div class="card-num">02</div>
-        <div class="card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-        </div>
-        <h3 class="card-title">Short-Form Content</h3>
-        <p class="card-desc">Professional filming and editing of Reels and TikToks using trending formats and hooks that actually stop the scroll — designed to generate views and new followers.</p>
-      </div>
-      <div class="social-card reveal rd1">
-        <div class="card-num">03</div>
-        <div class="card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <h3 class="card-title">Organic Growth</h3>
-        <p class="card-desc">Hashtag research, caption SEO, and community management to grow your reach and follower count naturally — real, compounding growth that builds a solid foundation for your brand.</p>
-      </div>
-      <div class="social-card reveal rd2">
-        <div class="card-num">04</div>
-        <div class="card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3 class="card-title">Views to Customers</h3>
-        <p class="card-desc">Monthly performance reports and analytics — I track what's working, optimise the strategy, and ensure your social audience is converting into real paying customers.</p>
-      </div>
-    </div>
+    <div class="services-stack">
 
-    <!-- THE OFFER -->
-    <div class="offer-block reveal">
-      <div class="offer-block-header">
-        <div>
-          <p class="section-eyebrow" style="margin-bottom:.6rem;">What's Included</p>
-          <h3 class="offer-block-title">The Social Media<br>Management Package</h3>
-        </div>
-        <div>
+      <!-- ── BOX 1: SOCIAL MEDIA MANAGEMENT ── -->
+      <div class="offer-block reveal">
+        <div class="offer-block-header">
+          <div>
+            <div class="offer-block-meta">
+              <div class="offer-block-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <p class="section-eyebrow" style="margin:0;">My Main Service</p>
+            </div>
+            <h3 class="offer-block-title">Social Media<br>Management Package</h3>
+            <p class="offer-block-tagline">Instagram · TikTok · YouTube</p>
+          </div>
           <p class="offer-block-sub">No hidden fees. No vague promises. Here's exactly what you get every month when you work with me.</p>
         </div>
-      </div>
-      <div class="offer-list">
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Full social media management across all platforms</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Professional filming &amp; short-form video editing</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Custom Reels &amp; TikToks with trending formats</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Content calendar &amp; consistent posting schedule</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Hashtag research &amp; caption SEO optimisation</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Engagement strategy &amp; community management</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Monthly performance reports &amp; analytics</span></div>
-        <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">10,000+ organic views guaranteed in your first month</span></div>
-      </div>
-      <a href="#contact" class="btn btn-solid" onclick="switchTab('trial')">Start Free Trial &nbsp;→</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ RESULTS ══════════════════════════════════════════════ -->
-<section id="results">
-  <div class="section-inner">
-    <div class="results-header reveal">
-      <div>
-        <p class="section-eyebrow">Real Numbers</p>
-        <h2 class="section-title">Real Growth.<br>Real Results.</h2>
-      </div>
-      <p class="section-sub" style="max-width:340px;">I build audiences through content that compounds over time — giving your brand a strong organic foundation that can scale further with or without paid campaigns.</p>
-    </div>
-    <div class="stats-row reveal-up">
-      <div class="stat-cell">
-        <div class="stat-num"><span class="counter" data-target="10">0</span><span class="stat-sfx">K+</span></div>
-        <div class="stat-lbl">Organic Views<br>in 30 Days</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num"><span>30</span></div>
-        <div class="stat-lbl">Days to<br>First Results</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num"><span class="counter" data-target="100">0</span><span class="stat-sfx">%</span></div>
-        <div class="stat-lbl">Organic<br>Growth</div>
-      </div>
-    </div>
-    <div class="quote-strip reveal">
-      <p class="quote-text">"Most businesses are invisible on social media — not because their product is bad, but because they're not showing up consistently with content that actually works. I change that. I manage everything, film everything, post everything — and your audience grows while you focus on running your business."</p>
-      <div class="quote-meta">
-        <div class="quote-avatar">LD</div>
-        <div>
-          <div class="quote-name">Louis Destrebecq</div>
-          <div class="quote-role">Social Media Specialist &amp; Freelancer — Warsaw</div>
-          <span class="quote-pill"><span class="qpd"></span>Available for new clients</span>
+        <div class="offer-list">
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Full social media management across all platforms</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Professional filming &amp; short-form video editing</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Custom Reels &amp; TikToks with trending formats</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Content calendar &amp; consistent posting schedule</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Hashtag research &amp; caption SEO optimisation</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Engagement strategy &amp; community management</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Monthly performance reports &amp; analytics</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">10,000+ organic views guaranteed in your first month</span></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ ADDITIONAL SERVICES ═══════════════════════════════════ -->
-<section id="additional">
-  <div class="section-inner">
-    <div class="additional-header reveal">
-      <p class="section-eyebrow">Beyond Social Media</p>
-      <h2 class="section-title">I Also Offer</h2>
-      <p class="section-sub" style="margin:0 auto;">These are separate, standalone services — independent from the social media package. Each one is its own offering with its own pricing.</p>
-    </div>
-
-    <div class="additional-grid">
-      <!-- Website Creation -->
-      <div class="add-panel add-panel-web reveal">
-        <div class="add-panel-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="16" rx="2"/><path d="M8 3v16"/><path d="M2 9h6"/><path d="M2 15h6"/></svg>
-        </div>
-        <h3 class="add-panel-title">Website Creation</h3>
-        <p class="add-panel-tagline">Design · Development · Conversion</p>
-        <div class="add-panel-divider"></div>
-        <ul class="add-features">
-          <li>Fully custom — no templates, no page builders</li>
-          <li>Mobile-responsive &amp; fast-loading on all devices</li>
-          <li>SEO-optimised structure from the ground up</li>
-          <li>Built to convert visitors into paying customers</li>
-          <li>Contact forms, booking systems &amp; integrations</li>
-          <li>Clean aesthetic that fits your brand perfectly</li>
-          <li>Ongoing maintenance &amp; updates available</li>
-          <li>Delivered on time, every time</li>
-        </ul>
-        <div class="add-panel-cta">
-          <a href="#contact" class="btn btn-solid" onclick="switchTab('work')">Get a Quote &nbsp;→</a>
+        <div class="offer-block-footer">
+          <a href="#contact" class="btn btn-solid" onclick="switchTab('social');switchSub('direct')">Let's Start &nbsp;→</a>
+          <a href="#contact" class="btn btn-ghost" onclick="switchTab('social');switchSub('trial')">Free Trial</a>
+          <a href="process.html" class="btn btn-process">How It Works &nbsp;↗</a>
         </div>
       </div>
 
-      <!-- Graphic Design -->
-      <div class="add-panel add-panel-gfx reveal rd1">
-        <div class="add-panel-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 3H7a4 4 0 00-4 4v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4z"/><path d="M3 15l5-5 4 4 2-2 4 4"/></svg>
+      <!-- ── BOX 2: WEBSITE CREATION ── -->
+      <div class="offer-block offer-block-web reveal">
+        <div class="offer-block-header">
+          <div>
+            <div class="offer-block-meta">
+              <div class="offer-block-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="16" rx="2"/><path d="M8 3v16"/><path d="M2 9h6"/><path d="M2 15h6"/></svg>
+              </div>
+              <p class="section-eyebrow" style="margin:0;">Standalone Service</p>
+            </div>
+            <h3 class="offer-block-title">Website Creation</h3>
+            <p class="offer-block-tagline">Design · Development · Conversion</p>
+          </div>
+          <p class="offer-block-sub">A custom site built from scratch — clean, fast, and designed to turn visitors into paying customers.</p>
         </div>
-        <h3 class="add-panel-title">Graphic Design</h3>
-        <p class="add-panel-tagline">Branding · Visuals · Identity</p>
-        <div class="add-panel-divider"></div>
-        <ul class="add-features">
-          <li>Logo design &amp; full brand identity</li>
-          <li>Brand kit — colours, fonts, and visual guidelines</li>
-          <li>Social media graphics &amp; post templates</li>
-          <li>Marketing materials — flyers, banners &amp; posters</li>
-          <li>Thumbnail &amp; cover design for video platforms</li>
-          <li>Business cards &amp; print-ready files</li>
-          <li>Consistent visual language across every platform</li>
-          <li>Fast delivery &amp; revisions until it's perfect</li>
-        </ul>
-        <div class="add-panel-cta">
-          <a href="#contact" class="btn btn-solid" onclick="switchTab('work')">Get a Quote &nbsp;→</a>
+        <div class="offer-list">
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Fully custom — no templates, no page builders</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Mobile-responsive &amp; fast-loading on all devices</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">SEO-optimised structure from the ground up</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Built to convert visitors into paying customers</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Contact forms, booking systems &amp; integrations</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Clean aesthetic that fits your brand perfectly</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Ongoing maintenance &amp; updates available</span></div>
+          <div class="offer-item"><div class="offer-check">✓</div><span class="offer-item-text">Delivered on time, every time</span></div>
+        </div>
+        <div class="offer-block-footer">
+          <a href="#contact" class="btn btn-solid" onclick="switchTab('web')">Get a Quote &nbsp;→</a>
         </div>
       </div>
+
+      <!-- ── BOX 3: GRAPHIC DESIGN ── -->
+      <div class="offer-block offer-block-gfx reveal">
+        <div class="offer-block-header">
+          <div>
+            <div class="offer-block-meta">
+              <div class="offer-block-icon gfx">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 3H7a4 4 0 00-4 4v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4z"/><path d="M3 15l5-5 4 4 2-2 4 4"/></svg>
+              </div>
+              <p class="section-eyebrow" style="margin:0;color:#a060ff;">Standalone Service</p>
+            </div>
+            <h3 class="offer-block-title">Graphic Design</h3>
+            <p class="offer-block-tagline">Branding · Visuals · Identity</p>
+          </div>
+          <p class="offer-block-sub">Logos, brand kits, and visual assets — delivered fast, revised until perfect.</p>
+        </div>
+        <div class="offer-list">
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Logo design &amp; full brand identity</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Brand kit — colours, fonts, and visual guidelines</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Social media graphics &amp; post templates</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Marketing materials — flyers, banners &amp; posters</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Thumbnail &amp; cover design for video platforms</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Business cards &amp; print-ready files</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Consistent visual language across every platform</span></div>
+          <div class="offer-item"><div class="offer-check gfx">✓</div><span class="offer-item-text">Fast delivery &amp; revisions until it's perfect</span></div>
+        </div>
+        <div class="offer-block-footer">
+          <a href="#contact" class="btn btn-solid" style="background:#a060ff;" onmouseover="this.style.background='#7030d0'" onmouseout="this.style.background='#a060ff'" onclick="switchTab('gfx')">Get a Quote &nbsp;→</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -534,143 +427,142 @@
   </div>
 </section>
 
-<!-- ═══ PROCESS ══════════════════════════════════════════════ -->
-<section id="process">
-  <div class="section-inner">
-    <div class="process-header reveal">
-      <p class="section-eyebrow">How It Works</p>
-      <h2 class="section-title">A Simple,<br>Proven Process</h2>
-      <p class="section-sub">From first conversation to a growing social media account — here's exactly how we work together.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-item reveal">
-        <div class="proc-left"><div class="proc-num">01</div><div class="proc-dot"></div></div>
-        <div><div class="proc-title">Brand Audit</div><p class="proc-desc">I review your current social media presence, identify what's working, what isn't, and where the biggest growth opportunities are.</p></div>
-      </div>
-      <div class="process-item reveal rd1">
-        <div class="proc-left"><div class="proc-num">02</div><div class="proc-dot"></div></div>
-        <div><div class="proc-title">Content Strategy</div><p class="proc-desc">A tailored plan for your niche — posting frequency, content pillars, video formats, and hooks built around your brand voice.</p></div>
-      </div>
-      <div class="process-item reveal rd1">
-        <div class="proc-left"><div class="proc-num">03</div><div class="proc-dot"></div></div>
-        <div><div class="proc-title">Film &amp; Create</div><p class="proc-desc">I film, edit, and produce all your short-form content — Reels, TikToks, and everything in between — ready to post.</p></div>
-      </div>
-      <div class="process-item reveal rd2">
-        <div class="proc-left"><div class="proc-num">04</div><div class="proc-dot"></div></div>
-        <div><div class="proc-title">Post, Grow &amp; Report</div><p class="proc-desc">I post consistently, manage your community, and send monthly reports tracking your growth, reach, and engagement every step of the way.</p></div>
-      </div>
-    </div>
-    <div class="process-cta reveal">
-      <a href="#contact" class="btn btn-solid" id="btnProcessCta">Get Started &nbsp;→</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CONTACT ══════════════════════════════════════════════ -->
+<!-- ═══ CONTACT — 3 paths ════════════════════════════════════ -->
 <section id="contact">
   <div class="section-inner">
 
     <div class="contact-top reveal">
       <p class="section-eyebrow">Get In Touch</p>
-      <h2 class="section-title">Let's Work<br>Together.</h2>
-      <p class="section-sub" style="margin:0 auto;">Choose how you'd like to get started — a risk-free trial or a direct working relationship.</p>
+      <h2 class="section-title">Let's Connect.</h2>
+      <p class="section-sub" style="margin:0 auto;">Choose your service below and I'll get back to you within 24 hours.</p>
     </div>
 
     <div class="form-tabs">
-      <button class="form-tab active" data-tab="trial" onclick="switchTab('trial')">Free Trial</button>
-      <button class="form-tab" data-tab="work" onclick="switchTab('work')">Work With Me</button>
+      <button class="form-tab active" data-tab="social" onclick="switchTab('social')">Social Media</button>
+      <button class="form-tab" data-tab="web"    onclick="switchTab('web')">Website Creation</button>
+      <button class="form-tab" data-tab="gfx"    onclick="switchTab('gfx')">Graphic Design</button>
     </div>
 
-    <!-- FREE TRIAL PANEL -->
-    <div class="form-panel active" id="panel-trial">
-      <div class="reveal">
-        <div class="contact-detail">
-          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
+    <!-- ── SOCIAL MEDIA PANEL ── -->
+    <div class="form-panel active" id="panel-social">
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-sub="direct" onclick="switchSub('direct')">Let's Start Directly</button>
+        <button class="sub-tab" data-sub="trial" onclick="switchSub('trial')">Free Trial</button>
+      </div>
+
+      <!-- Sub: Let's Start Directly -->
+      <div class="sub-panel active" id="sub-direct">
+        <div class="reveal">
+          <div class="contact-detail">
+            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="contact-lbl">Location</div><div class="contact-val">Wilanów, Warsaw</div></div>
+          </div>
+          <div class="panel-info-box" style="margin-top:1.5rem;">
+            <div class="panel-info-box-lbl">Ready to start?</div>
+            <div class="panel-info-box-desc">Tell me about your business and goals. I'll put together a tailored plan and reply within 24 hours.</div>
+          </div>
         </div>
-        <div class="contact-detail">
-          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><div class="contact-lbl">Location</div><div class="contact-val">Wilanów, Warsaw</div></div>
+        <div class="reveal rd1">
+          <div id="directForm">
+            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
+            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+            <div class="form-group"><label class="form-lbl">Your Main Platform</label>
+              <select class="form-select"><option value="" disabled selected>Select a platform...</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Multiple platforms</option><option>Not on social media yet</option></select>
+            </div>
+            <div class="form-group"><label class="form-lbl">Tell me about your business</label><textarea class="form-textarea" placeholder="What do you do? What are your goals? What's your niche?"></textarea></div>
+            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('direct')">Let's Start &nbsp;→</button></div>
+          </div>
+          <div class="form-success" id="directSuccess"><div class="form-success-ico">✓</div><h3>Message Received.</h3><p>Thanks — I'll get back to you within 24 hours with a plan.</p></div>
         </div>
-        <div class="panel-info" style="margin-top:2rem;">
-          <div class="panel-info-box">
+      </div>
+
+      <!-- Sub: Free Trial -->
+      <div class="sub-panel" id="sub-trial">
+        <div class="reveal">
+          <div class="contact-detail">
+            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
+          </div>
+          <div class="panel-info-box" style="margin-top:1.5rem;">
             <div class="panel-info-box-lbl">What's the Free Trial?</div>
-            <div class="panel-info-box-desc">I'll manage your social media for a short period at zero cost — so you can see real results before committing to anything. No contract, no credit card, no pressure.</div>
+            <div class="panel-info-box-desc">I'll manage your social media for a short period at zero cost — see real results before committing. No contract, no credit card, no pressure.</div>
           </div>
           <div class="panel-info-box">
             <div class="panel-info-box-lbl">What happens next?</div>
-            <div class="panel-info-box-desc">I'll review your message and get back to you within 24 hours to schedule a quick call and kick things off.</div>
+            <div class="panel-info-box-desc">I'll review your message and reply within 24 hours to schedule a quick call and kick things off.</div>
           </div>
         </div>
-      </div>
-      <div class="reveal rd1">
-        <div id="trialForm">
-          <div class="form-group"><label class="form-lbl" for="t-name">Your Name <span class="req">*</span></label><input type="text" class="form-input" id="t-name" placeholder="John Smith"></div>
-          <div class="form-group"><label class="form-lbl" for="t-email">Email Address <span class="req">*</span></label><input type="email" class="form-input" id="t-email" placeholder="your@email.com"></div>
-          <div class="form-group"><label class="form-lbl" for="t-platform">Your Main Platform</label>
-            <select class="form-select" id="t-platform">
-              <option value="" disabled selected>Select a platform...</option>
-              <option>Instagram</option>
-              <option>TikTok</option>
-              <option>YouTube</option>
-              <option>Multiple platforms</option>
-              <option>Not on social media yet</option>
-            </select>
+        <div class="reveal rd1">
+          <div id="trialForm">
+            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
+            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+            <div class="form-group"><label class="form-lbl">Your Main Platform</label>
+              <select class="form-select"><option value="" disabled selected>Select a platform...</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Multiple platforms</option><option>Not on social media yet</option></select>
+            </div>
+            <div class="form-group"><label class="form-lbl">Tell me about your business</label><textarea class="form-textarea" placeholder="What do you do? What results are you looking for?"></textarea></div>
+            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('trial')">Start My Free Trial &nbsp;→</button></div>
           </div>
-          <div class="form-group"><label class="form-lbl" for="t-msg">Tell me about your business</label><textarea class="form-textarea" id="t-msg" placeholder="What do you do? What's your niche? What results are you looking for?"></textarea></div>
-          <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('trial')">Start My Free Trial &nbsp;→</button></div>
-        </div>
-        <div class="form-success" id="trialSuccess">
-          <div class="form-success-ico">✓</div>
-          <h3>You're In.</h3>
-          <p>Thanks for reaching out — I'll get back to you within 24 hours to get your free trial started.</p>
+          <div class="form-success" id="trialSuccess"><div class="form-success-ico">✓</div><h3>You're In.</h3><p>I'll get back to you within 24 hours to get your free trial started.</p></div>
         </div>
       </div>
     </div>
 
-    <!-- WORK WITH ME PANEL -->
-    <div class="form-panel" id="panel-work">
-      <div class="reveal">
-        <div class="contact-detail">
-          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><div class="contact-lbl">Location</div><div class="contact-val">Wilanów, Warsaw</div></div>
-        </div>
-        <div class="panel-info" style="margin-top:2rem;">
-          <div class="panel-info-box purple">
-            <div class="panel-info-box-lbl">Direct Collaboration</div>
-            <div class="panel-info-box-desc">Ready to get started right away? Tell me what you need — social media management, a website, graphic design, or a combination — and I'll put together a tailored proposal.</div>
+    <!-- ── WEBSITE CREATION PANEL ── -->
+    <div class="form-panel" id="panel-web">
+      <div class="form-panel-grid">
+        <div class="reveal">
+          <div class="contact-detail">
+            <div class="contact-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
           </div>
-          <div class="panel-info-box purple">
-            <div class="panel-info-box-lbl">What happens next?</div>
-            <div class="panel-info-box-desc">I'll review your project details and reply within 24 hours with a clear plan and pricing. No fluff, just results.</div>
+          <div class="panel-info-box" style="margin-top:1.5rem;">
+            <div class="panel-info-box-lbl">Website Creation</div>
+            <div class="panel-info-box-desc">Tell me about your project — what you need, your industry, and any reference sites you like. I'll come back with a clear scope and quote.</div>
           </div>
+        </div>
+        <div class="reveal rd1">
+          <div id="webForm">
+            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
+            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+            <div class="form-group"><label class="form-lbl">Type of Website</label>
+              <select class="form-select"><option value="" disabled selected>Select type...</option><option>Business / Portfolio</option><option>E-commerce</option><option>Landing Page</option><option>Blog</option><option>Other</option></select>
+            </div>
+            <div class="form-group"><label class="form-lbl">Tell me about your project <span class="req">*</span></label><textarea class="form-textarea" placeholder="What's your business? Any reference sites? Budget or timeline?"></textarea></div>
+            <div class="form-submit"><button class="btn btn-solid" onclick="submitForm('web')">Get a Quote &nbsp;→</button></div>
+          </div>
+          <div class="form-success" id="webSuccess"><div class="form-success-ico">✓</div><h3>Request Received.</h3><p>I'll review your project and reply within 24 hours with a clear plan and quote.</p></div>
         </div>
       </div>
-      <div class="reveal rd1">
-        <div id="workForm">
-          <div class="form-group"><label class="form-lbl" for="w-name">Your Name <span class="req">*</span></label><input type="text" class="form-input" id="w-name" placeholder="John Smith"></div>
-          <div class="form-group"><label class="form-lbl" for="w-email">Email Address <span class="req">*</span></label><input type="email" class="form-input" id="w-email" placeholder="your@email.com"></div>
-          <div class="form-group"><label class="form-lbl" for="w-service">Service You're Interested In</label>
-            <select class="form-select" id="w-service">
-              <option value="" disabled selected>Select a service...</option>
-              <option>Social Media Management</option>
-              <option>Website Creation</option>
-              <option>Graphic Design</option>
-              <option>Social Media + Website</option>
-              <option>All Services</option>
-            </select>
+    </div>
+
+    <!-- ── GRAPHIC DESIGN PANEL ── -->
+    <div class="form-panel" id="panel-gfx">
+      <div class="form-panel-grid">
+        <div class="reveal">
+          <div class="contact-detail">
+            <div class="contact-ico" style="color:#a060ff;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
           </div>
-          <div class="form-group"><label class="form-lbl" for="w-msg">Tell me about your project <span class="req">*</span></label><textarea class="form-textarea" id="w-msg" placeholder="What's your business? What are your goals? Any details about budget or timeline are helpful."></textarea></div>
-          <div class="form-submit"><button class="btn btn-solid" style="background:#7830dc;" onmouseover="this.style.background='#6020bb'" onmouseout="this.style.background='#7830dc'" onclick="submitForm('work')">Let's Work Together &nbsp;→</button></div>
+          <div class="panel-info-box" style="margin-top:1.5rem;border-left-color:#a060ff;">
+            <div class="panel-info-box-lbl" style="color:#a060ff;">Graphic Design</div>
+            <div class="panel-info-box-desc">Logos, brand kits, social templates, or marketing materials — tell me what you need and I'll deliver fast with revisions until it's perfect.</div>
+          </div>
         </div>
-        <div class="form-success" id="workSuccess">
-          <div class="form-success-ico" style="background:rgba(120,48,220,.1);border-color:#7830dc;color:#7830dc;">✓</div>
-          <h3>Message Received.</h3>
-          <p>Thanks for getting in touch — I'll review your project and get back to you within 24 hours with a clear plan.</p>
+        <div class="reveal rd1">
+          <div id="gfxForm">
+            <div class="form-group"><label class="form-lbl">Your Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John Smith"></div>
+            <div class="form-group"><label class="form-lbl">Email Address <span class="req">*</span></label><input type="email" class="form-input" placeholder="your@email.com"></div>
+            <div class="form-group"><label class="form-lbl">What do you need?</label>
+              <select class="form-select"><option value="" disabled selected>Select type...</option><option>Logo &amp; Brand Identity</option><option>Social Media Graphics</option><option>Marketing Materials</option><option>Thumbnails &amp; Covers</option><option>Business Cards</option><option>Other</option></select>
+            </div>
+            <div class="form-group"><label class="form-lbl">Tell me about your project <span class="req">*</span></label><textarea class="form-textarea" placeholder="Describe what you need. Any style references, colours, or brand guidelines?"></textarea></div>
+            <div class="form-submit"><button class="btn btn-solid" style="background:#a060ff;" onmouseover="this.style.background='#7030d0'" onmouseout="this.style.background='#a060ff'" onclick="submitForm('gfx')">Get a Quote &nbsp;→</button></div>
+          </div>
+          <div class="form-success" id="gfxSuccess"><div class="form-success-ico" style="background:rgba(160,96,255,.1);border-color:#a060ff;color:#a060ff;">✓</div><h3>Request Received.</h3><p>I'll review your project and reply within 24 hours.</p></div>
         </div>
       </div>
     </div>
@@ -686,12 +578,9 @@
       <p class="footer-copy">© 2026 Warsaw Media. All rights reserved.</p>
     </div>
     <ul class="footer-links">
-      <li><a href="#social">Social Media</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#additional">Other Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Let's Talk</a></li>
+      <li><a href="#services">My Services</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#contact">Let's Connect</a></li>
     </ul>
   </div>
 </footer>
@@ -727,58 +616,39 @@
   }, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
   document.querySelectorAll('.reveal, .reveal-up').forEach(el => obs.observe(el));
 
-  /* Counter animation */
-  const cObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.target.dataset.done) return;
-      e.target.dataset.done = '1';
-      const target = +e.target.dataset.target;
-      const dur = 2000, start = performance.now();
-      (function tick(now) {
-        const p = Math.min((now-start)/dur, 1);
-        e.target.textContent = Math.floor((1-Math.pow(1-p,3))*target);
-        if (p < 1) requestAnimationFrame(tick);
-      })(start);
-    });
-  }, { threshold:0.6 });
-  document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
-
-  /* Tab switching */
-  function switchTab(name) {
+  /* Primary tab switch */
+  window.switchTab = function (name) {
     document.querySelectorAll('.form-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
     document.querySelectorAll('.form-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
-  }
+    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
+  };
 
-  /* Hero buttons → open correct tab */
-  document.getElementById('btnTrial').addEventListener('click', (e) => {
-    e.preventDefault();
-    switchTab('trial');
-    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
-  });
-  document.getElementById('btnWork').addEventListener('click', (e) => {
-    e.preventDefault();
-    switchTab('work');
-    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
-  });
-  document.getElementById('btnProcessCta').addEventListener('click', (e) => {
-    e.preventDefault();
-    switchTab('trial');
-    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
-  });
+  /* Sub-tab switch (social media) */
+  window.switchSub = function (name) {
+    document.querySelectorAll('.sub-tab').forEach(t => t.classList.toggle('active', t.dataset.sub === name));
+    document.querySelectorAll('.sub-panel').forEach(p => p.classList.toggle('active', p.id === 'sub-' + name));
+  };
+
+  /* Handle return from process.html — open correct tab/sub-tab */
+  (function () {
+    const tab = sessionStorage.getItem('openTab');
+    const sub = sessionStorage.getItem('openSub');
+    if (tab) { sessionStorage.removeItem('openTab'); sessionStorage.removeItem('openSub'); window.switchTab(tab); if (sub) window.switchSub(sub); }
+  })();
 
   /* Form submit */
-  function submitForm(type) {
-    document.getElementById(type + 'Form').style.display = 'none';
-    document.getElementById(type + 'Success').style.display = 'block';
-  }
+  window.submitForm = function (type) {
+    const formMap = { direct:'directForm', trial:'trialForm', web:'webForm', gfx:'gfxForm' };
+    const sucMap  = { direct:'directSuccess', trial:'trialSuccess', web:'webSuccess', gfx:'gfxSuccess' };
+    document.getElementById(formMap[type]).style.display = 'none';
+    document.getElementById(sucMap[type]).style.display  = 'block';
+  };
 </script>
 
 <!-- ═══ HIDDEN ADMIN PANEL (CMS) ════════════════════════════ -->
 <style id="wm-admin-css">
   #wm-admin-overlay { display:none; position:fixed; inset:0; z-index:999999; background:#0a0a0a; font-family:'Space Grotesk',sans-serif; overflow-y:auto; }
   #wm-admin-overlay * { box-sizing:border-box; }
-
-  /* Auth */
   #wm-admin-auth { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; gap:1.5rem; padding:2rem; }
   .wm-admin-logo { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; letter-spacing:.15em; color:#fff; }
   .wm-admin-logo span { color:#893ef5; }
@@ -789,21 +659,15 @@
   .wm-admin-pwd-wrap button { background:#893ef5; border:none; color:#fff; padding:0 1.5rem; font-family:'Space Grotesk',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:background .2s; white-space:nowrap; }
   .wm-admin-pwd-wrap button:hover { background:#7030d0; }
   .wm-admin-auth-error { font-size:.78rem; color:#ff4444; display:none; }
-
-  /* Panel shell */
   #wm-admin-panel { max-width:860px; margin:0 auto; padding:4rem 2rem; }
   .wm-admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:3rem; padding-bottom:1.5rem; border-bottom:1px solid #1e1e1e; }
   .wm-admin-header-sub { font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:#555; margin-top:.3rem; }
   .wm-admin-close { background:none; border:1px solid #1e1e1e; color:#555; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; transition:border-color .2s,color .2s; }
   .wm-admin-close:hover { border-color:#fff; color:#fff; }
-
-  /* Sections */
   .wm-admin-section { margin-bottom:3rem; padding-bottom:3rem; border-bottom:1px solid #1e1e1e; }
   .wm-admin-section:last-child { border-bottom:none; margin-bottom:0; }
   .wm-admin-section-title { font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#893ef5; font-weight:600; margin-bottom:1.5rem; display:flex; align-items:center; gap:.7rem; }
   .wm-admin-section-title::before { content:''; width:18px; height:1px; background:#893ef5; }
-
-  /* Fields */
   .wm-admin-field { margin-bottom:1.4rem; }
   .wm-admin-label { display:block; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:#555; margin-bottom:.55rem; }
   .wm-admin-input-row { display:flex; gap:.6rem; align-items:flex-start; }
@@ -812,16 +676,12 @@
   .wm-admin-input::placeholder, .wm-admin-textarea::placeholder { color:#555; }
   .wm-admin-textarea { resize:vertical; min-height:80px; }
   .wm-admin-hint { font-size:.68rem; color:#555; margin-top:.4rem; }
-
-  /* Buttons */
   .wm-admin-btn { background:#893ef5; border:none; color:#fff; padding:.85rem 1.4rem; font-family:'Space Grotesk',sans-serif; font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; transition:background .2s; white-space:nowrap; }
   .wm-admin-btn:hover { background:#7030d0; }
   .wm-admin-btn.outline { background:transparent; border:1px solid #1e1e1e; color:#999; }
   .wm-admin-btn.outline:hover { border-color:#893ef5; color:#893ef5; background:transparent; }
   .wm-admin-btn.wm-saved { background:#00a84a !important; }
   .wm-admin-btn-col { display:flex; flex-direction:column; gap:.5rem; }
-
-  /* Toggle */
   .wm-admin-toggle-wrap { display:flex; align-items:center; gap:1rem; }
   .wm-admin-toggle { position:relative; width:48px; height:26px; cursor:pointer; flex-shrink:0; }
   .wm-admin-toggle input { opacity:0; width:0; height:0; position:absolute; }
@@ -830,8 +690,6 @@
   .wm-admin-toggle input:checked + .wm-admin-slider { background:rgba(137,62,245,.2); }
   .wm-admin-toggle input:checked + .wm-admin-slider::before { transform:translateX(22px); background:#893ef5; }
   .wm-admin-toggle-lbl { font-size:.83rem; color:#999; }
-
-  /* Stats grid */
   .wm-admin-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#1e1e1e; border:1px solid #1e1e1e; }
   .wm-admin-stat-cell { background:#141414; padding:1.2rem; display:flex; flex-direction:column; gap:.6rem; }
   .wm-admin-stat-lbl { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:#555; }
@@ -843,16 +701,12 @@
   .wm-admin-stat-btn { background:#141414; border:1px solid #1e1e1e; color:#999; padding:.6rem .8rem; font-size:.6rem; font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s,background .2s; white-space:nowrap; }
   .wm-admin-stat-btn:hover { border-color:#893ef5; color:#893ef5; }
   .wm-admin-stat-btn.wm-saved { background:rgba(0,168,74,.15) !important; border-color:#00a84a !important; color:#00a84a !important; }
-
-  /* AI suggest loader */
   .wm-suggest-loading { display:none; align-items:center; gap:.5rem; font-size:.72rem; color:#893ef5; margin-top:.5rem; }
   @keyframes wm-spin { to { transform:rotate(360deg); } }
   .wm-spinner { width:13px; height:13px; border:2px solid #1e1e1e; border-top-color:#893ef5; border-radius:50%; animation:wm-spin .7s linear infinite; flex-shrink:0; }
 </style>
 
 <div id="wm-admin-overlay">
-
-  <!-- AUTH SCREEN -->
   <div id="wm-admin-auth">
     <div class="wm-admin-logo">WARSAW MEDIA<span>.</span></div>
     <div class="wm-admin-auth-sub">Admin Access</div>
@@ -862,8 +716,6 @@
     </div>
     <div class="wm-admin-auth-error" id="wm-admin-error">Incorrect password</div>
   </div>
-
-  <!-- PANEL -->
   <div id="wm-admin-panel" style="display:none;">
     <div class="wm-admin-header">
       <div>
@@ -872,22 +724,15 @@
       </div>
       <button class="wm-admin-close" onclick="wmAdminClose()">✕</button>
     </div>
-
-    <!-- HERO -->
     <div class="wm-admin-section">
       <div class="wm-admin-section-title">Hero Section</div>
-
       <div class="wm-admin-field">
         <label class="wm-admin-label">Accepting New Clients Tag</label>
         <div class="wm-admin-toggle-wrap">
-          <label class="wm-admin-toggle">
-            <input type="checkbox" id="wm-admin-accepting" checked onchange="wmAdminSaveAccepting()">
-            <span class="wm-admin-slider"></span>
-          </label>
+          <label class="wm-admin-toggle"><input type="checkbox" id="wm-admin-accepting" checked onchange="wmAdminSaveAccepting()"><span class="wm-admin-slider"></span></label>
           <span class="wm-admin-toggle-lbl" id="wm-accepting-lbl">Visible</span>
         </div>
       </div>
-
       <div class="wm-admin-field">
         <label class="wm-admin-label">Hero Headline</label>
         <div class="wm-admin-input-row">
@@ -898,9 +743,8 @@
           </div>
         </div>
         <div class="wm-suggest-loading" id="wm-suggest-loading"><div class="wm-spinner"></div>Asking Claude…</div>
-        <div class="wm-admin-hint">The blue period ( . ) is always added automatically at the end.</div>
+        <div class="wm-admin-hint">The blue period ( . ) is always added automatically.</div>
       </div>
-
       <div class="wm-admin-field">
         <label class="wm-admin-label">Hero Description</label>
         <div class="wm-admin-input-row">
@@ -909,38 +753,6 @@
         </div>
       </div>
     </div>
-
-    <!-- STATS -->
-    <div class="wm-admin-section">
-      <div class="wm-admin-section-title">Stats — Results Section</div>
-      <div class="wm-admin-stats-grid">
-        <div class="wm-admin-stat-cell">
-          <div class="wm-admin-stat-lbl">Organic Views (30 days)</div>
-          <div class="wm-admin-stat-row">
-            <input class="wm-admin-stat-num" id="wm-s0-num" type="text" value="10">
-            <input class="wm-admin-stat-sfx" id="wm-s0-sfx" type="text" value="K+">
-            <button class="wm-admin-stat-btn" id="wm-s0-btn" onclick="wmAdminSaveStat(0)">Save</button>
-          </div>
-        </div>
-        <div class="wm-admin-stat-cell">
-          <div class="wm-admin-stat-lbl">Days to First Results</div>
-          <div class="wm-admin-stat-row">
-            <input class="wm-admin-stat-num" id="wm-s1-num" type="text" value="30">
-            <button class="wm-admin-stat-btn" id="wm-s1-btn" onclick="wmAdminSaveStat(1)">Save</button>
-          </div>
-        </div>
-        <div class="wm-admin-stat-cell">
-          <div class="wm-admin-stat-lbl">Organic Growth</div>
-          <div class="wm-admin-stat-row">
-            <input class="wm-admin-stat-num" id="wm-s2-num" type="text" value="100">
-            <input class="wm-admin-stat-sfx" id="wm-s2-sfx" type="text" value="%">
-            <button class="wm-admin-stat-btn" id="wm-s2-btn" onclick="wmAdminSaveStat(2)">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
     <div class="wm-admin-section">
       <div class="wm-admin-section-title">Contact</div>
       <div class="wm-admin-field">
@@ -951,230 +763,118 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
 (function () {
-  /* ── API KEY ─────────────────────────────────────────── */
-  const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE'; // ← replace with your Anthropic API key
-
-  /* ── PASSWORD ────────────────────────────────────────── */
+  const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE';
   const WM_PASS = 'warsawmedia2026';
 
-  /* ── FLASH HELPER ────────────────────────────────────── */
   function wmFlash(id, isStatBtn) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const orig = el.textContent;
-    el.classList.add('wm-saved');
+    const el = document.getElementById(id); if (!el) return;
+    const orig = el.textContent; el.classList.add('wm-saved');
     el.textContent = isStatBtn ? '✓' : '✓ Saved';
     setTimeout(() => { el.classList.remove('wm-saved'); el.textContent = orig; }, 1500);
   }
 
-  /* ── OPEN / CLOSE ────────────────────────────────────── */
   window.wmAdminOpen = function () {
-    const ov = document.getElementById('wm-admin-overlay');
-    ov.style.display = 'block';
+    const ov = document.getElementById('wm-admin-overlay'); ov.style.display = 'block';
     document.getElementById('wm-admin-auth').style.display = 'flex';
     document.getElementById('wm-admin-panel').style.display = 'none';
     document.getElementById('wm-admin-error').style.display = 'none';
     document.getElementById('wm-admin-pwd').value = '';
     setTimeout(() => document.getElementById('wm-admin-pwd').focus(), 50);
   };
-  window.wmAdminClose = function () {
-    document.getElementById('wm-admin-overlay').style.display = 'none';
-  };
+  window.wmAdminClose = function () { document.getElementById('wm-admin-overlay').style.display = 'none'; };
 
-  /* ── LOGIN ───────────────────────────────────────────── */
   window.wmAdminLogin = function () {
     if (document.getElementById('wm-admin-pwd').value === WM_PASS) {
       document.getElementById('wm-admin-auth').style.display = 'none';
       document.getElementById('wm-admin-panel').style.display = 'block';
       wmAdminPopulate();
     } else {
-      const err = document.getElementById('wm-admin-error');
-      err.style.display = 'block';
-      document.getElementById('wm-admin-pwd').value = '';
-      document.getElementById('wm-admin-pwd').focus();
+      const err = document.getElementById('wm-admin-error'); err.style.display = 'block';
+      document.getElementById('wm-admin-pwd').value = ''; document.getElementById('wm-admin-pwd').focus();
       setTimeout(() => { err.style.display = 'none'; }, 2500);
     }
   };
 
-  /* ── POPULATE FIELDS WITH CURRENT VALUES ─────────────── */
   function wmAdminPopulate() {
-    // Headline: strip blue span, split on <br>
     const h1 = document.querySelector('.hero-headline');
     if (h1) {
-      const clone = h1.cloneNode(true);
-      clone.querySelectorAll('.blue').forEach(el => el.remove());
+      const clone = h1.cloneNode(true); clone.querySelectorAll('.blue').forEach(el => el.remove());
       const lines = clone.innerHTML.split(/<br\s*\/?>/i).map(l => l.replace(/\s+/g,' ').trim()).filter(Boolean);
       document.getElementById('wm-admin-headline').value = lines.join('\n');
     }
-
-    // Description
     const desc = document.querySelector('.hero-desc');
     if (desc) document.getElementById('wm-admin-desc').value = desc.textContent.trim();
-
-    // Accepting tag toggle
     const tag = document.querySelector('.hero-tag');
     const on = !tag || tag.style.display !== 'none';
     document.getElementById('wm-admin-accepting').checked = on;
     document.getElementById('wm-accepting-lbl').textContent = on ? 'Visible' : 'Hidden';
-
-    // Stats
-    const cells = document.querySelectorAll('.stat-cell');
-    const s0c = cells[0] && cells[0].querySelector('.counter');
-    const s0f = cells[0] && cells[0].querySelector('.stat-sfx');
-    if (s0c) document.getElementById('wm-s0-num').value = s0c.dataset.target || s0c.textContent;
-    if (s0f) document.getElementById('wm-s0-sfx').value = s0f.textContent;
-
-    const s1s = cells[1] && cells[1].querySelector('.stat-num span');
-    if (s1s) document.getElementById('wm-s1-num').value = s1s.textContent;
-
-    const s2c = cells[2] && cells[2].querySelector('.counter');
-    const s2f = cells[2] && cells[2].querySelector('.stat-sfx');
-    if (s2c) document.getElementById('wm-s2-num').value = s2c.dataset.target || s2c.textContent;
-    if (s2f) document.getElementById('wm-s2-sfx').value = s2f.textContent;
-
-    // Email
     const emailLink = document.querySelector('.contact-val a');
     if (emailLink) document.getElementById('wm-admin-email').value = emailLink.textContent;
   }
 
-  /* ── SAVE: HEADLINE ──────────────────────────────────── */
   window.wmAdminSaveHeadline = function () {
-    const val = document.getElementById('wm-admin-headline').value.trim();
-    if (!val) return;
+    const val = document.getElementById('wm-admin-headline').value.trim(); if (!val) return;
     const lines = val.split('\n').map(l => l.trim()).filter(Boolean);
     const h1 = document.querySelector('.hero-headline');
     if (h1) h1.innerHTML = lines.join('<br>\n      ') + '<span class="blue">.</span>';
-    localStorage.setItem('wm_headline', val);
-    wmFlash('wm-save-headline');
+    localStorage.setItem('wm_headline', val); wmFlash('wm-save-headline');
   };
 
-  /* ── SAVE: DESCRIPTION ───────────────────────────────── */
   window.wmAdminSaveDesc = function () {
-    const val = document.getElementById('wm-admin-desc').value.trim();
-    if (!val) return;
-    const desc = document.querySelector('.hero-desc');
-    if (desc) desc.textContent = val;
-    localStorage.setItem('wm_desc', val);
-    wmFlash('wm-save-desc');
+    const val = document.getElementById('wm-admin-desc').value.trim(); if (!val) return;
+    const desc = document.querySelector('.hero-desc'); if (desc) desc.textContent = val;
+    localStorage.setItem('wm_desc', val); wmFlash('wm-save-desc');
   };
 
-  /* ── SAVE: ACCEPTING TOGGLE ──────────────────────────── */
   window.wmAdminSaveAccepting = function () {
     const on = document.getElementById('wm-admin-accepting').checked;
-    const tag = document.querySelector('.hero-tag');
-    if (tag) tag.style.display = on ? '' : 'none';
+    const tag = document.querySelector('.hero-tag'); if (tag) tag.style.display = on ? '' : 'none';
     document.getElementById('wm-accepting-lbl').textContent = on ? 'Visible' : 'Hidden';
     localStorage.setItem('wm_accepting', on ? '1' : '0');
   };
 
-  /* ── SAVE: STAT ──────────────────────────────────────── */
-  window.wmAdminSaveStat = function (i) {
-    const cells = document.querySelectorAll('.stat-cell');
-    if (!cells[i]) return;
-    if (i === 0) {
-      const num = document.getElementById('wm-s0-num').value.trim();
-      const sfx = document.getElementById('wm-s0-sfx').value.trim();
-      const c = cells[0].querySelector('.counter'), f = cells[0].querySelector('.stat-sfx');
-      if (c) { c.dataset.target = num; c.textContent = num; c.dataset.done = '1'; }
-      if (f) f.textContent = sfx;
-      localStorage.setItem('wm_stat0', JSON.stringify({ num, sfx }));
-    } else if (i === 1) {
-      const num = document.getElementById('wm-s1-num').value.trim();
-      const s = cells[1].querySelector('.stat-num span');
-      if (s) s.textContent = num;
-      localStorage.setItem('wm_stat1', JSON.stringify({ num }));
-    } else if (i === 2) {
-      const num = document.getElementById('wm-s2-num').value.trim();
-      const sfx = document.getElementById('wm-s2-sfx').value.trim();
-      const c = cells[2].querySelector('.counter'), f = cells[2].querySelector('.stat-sfx');
-      if (c) { c.dataset.target = num; c.textContent = num; c.dataset.done = '1'; }
-      if (f) f.textContent = sfx;
-      localStorage.setItem('wm_stat2', JSON.stringify({ num, sfx }));
-    }
-    wmFlash('wm-s' + i + '-btn', true);
-  };
-
-  /* ── SAVE: EMAIL ─────────────────────────────────────── */
   window.wmAdminSaveEmail = function () {
-    const val = document.getElementById('wm-admin-email').value.trim();
-    if (!val) return;
+    const val = document.getElementById('wm-admin-email').value.trim(); if (!val) return;
     document.querySelectorAll('.contact-val a').forEach(a => { a.href = 'mailto:' + val; a.textContent = val; });
-    localStorage.setItem('wm_email', val);
-    wmFlash('wm-save-email');
+    localStorage.setItem('wm_email', val); wmFlash('wm-save-email');
   };
 
-  /* ── CLAUDE AI SUGGEST ───────────────────────────────── */
   window.wmAdminSuggest = async function () {
     const btn = document.getElementById('wm-suggest-btn');
     const loader = document.getElementById('wm-suggest-loading');
-    btn.disabled = true; btn.textContent = '…';
-    loader.style.display = 'flex';
+    btn.disabled = true; btn.textContent = '…'; loader.style.display = 'flex';
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: {
-          'x-api-key': ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 60,
-          messages: [{ role: 'user', content: 'Write a short punchy hero headline for a social media growth agency. Exactly 2 lines. Max 4 words per line. ALL CAPS. No punctuation. Reply with only the headline, a single line break between the two lines, nothing else.' }]
-        })
+        headers: { 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 60, messages: [{ role: 'user', content: 'Write a short punchy hero headline for a social media growth agency. Exactly 2 lines. Max 4 words per line. ALL CAPS. No punctuation. Reply with only the headline.' }] })
       });
       const data = await res.json();
-      if (data.content && data.content[0]) {
-        document.getElementById('wm-admin-headline').value = data.content[0].text.trim();
-      } else {
-        alert('No response — check your API key.');
-      }
-    } catch (err) {
-      alert('Request failed: ' + err.message);
-    } finally {
-      btn.disabled = false; btn.textContent = '✦ AI Suggest';
-      loader.style.display = 'none';
-    }
+      if (data.content && data.content[0]) document.getElementById('wm-admin-headline').value = data.content[0].text.trim();
+      else alert('No response — check your API key.');
+    } catch (err) { alert('Request failed: ' + err.message); }
+    finally { btn.disabled = false; btn.textContent = '✦ AI Suggest'; loader.style.display = 'none'; }
   };
 
-  /* ── RESTORE FROM localStorage ON LOAD ──────────────── */
   (function wmRestore() {
     const hl = localStorage.getItem('wm_headline');
-    if (hl) {
-      const h1 = document.querySelector('.hero-headline');
-      if (h1) h1.innerHTML = hl.split('\n').map(l=>l.trim()).filter(Boolean).join('<br>\n      ') + '<span class="blue">.</span>';
-    }
+    if (hl) { const h1 = document.querySelector('.hero-headline'); if (h1) h1.innerHTML = hl.split('\n').map(l=>l.trim()).filter(Boolean).join('<br>\n      ') + '<span class="blue">.</span>'; }
     const dc = localStorage.getItem('wm_desc');
     if (dc) { const d = document.querySelector('.hero-desc'); if (d) d.textContent = dc; }
-
-    if (localStorage.getItem('wm_accepting') === '0') {
-      const t = document.querySelector('.hero-tag'); if (t) t.style.display = 'none';
-    }
-    const cells = document.querySelectorAll('.stat-cell');
-    const s0 = localStorage.getItem('wm_stat0');
-    if (s0 && cells[0]) { const v=JSON.parse(s0); const c=cells[0].querySelector('.counter'),f=cells[0].querySelector('.stat-sfx'); if(c){c.dataset.target=v.num;} if(f&&v.sfx)f.textContent=v.sfx; }
-    const s1 = localStorage.getItem('wm_stat1');
-    if (s1 && cells[1]) { const v=JSON.parse(s1); const s=cells[1].querySelector('.stat-num span'); if(s)s.textContent=v.num; }
-    const s2 = localStorage.getItem('wm_stat2');
-    if (s2 && cells[2]) { const v=JSON.parse(s2); const c=cells[2].querySelector('.counter'),f=cells[2].querySelector('.stat-sfx'); if(c){c.dataset.target=v.num;} if(f&&v.sfx)f.textContent=v.sfx; }
-
+    if (localStorage.getItem('wm_accepting') === '0') { const t = document.querySelector('.hero-tag'); if (t) t.style.display = 'none'; }
     const em = localStorage.getItem('wm_email');
     if (em) document.querySelectorAll('.contact-val a').forEach(a=>{ a.href='mailto:'+em; a.textContent=em; });
   })();
 
-  /* ── KEYBOARD TRIGGER ────────────────────────────────── */
   document.addEventListener('keydown', function (e) {
     if (e.shiftKey && e.key === 'A') { e.preventDefault(); wmAdminOpen(); }
     if (e.key === 'Escape' && document.getElementById('wm-admin-overlay').style.display !== 'none') wmAdminClose();
   });
-
 })();
 </script>
 </body>
