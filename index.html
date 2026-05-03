@@ -137,6 +137,31 @@
     .offer-block-gfx .offer-check { border-color:#a060ff; color:#a060ff; }
     .offer-block-gfx .offer-item:hover { background:rgba(160,96,255,.04); }
 
+    /* ── TRUSTED BY ── */
+    #trusted { padding:5rem 0; background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; }
+    .trusted-title { text-align:center; font-size:1rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--text); margin-bottom:3rem; }
+    .marquee-wrap { position:relative; overflow:hidden; }
+    /* fade edges */
+    .marquee-wrap::before, .marquee-wrap::after { content:''; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none; }
+    .marquee-wrap::before { left:0;  background:linear-gradient(to right, var(--bg-alt), transparent); }
+    .marquee-wrap::after  { right:0; background:linear-gradient(to left,  var(--bg-alt), transparent); }
+    .marquee-inner { display:flex; align-items:center; width:max-content; animation:marquee 28s linear infinite; }
+    .marquee-wrap:hover .marquee-inner { animation-play-state:paused; }
+    @keyframes marquee { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+    .logo-slide { display:flex; align-items:center; justify-content:center; padding:0 3.5rem; }
+    .logo-slide img { height:64px; width:auto; max-width:160px; object-fit:contain; transition:filter .3s, opacity .3s; }
+    /* lubihair is white outlines — boost brightness; others handle individually */
+    .logo-lubihair { filter:brightness(0) invert(1); opacity:.55; }
+    .logo-lubihair:hover { opacity:1; }
+    .logo-cumin { filter:none; opacity:.7; border-radius:8px; background:#fff; padding:6px 10px; }
+    .logo-cumin:hover { opacity:1; }
+    .logo-zamigo { filter:none; opacity:.7; border-radius:8px; background:#fff; padding:6px 10px; }
+    .logo-zamigo:hover { opacity:1; }
+    .logo-vk { filter:brightness(0) invert(1); opacity:.55; }
+    .logo-vk:hover { opacity:1; }
+    .logo-native { filter:none; opacity:.7; border-radius:8px; }
+    .logo-native:hover { opacity:1; }
+
     /* ── ABOUT ── */
     #about { background:var(--bg-alt); }
     .about-layout { display:grid; grid-template-columns:1.1fr .9fr; gap:7rem; align-items:start; }
@@ -410,6 +435,27 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUSTED BY ══════════════════════════════════════════════ -->
+<section id="trusted">
+  <p class="trusted-title">Trusted by many</p>
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <!-- Set 1 -->
+      <div class="logo-slide"><img src="logo-lubihair.png" alt="Lubi Hair"            class="logo-lubihair"></div>
+      <div class="logo-slide"><img src="logo-cumin.png"    alt="Cumin Club"           class="logo-cumin"></div>
+      <div class="logo-slide"><img src="logo-zamigo.png"   alt="Zamigo"               class="logo-zamigo"></div>
+      <div class="logo-slide"><img src="logo-vk.png"       alt="Villa Krasnowolska"   class="logo-vk"></div>
+      <div class="logo-slide"><img src="logo-native.png"   alt="The Native Station"   class="logo-native"></div>
+      <!-- Set 2 — duplicate for seamless loop -->
+      <div class="logo-slide"><img src="logo-lubihair.png" alt="Lubi Hair"            class="logo-lubihair"></div>
+      <div class="logo-slide"><img src="logo-cumin.png"    alt="Cumin Club"           class="logo-cumin"></div>
+      <div class="logo-slide"><img src="logo-zamigo.png"   alt="Zamigo"               class="logo-zamigo"></div>
+      <div class="logo-slide"><img src="logo-vk.png"       alt="Villa Krasnowolska"   class="logo-vk"></div>
+      <div class="logo-slide"><img src="logo-native.png"   alt="The Native Station"   class="logo-native"></div>
     </div>
   </div>
 </section>
