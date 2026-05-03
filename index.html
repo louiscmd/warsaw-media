@@ -145,7 +145,6 @@
     .marquee-wrap::before { left:0;  background:linear-gradient(to right, var(--bg-alt), transparent); }
     .marquee-wrap::after  { right:0; background:linear-gradient(to left,  var(--bg-alt), transparent); }
     .marquee-inner { display:flex; align-items:center; width:max-content; animation:marquee 35s linear infinite; }
-    .marquee-wrap:hover .marquee-inner { animation-play-state:paused; }
     @keyframes marquee { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
     .logo-slide { display:flex; align-items:center; justify-content:center; padding:0 6rem; }
     .logo-slide img { height:110px; width:auto; max-width:260px; object-fit:contain; transition:opacity .3s; }
@@ -157,7 +156,7 @@
     .logo-zamigo:hover { opacity:1; }
     .logo-vk { filter:brightness(0) invert(1); opacity:.6; }
     .logo-vk:hover { opacity:1; }
-    .logo-native { opacity:.85; }
+    .logo-native { opacity:.9; mix-blend-mode:screen; }
     .logo-native:hover { opacity:1; }
 
     /* ── ABOUT ── */
