@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#b07af9"/>
+      <stop offset="100%" stop-color="#7030d0"/>
+    </linearGradient>
+  </defs>
+  <!-- Top bolt piece: wide parallelogram, ends at y=50 -->
+  <polygon points="65,5 30,5 14,52 50,52" fill="url(#g)"/>
+  <!-- Bottom bolt piece: narrower triangle, starts at y=37 (clear gap) -->
+  <polygon points="57,37 80,37 39,97" fill="url(#g)"/>
+</svg>
