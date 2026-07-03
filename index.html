@@ -33,7 +33,7 @@
     /* ── NAV ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.4rem 5%; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, border-color 0.4s, box-shadow 0.4s; border-bottom: 1px solid transparent; }
     nav.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom-color: var(--border); box-shadow: 0 1px 20px rgba(137,62,245,.08); }
-    .nav-logo { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.06em; color: var(--text); text-decoration: none; display:flex; align-items:center; gap:.6rem; }
+    .nav-logo { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: -0.01em; color: var(--text); text-decoration: none; display:flex; align-items:center; gap:.6rem; }
     .nav-logo .dot { color: var(--blue); }
     .nav-logo-img { width:34px; height:34px; border-radius:8px; object-fit:cover; flex-shrink:0; }
     .nav-right { display: flex; align-items: center; gap: 2rem; }
@@ -221,7 +221,7 @@
     /* ── FOOTER ── */
     footer { background:var(--bg-alt); border-top:1px solid var(--border); padding:2.8rem 5%; }
     .footer-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
-    .footer-logo { font-family:'Inter',sans-serif; font-size:1.1rem; font-weight:800; letter-spacing:.06em; color:var(--text); display:block; margin-bottom:.3rem; }
+    .footer-logo { font-family:'Inter',sans-serif; font-size:1.1rem; font-weight:800; letter-spacing:-.01em; color:var(--text); display:block; margin-bottom:.3rem; }
     .footer-logo .dot { color:var(--blue); }
     .footer-copy { font-size:.7rem; color:var(--dim); }
     .footer-links { display:flex; gap:1.8rem; list-style:none; flex-wrap:wrap; }
@@ -261,7 +261,7 @@
 <nav id="navbar">
   <a href="#hero" class="nav-logo">
     <img src="logo-pulse.png" alt="" class="nav-logo-img">
-    PULSE MEDIA<span class="dot">.</span>
+    Pulse Media
   </a>
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
@@ -276,10 +276,6 @@
 <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="hero-tag-dot"></span>
-      Aktualnie przyjmuję nowych klientów
-    </div>
     <h1 class="hero-headline">
       Generuję <span class="hero-hl">10&nbsp;000+ organicznych wyświetleń</span> dla Twojego biznesu w pierwszych 30 dniach — bez płatnych reklam
     </h1>
@@ -606,7 +602,7 @@
 <footer>
   <div class="footer-inner">
     <div>
-      <span class="footer-logo">PULSE MEDIA<span class="dot">.</span></span>
+      <span class="footer-logo">Pulse Media</span>
       <p class="footer-copy">© 2026 Pulse Media. Wszelkie prawa zastrzeżone.</p>
     </div>
     <ul class="footer-links">
