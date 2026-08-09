@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse Media — Social Media Agency</title>
+  <title>Pulse Media — Agencja Social Media</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
     nav.scrolled { background: rgba(255,255,255,.96); backdrop-filter: blur(20px); border-bottom-color: var(--border); box-shadow: 0 1px 24px rgba(137,62,245,.06); }
     .nav-logo { display: flex; align-items: center; gap: .55rem; text-decoration: none; font-weight: 800; font-size: 1.05rem; letter-spacing: -.01em; color: var(--text); }
     .nav-logo-img { width: 30px; height: 30px; border-radius: 7px; object-fit: cover; }
-    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--text); }
@@ -44,6 +44,13 @@
     .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all .3s; }
     .nav-mobile-open { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); box-shadow: 0 8px 28px rgba(137,62,245,.09); padding: 1.8rem 5%; gap: 1.3rem; }
     .nav-mobile-open .nav-cta { width: fit-content; }
+
+    /* ── LANG PICKER ── */
+    .lang-picker { display: flex; align-items: center; gap: .2rem; }
+    .lang-sep { color: var(--dim); font-size: .7rem; user-select: none; padding: 0 .1rem; }
+    .lang-btn { background: none; border: none; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; color: var(--dim); cursor: pointer; padding: .28rem .48rem; border-radius: 5px; transition: color .2s, background .2s; letter-spacing: .06em; line-height: 1; }
+    .lang-btn.active { color: var(--blue); background: rgba(137,62,245,.09); }
+    .lang-btn:hover:not(.active) { color: var(--text); }
 
     /* ── BUTTONS ── */
     .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .22s; padding: .82rem 1.7rem; border: none; border-radius: 10px; }
@@ -240,11 +247,16 @@
     Pulse Media
   </a>
   <div class="nav-right">
+    <div class="lang-picker">
+      <button class="lang-btn active" data-lang="pl" onclick="setLang('pl')">PL</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#pillars">Services</a></li>
-      <li><a href="#work">Our Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+      <li><a href="#pillars" data-i18n="nav-services">Usługi</a></li>
+      <li><a href="#work" data-i18n="nav-work">Nasze Prace</a></li>
+      <li><a href="#about" data-i18n="nav-about">O Mnie</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav-cta">Porozmawiajmy</a></li>
     </ul>
     <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </div>
@@ -255,34 +267,34 @@
   <div class="hero-inner">
     <div class="hero-kicker">
       <span class="hero-kicker-dot"></span>
-      Social Media Agency — Warsaw, Poland
+      <span data-i18n="hero-kicker">Agencja Social Media — Warszawa, Polska</span>
     </div>
-    <h1 class="hero-headline">
-      We turn your brand<br>into content people<br><span class="hero-hl">can't stop watching.</span>
+    <h1 class="hero-headline" data-i18n-html="hero-headline">
+      Zamieniamy Twoją markę<br>w treści, których<br><span class="hero-hl">nie można przestać oglądać.</span>
     </h1>
-    <p class="hero-sub">
-      Short-form video and organic social media management that grows your audience for free — or paid ad campaigns that scale your brand to the next level. One team. Your choice.
+    <p class="hero-sub" data-i18n="hero-sub">
+      Krótkie filmy i zarządzanie social mediami, które bezpłatnie rozwijają Twoją publiczność — lub płatne kampanie reklamowe, które skalują Twoją markę na wyższy poziom. Jeden zespół. Twój wybór.
     </p>
     <div class="hero-btns">
-      <a href="#pillars" class="btn btn-solid">See How We Grow You &nbsp;→</a>
-      <a href="#contact" class="btn btn-ghost">Book a Free Call</a>
+      <a href="#pillars" class="btn btn-solid" data-i18n="hero-btn1">Zobacz jak Cię rozwijamy &nbsp;→</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero-btn2">Umów bezpłatną rozmowę</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
         <span class="hero-stat-num">10K+</span>
-        <span class="hero-stat-label">Organic views<br>in month 1</span>
+        <span class="hero-stat-label" data-i18n-html="stat1-label">Organicznych wyświetleń<br>w 1. miesiącu</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-num">30</span>
-        <span class="hero-stat-label">Days to see<br>real results</span>
+        <span class="hero-stat-label" data-i18n-html="stat2-label">Dni do<br>prawdziwych wyników</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-num">100%</span>
-        <span class="hero-stat-label">Done for<br>you</span>
+        <span class="hero-stat-label" data-i18n-html="stat3-label">W pełni<br>dla Ciebie</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-num">$0</span>
-        <span class="hero-stat-label">Ad spend<br>required*</span>
+        <span class="hero-stat-label" data-i18n-html="stat4-label">Bez wydatków<br>na reklamy*</span>
       </div>
     </div>
   </div>
@@ -293,60 +305,60 @@
   <div class="section-inner">
 
     <div class="pillars-header reveal">
-      <p class="section-label center">Our Services</p>
-      <h2 class="section-title">Two ways to grow<br>your brand.</h2>
-      <p class="section-sub" style="margin:0 auto 0;">Whether you need organic content or paid growth — we have a pillar built for where your brand is right now.</p>
+      <p class="section-label center" data-i18n="pillars-label">Nasze Usługi</p>
+      <h2 class="section-title" data-i18n-html="pillars-title">Dwa sposoby na<br>rozwój Twojej marki.</h2>
+      <p class="section-sub" style="margin:0 auto 0;" data-i18n="pillars-sub">Niezależnie czy potrzebujesz organicznych treści czy płatnego wzrostu — mamy filar zbudowany dla etapu, na którym jest teraz Twoja marka.</p>
     </div>
 
     <div class="pillars-grid">
 
       <!-- ── PILLAR 1: ORGANIC ── -->
       <div class="pillar-card pillar-organic reveal">
-        <div class="pillar-num">Pillar 01</div>
+        <div class="pillar-num" data-i18n="p1-num">Filar 01</div>
         <div class="pillar-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2v6h6"/></svg>
         </div>
-        <h3 class="pillar-title">The Organic<br>Pillar</h3>
-        <p class="pillar-platforms">Instagram · TikTok · YouTube Shorts</p>
-        <p class="pillar-desc">Full social media management — we film, edit, post and grow your audience through short-form content. No ad spend needed. Every month you get a consistent stream of content built around your brand that drives real organic reach.</p>
+        <h3 class="pillar-title" data-i18n-html="p1-title">Filar<br>Organiczny</h3>
+        <p class="pillar-platforms" data-i18n="p1-platforms">Instagram · TikTok · YouTube Shorts</p>
+        <p class="pillar-desc" data-i18n="p1-desc">Pełne zarządzanie mediami społecznościowymi — filmujemy, edytujemy, publikujemy i rozwijamy Twoją publiczność poprzez krótkie formy wideo. Bez wydatków na reklamy. Co miesiąc dostajesz stały strumień treści zbudowanych wokół Twojej marki, generujących prawdziwy zasięg organiczny.</p>
         <div class="pillar-list">
-          <div class="pillar-item"><div class="pillar-check">✓</div>Full social media management across all platforms</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Professional on-location filming & video editing</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Custom Reels, TikToks & YouTube Shorts</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Content calendar & posting schedule</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Hashtag strategy & caption optimisation</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Community engagement & DM management</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Monthly analytics & performance report</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><strong>10,000+ organic views guaranteed in month 1</strong></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item1">Pełne zarządzanie social media na wszystkich platformach</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item2">Profesjonalne filmowanie na miejscu i montaż wideo</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item3">Autorskie Reelsy, TikToki i YouTube Shorts</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item4">Kalendarz treści i harmonogram publikacji</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item5">Strategia hashtagów i optymalizacja opisów</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item6">Zarządzanie społecznością i obsługa wiadomości DM</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item7">Miesięczna analityka i raport wyników</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p1-item8"><strong>10 000+ organicznych wyświetleń gwarantowanych w 1. miesiącu</strong></span></div>
         </div>
         <div class="pillar-footer">
-          <a href="#contact" class="btn btn-solid" onclick="selectService('organic-direct')">Start Organic &nbsp;→</a>
-          <a href="#contact" class="btn btn-ghost" onclick="selectService('organic-trial')">Free Trial</a>
-          <a href="process.html" class="btn-subtle">How it works →</a>
+          <a href="#contact" class="btn btn-solid" onclick="selectService('organic-direct')" data-i18n="p1-btn1">Zacznij organicznie &nbsp;→</a>
+          <a href="#contact" class="btn btn-ghost" onclick="selectService('organic-trial')" data-i18n="p1-btn2">Bezpłatny Trial</a>
+          <a href="process.html" class="btn-subtle" data-i18n="p1-btn3">Jak to działa →</a>
         </div>
       </div>
 
       <!-- ── PILLAR 2: SCALE ── -->
       <div class="pillar-card pillar-scale reveal rd1">
-        <div class="pillar-num">Pillar 02</div>
+        <div class="pillar-num" data-i18n="p2-num">Filar 02</div>
         <div class="pillar-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         </div>
-        <h3 class="pillar-title">The Scale<br>Offer</h3>
-        <p class="pillar-platforms">Organic · Paid Ads · Or Both</p>
-        <p class="pillar-desc">When you're ready to grow beyond organic reach, we build a custom growth plan tailored to your goals. This can mean paid ad campaigns, a reinforced organic layer, or a combination of both — we assess what your brand actually needs and execute it.</p>
+        <h3 class="pillar-title" data-i18n-html="p2-title">Oferta<br>Skalowania</h3>
+        <p class="pillar-platforms" data-i18n="p2-platforms">Organiczne · Płatne Reklamy · Lub Oba</p>
+        <p class="pillar-desc" data-i18n="p2-desc">Gdy jesteś gotowy wyjść poza organiczny zasięg, budujemy niestandardowy plan wzrostu dopasowany do Twoich celów. Mogą to być płatne kampanie reklamowe, wzmocniona warstwa organiczna lub kombinacja obu — oceniamy, czego Twoja marka naprawdę potrzebuje i to realizujemy.</p>
         <div class="pillar-list">
-          <div class="pillar-item"><div class="pillar-check">✓</div>Custom brand growth strategy & audit</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Paid ad campaigns (Meta Ads & TikTok Ads)</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Ad creative production — video + static formats</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Audience targeting, retargeting & lookalikes</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Budget optimisation & ROAS tracking</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>A/B testing & ongoing creative iteration</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div>Optional organic content layer included</div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><strong>Monthly performance report & strategy review</strong></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item1">Niestandardowa strategia wzrostu marki i audyt</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item2">Płatne kampanie reklamowe (Meta Ads i TikTok Ads)</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item3">Produkcja kreacji reklamowych — formaty wideo i statyczne</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item4">Targetowanie odbiorców, retargeting i grupy podobnych</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item5">Optymalizacja budżetu i śledzenie ROAS</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item6">Testy A/B i ciągłe doskonalenie kreacji</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item7">Opcjonalna warstwa treści organicznych w pakiecie</span></div>
+          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p2-item8"><strong>Miesięczny raport wyników i przegląd strategii</strong></span></div>
         </div>
         <div class="pillar-footer">
-          <a href="#contact" class="btn btn-solid" onclick="selectService('scale')">Get a Custom Quote &nbsp;→</a>
+          <a href="#contact" class="btn btn-solid" onclick="selectService('scale')" data-i18n="p2-btn1">Uzyskaj indywidualną wycenę &nbsp;→</a>
         </div>
       </div>
 
@@ -358,32 +370,32 @@
 <section id="work">
   <div class="section-inner">
     <div class="work-header reveal">
-      <p class="section-label center">Portfolio</p>
-      <h2 class="section-title">Content we've created.</h2>
-      <p class="section-sub">Real brands. Real results. We film and edit everything in-house — built to stop the scroll and drive genuine engagement.</p>
+      <p class="section-label center" data-i18n="work-label">Portfolio</p>
+      <h2 class="section-title" data-i18n="work-title">Treści, które stworzyliśmy.</h2>
+      <p class="section-sub" data-i18n="work-sub">Prawdziwe marki. Prawdziwe wyniki. Wszystko filmujemy i montujemy wewnętrznie — stworzone, by zatrzymać scroll i generować prawdziwe zaangażowanie.</p>
     </div>
-    <p class="work-slogan reveal">We can create for <em>any industry, any business.</em></p>
+    <p class="work-slogan reveal" data-i18n-html="work-slogan">Tworzymy dla <em>każdej branży, każdego biznesu.</em></p>
     <div class="video-row">
       <div class="video-card reveal">
         <div class="video-wrap" id="vw1" onclick="toggleVideo('vw1')">
           <video id="vid1" src="video-restaurant.mp4" preload="metadata" playsinline></video>
           <div class="video-overlay"><div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <p class="video-label">Asian Restaurant</p>
+        <p class="video-label" data-i18n="work-vid1">Restauracja Azjatycka</p>
       </div>
       <div class="video-card reveal rd1">
         <div class="video-wrap" id="vw2" onclick="toggleVideo('vw2')">
           <video id="vid2" src="video-barbershop.mp4" preload="metadata" playsinline></video>
           <div class="video-overlay"><div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <p class="video-label">Barbershop</p>
+        <p class="video-label" data-i18n="work-vid2">Barber Shop</p>
       </div>
       <div class="video-card reveal rd2">
         <div class="video-wrap" id="vw3" onclick="toggleVideo('vw3')">
           <video id="vid3" src="video-english.mp4" preload="metadata" playsinline></video>
           <div class="video-overlay"><div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <p class="video-label">English School</p>
+        <p class="video-label" data-i18n="work-vid3">Szkoła Angielskiego</p>
       </div>
     </div>
   </div>
@@ -391,7 +403,7 @@
 
 <!-- ═══ TRUST ════════════════════════════════════════ -->
 <section id="trust">
-  <p class="trust-label">Trusted by local brands</p>
+  <p class="trust-label" data-i18n="trust-label">Zaufały nam lokalne marki</p>
   <div class="marquee-wrap">
     <div class="marquee-inner">
       <div class="logo-slide"><img src="logo-lubihair.png" alt="Lubi Hair"          class="logo-lubihair"></div>
@@ -419,20 +431,20 @@
         <p class="about-photo-name">Louis Destrebecq</p>
       </div>
       <div class="reveal rd1">
-        <p class="section-label">About</p>
+        <p class="section-label" data-i18n="about-label">O Mnie</p>
         <h2 class="about-name">Louis Destrebecq</h2>
-        <p class="about-role">Founder, Pulse Media</p>
-        <p class="about-bio">
-          I started Pulse Media because I kept seeing the same story — businesses with something real to offer, completely invisible online. No consistent content. No strategy. No results.<br><br>
-          I film, edit, strategise and post — taking the entire content operation off your plate. Whether you need organic growth or paid acceleration, I build the plan around what your brand actually needs right now. Not a one-size-fits-all package. A real strategy.
+        <p class="about-role" data-i18n="about-role">Założyciel, Pulse Media</p>
+        <p class="about-bio" data-i18n-html="about-bio">
+          Założyłem Pulse Media, bo wciąż widywałem tę samą historię — firmy z czymś prawdziwym do zaoferowania, kompletnie niewidoczne w sieci. Brak spójnych treści. Brak strategii. Brak wyników.<br><br>
+          Filmuję, montuję, tworzę strategię i publikuję — zdejmując z Ciebie całą operację contentową. Niezależnie czy potrzebujesz wzrostu organicznego czy płatnego przyspieszenia, buduję plan dopasowany do tego, czego Twoja marka naprawdę potrzebuje. Nie pakiet jeden-dla-wszystkich. Prawdziwa strategia.
         </p>
         <div class="about-tags">
-          <span class="about-tag">Short-form video</span>
-          <span class="about-tag">Social media strategy</span>
-          <span class="about-tag">Content creation</span>
-          <span class="about-tag">Meta Ads</span>
-          <span class="about-tag">TikTok Ads</span>
-          <span class="about-tag">Brand growth</span>
+          <span class="about-tag" data-i18n="about-tag1">Krótkie formy wideo</span>
+          <span class="about-tag" data-i18n="about-tag2">Strategia social media</span>
+          <span class="about-tag" data-i18n="about-tag3">Tworzenie treści</span>
+          <span class="about-tag" data-i18n="about-tag4">Meta Ads</span>
+          <span class="about-tag" data-i18n="about-tag5">TikTok Ads</span>
+          <span class="about-tag" data-i18n="about-tag6">Rozwój marki</span>
         </div>
       </div>
     </div>
@@ -445,57 +457,63 @@
     <div class="contact-grid">
 
       <div class="contact-info reveal">
-        <p class="section-label">Get in Touch</p>
-        <h2 class="section-title">Let's build<br>something.</h2>
-        <p class="section-sub" style="margin-bottom:2.2rem;">Tell me about your brand and I'll come back within 24 hours with a clear, no-fluff plan.</p>
+        <p class="section-label" data-i18n="contact-label">Kontakt</p>
+        <h2 class="section-title" data-i18n-html="contact-title">Zbudujmy<br>coś razem.</h2>
+        <p class="section-sub" style="margin-bottom:2.2rem;" data-i18n="contact-sub">Opowiedz mi o swojej marce, a odezwę się w ciągu 24 godzin z jasnym, konkretnym planem.</p>
         <div class="contact-detail">
           <div class="contact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div></div>
+          <div>
+            <div class="contact-lbl" data-i18n="contact-email-lbl">Email</div>
+            <div class="contact-val"><a href="mailto:warsawmedia.pl@gmail.com">warsawmedia.pl@gmail.com</a></div>
+          </div>
         </div>
         <div class="contact-detail">
           <div class="contact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><div class="contact-lbl">Based in</div><div class="contact-val">Wilanów, Warsaw, Poland</div></div>
+          <div>
+            <div class="contact-lbl" data-i18n="contact-location-lbl">Siedziba</div>
+            <div class="contact-val" data-i18n="contact-location-val">Wilanów, Warszawa, Polska</div>
+          </div>
         </div>
         <div class="contact-info-box">
-          <div class="contact-info-lbl">Free Trial Available</div>
-          <div class="contact-info-desc">Not ready to commit? Start with a free trial of the Organic Pillar — no contract, no credit card. See real results before signing anything.</div>
+          <div class="contact-info-lbl" data-i18n="contact-trial-lbl">Dostępny Bezpłatny Trial</div>
+          <div class="contact-info-desc" data-i18n="contact-trial-desc">Nie gotowy na zobowiązanie? Zacznij od bezpłatnego trialu Filara Organicznego — bez umowy, bez karty kredytowej. Zobacz prawdziwe wyniki, zanim cokolwiek podpiszesz.</div>
         </div>
       </div>
 
       <div class="reveal rd1">
         <div id="contactForm">
           <div class="form-group">
-            <label class="form-lbl">Your Name <span class="req">*</span></label>
-            <input id="inputName" type="text" class="form-input" placeholder="John Smith">
+            <label class="form-lbl"><span data-i18n="form-name-lbl">Twoje imię i nazwisko</span> <span class="req">*</span></label>
+            <input id="inputName" type="text" class="form-input" data-i18n-ph="form-name-ph" placeholder="Jan Kowalski">
           </div>
           <div class="form-group">
-            <label class="form-lbl">Email <span class="req">*</span></label>
-            <input id="inputEmail" type="email" class="form-input" placeholder="your@email.com">
+            <label class="form-lbl"><span data-i18n="form-email-lbl">Email</span> <span class="req">*</span></label>
+            <input id="inputEmail" type="email" class="form-input" data-i18n-ph="form-email-ph" placeholder="twój@email.com">
           </div>
           <div class="form-group">
-            <label class="form-lbl">What are you interested in? <span class="req">*</span></label>
+            <label class="form-lbl"><span data-i18n="form-service-lbl">Co Cię interesuje?</span> <span class="req">*</span></label>
             <select class="form-select" id="serviceSelect">
-              <option value="" disabled selected>Choose a service...</option>
-              <option value="The Organic Pillar — direct partnership">The Organic Pillar — direct partnership</option>
-              <option value="The Organic Pillar — free trial">The Organic Pillar — free trial</option>
-              <option value="The Scale Offer — organic + ads">The Scale Offer — organic + ads</option>
-              <option value="The Scale Offer — paid ads only">The Scale Offer — paid ads only</option>
-              <option value="Not sure — let's talk">Not sure — let's talk</option>
+              <option value="" disabled selected data-i18n-opt="form-service-ph">Wybierz usługę...</option>
+              <option value="The Organic Pillar — direct partnership" data-i18n-opt="opt1">Filar Organiczny — bezpośrednia współpraca</option>
+              <option value="The Organic Pillar — free trial" data-i18n-opt="opt2">Filar Organiczny — bezpłatny trial</option>
+              <option value="The Scale Offer — organic + ads" data-i18n-opt="opt3">Oferta Skalowania — organiczne + reklamy</option>
+              <option value="The Scale Offer — paid ads only" data-i18n-opt="opt4">Oferta Skalowania — tylko reklamy</option>
+              <option value="Not sure — let's talk" data-i18n-opt="opt5">Nie jestem pewny — porozmawiajmy</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-lbl">Tell me about your brand <span class="req">*</span></label>
-            <textarea id="inputMessage" class="form-textarea" placeholder="What do you do? What are your goals? Where are you right now on social media?"></textarea>
+            <label class="form-lbl"><span data-i18n="form-msg-lbl">Opowiedz mi o swojej marce</span> <span class="req">*</span></label>
+            <textarea id="inputMessage" class="form-textarea" data-i18n-ph="form-msg-ph" placeholder="Czym się zajmujesz? Jakie masz cele? Gdzie jesteś teraz w social mediach?"></textarea>
           </div>
-          <div id="formError" style="display:none;font-size:.82rem;color:#d94f4f;margin-bottom:1rem;padding:.7rem 1rem;background:rgba(217,79,79,.07);border:1px solid rgba(217,79,79,.2);border-radius:8px;">Please fill in all required fields.</div>
+          <div id="formError" style="display:none;font-size:.82rem;color:#d94f4f;margin-bottom:1rem;padding:.7rem 1rem;background:rgba(217,79,79,.07);border:1px solid rgba(217,79,79,.2);border-radius:8px;" data-i18n="form-error">Proszę wypełnić wszystkie wymagane pola.</div>
           <div class="form-submit">
-            <button class="btn btn-solid" onclick="submitForm()">Send Message &nbsp;→</button>
+            <button class="btn btn-solid" onclick="submitForm()" data-i18n="form-submit">Wyślij wiadomość &nbsp;→</button>
           </div>
         </div>
         <div class="form-success" id="formSuccess">
           <div class="form-success-ico">✓</div>
-          <h3>Message received.</h3>
-          <p>I'll get back to you within 24 hours with a clear, tailored plan.</p>
+          <h3 data-i18n="form-success-h">Wiadomość otrzymana.</h3>
+          <p data-i18n="form-success-p">Odezwę się w ciągu 24 godzin z jasnym, dopasowanym planem.</p>
         </div>
       </div>
 
@@ -511,18 +529,324 @@
         <img src="logo-pulse.png" alt="" class="footer-logo-img">
         Pulse Media
       </div>
-      <p class="footer-copy">© 2026 Pulse Media. All rights reserved.</p>
+      <p class="footer-copy" data-i18n="footer-copy">© 2026 Pulse Media. Wszelkie prawa zastrzeżone.</p>
     </div>
     <ul class="footer-links">
-      <li><a href="#pillars">Services</a></li>
-      <li><a href="#work">Our Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#pillars" data-i18n="footer-services">Usługi</a></li>
+      <li><a href="#work" data-i18n="footer-work">Nasze Prace</a></li>
+      <li><a href="#about" data-i18n="footer-about">O Mnie</a></li>
+      <li><a href="#contact" data-i18n="footer-contact">Kontakt</a></li>
     </ul>
   </div>
 </footer>
 
 <script>
+  /* ── TRANSLATIONS ── */
+  const translations = {
+    pl: {
+      'page-title':           'Pulse Media — Agencja Social Media',
+      'nav-services':         'Usługi',
+      'nav-work':             'Nasze Prace',
+      'nav-about':            'O Mnie',
+      'nav-cta':              'Porozmawiajmy',
+      'hero-kicker':          'Agencja Social Media — Warszawa, Polska',
+      'hero-headline':        'Zamieniamy Twoją markę<br>w treści, których<br><span class="hero-hl">nie można przestać oglądać.</span>',
+      'hero-sub':             'Krótkie filmy i zarządzanie social mediami, które bezpłatnie rozwijają Twoją publiczność — lub płatne kampanie reklamowe, które skalują Twoją markę na wyższy poziom. Jeden zespół. Twój wybór.',
+      'hero-btn1':            'Zobacz jak Cię rozwijamy  →',
+      'hero-btn2':            'Umów bezpłatną rozmowę',
+      'stat1-label':          'Organicznych wyświetleń<br>w 1. miesiącu',
+      'stat2-label':          'Dni do<br>prawdziwych wyników',
+      'stat3-label':          'W pełni<br>dla Ciebie',
+      'stat4-label':          'Bez wydatków<br>na reklamy*',
+      'pillars-label':        'Nasze Usługi',
+      'pillars-title':        'Dwa sposoby na<br>rozwój Twojej marki.',
+      'pillars-sub':          'Niezależnie czy potrzebujesz organicznych treści czy płatnego wzrostu — mamy filar zbudowany dla etapu, na którym jest teraz Twoja marka.',
+      'p1-num':               'Filar 01',
+      'p1-title':             'Filar<br>Organiczny',
+      'p1-platforms':         'Instagram · TikTok · YouTube Shorts',
+      'p1-desc':              'Pełne zarządzanie mediami społecznościowymi — filmujemy, edytujemy, publikujemy i rozwijamy Twoją publiczność poprzez krótkie formy wideo. Bez wydatków na reklamy. Co miesiąc dostajesz stały strumień treści zbudowanych wokół Twojej marki, generujących prawdziwy zasięg organiczny.',
+      'p1-item1':             'Pełne zarządzanie social media na wszystkich platformach',
+      'p1-item2':             'Profesjonalne filmowanie na miejscu i montaż wideo',
+      'p1-item3':             'Autorskie Reelsy, TikToki i YouTube Shorts',
+      'p1-item4':             'Kalendarz treści i harmonogram publikacji',
+      'p1-item5':             'Strategia hashtagów i optymalizacja opisów',
+      'p1-item6':             'Zarządzanie społecznością i obsługa wiadomości DM',
+      'p1-item7':             'Miesięczna analityka i raport wyników',
+      'p1-item8':             '<strong>10 000+ organicznych wyświetleń gwarantowanych w 1. miesiącu</strong>',
+      'p1-btn1':              'Zacznij organicznie  →',
+      'p1-btn2':              'Bezpłatny Trial',
+      'p1-btn3':              'Jak to działa →',
+      'p2-num':               'Filar 02',
+      'p2-title':             'Oferta<br>Skalowania',
+      'p2-platforms':         'Organiczne · Płatne Reklamy · Lub Oba',
+      'p2-desc':              'Gdy jesteś gotowy wyjść poza organiczny zasięg, budujemy niestandardowy plan wzrostu dopasowany do Twoich celów. Mogą to być płatne kampanie reklamowe, wzmocniona warstwa organiczna lub kombinacja obu — oceniamy, czego Twoja marka naprawdę potrzebuje i to realizujemy.',
+      'p2-item1':             'Niestandardowa strategia wzrostu marki i audyt',
+      'p2-item2':             'Płatne kampanie reklamowe (Meta Ads i TikTok Ads)',
+      'p2-item3':             'Produkcja kreacji reklamowych — formaty wideo i statyczne',
+      'p2-item4':             'Targetowanie odbiorców, retargeting i grupy podobnych',
+      'p2-item5':             'Optymalizacja budżetu i śledzenie ROAS',
+      'p2-item6':             'Testy A/B i ciągłe doskonalenie kreacji',
+      'p2-item7':             'Opcjonalna warstwa treści organicznych w pakiecie',
+      'p2-item8':             '<strong>Miesięczny raport wyników i przegląd strategii</strong>',
+      'p2-btn1':              'Uzyskaj indywidualną wycenę  →',
+      'work-label':           'Portfolio',
+      'work-title':           'Treści, które stworzyliśmy.',
+      'work-sub':             'Prawdziwe marki. Prawdziwe wyniki. Wszystko filmujemy i montujemy wewnętrznie — stworzone, by zatrzymać scroll i generować prawdziwe zaangażowanie.',
+      'work-slogan':          'Tworzymy dla <em>każdej branży, każdego biznesu.</em>',
+      'work-vid1':            'Restauracja Azjatycka',
+      'work-vid2':            'Barber Shop',
+      'work-vid3':            'Szkoła Angielskiego',
+      'trust-label':          'Zaufały nam lokalne marki',
+      'about-label':          'O Mnie',
+      'about-role':           'Założyciel, Pulse Media',
+      'about-bio':            'Założyłem Pulse Media, bo wciąż widywałem tę samą historię — firmy z czymś prawdziwym do zaoferowania, kompletnie niewidoczne w sieci. Brak spójnych treści. Brak strategii. Brak wyników.<br><br>Filmuję, montuję, tworzę strategię i publikuję — zdejmując z Ciebie całą operację contentową. Niezależnie czy potrzebujesz wzrostu organicznego czy płatnego przyspieszenia, buduję plan dopasowany do tego, czego Twoja marka naprawdę potrzebuje. Nie pakiet jeden-dla-wszystkich. Prawdziwa strategia.',
+      'about-tag1':           'Krótkie formy wideo',
+      'about-tag2':           'Strategia social media',
+      'about-tag3':           'Tworzenie treści',
+      'about-tag4':           'Meta Ads',
+      'about-tag5':           'TikTok Ads',
+      'about-tag6':           'Rozwój marki',
+      'contact-label':        'Kontakt',
+      'contact-title':        'Zbudujmy<br>coś razem.',
+      'contact-sub':          'Opowiedz mi o swojej marce, a odezwę się w ciągu 24 godzin z jasnym, konkretnym planem.',
+      'contact-email-lbl':    'Email',
+      'contact-location-lbl': 'Siedziba',
+      'contact-location-val': 'Wilanów, Warszawa, Polska',
+      'contact-trial-lbl':    'Dostępny Bezpłatny Trial',
+      'contact-trial-desc':   'Nie gotowy na zobowiązanie? Zacznij od bezpłatnego trialu Filara Organicznego — bez umowy, bez karty kredytowej. Zobacz prawdziwe wyniki, zanim cokolwiek podpiszesz.',
+      'form-name-lbl':        'Twoje imię i nazwisko',
+      'form-name-ph':         'Jan Kowalski',
+      'form-email-lbl':       'Email',
+      'form-email-ph':        'twój@email.com',
+      'form-service-lbl':     'Co Cię interesuje?',
+      'form-service-ph':      'Wybierz usługę...',
+      'opt1':                 'Filar Organiczny — bezpośrednia współpraca',
+      'opt2':                 'Filar Organiczny — bezpłatny trial',
+      'opt3':                 'Oferta Skalowania — organiczne + reklamy',
+      'opt4':                 'Oferta Skalowania — tylko reklamy',
+      'opt5':                 'Nie jestem pewny — porozmawiajmy',
+      'form-msg-lbl':         'Opowiedz mi o swojej marce',
+      'form-msg-ph':          'Czym się zajmujesz? Jakie masz cele? Gdzie jesteś teraz w social mediach?',
+      'form-submit':          'Wyślij wiadomość  →',
+      'form-error':           'Proszę wypełnić wszystkie wymagane pola.',
+      'form-success-h':       'Wiadomość otrzymana.',
+      'form-success-p':       'Odezwę się w ciągu 24 godzin z jasnym, dopasowanym planem.',
+      'form-err-server':      'Coś poszło nie tak — napisz bezpośrednio na warsawmedia.pl@gmail.com',
+      'form-err-conn':        'Błąd połączenia — napisz bezpośrednio na warsawmedia.pl@gmail.com',
+      'footer-copy':          '© 2026 Pulse Media. Wszelkie prawa zastrzeżone.',
+      'footer-services':      'Usługi',
+      'footer-work':          'Nasze Prace',
+      'footer-about':         'O Mnie',
+      'footer-contact':       'Kontakt',
+      'sending':              'Wysyłanie…',
+    },
+    en: {
+      'page-title':           'Pulse Media — Social Media Agency',
+      'nav-services':         'Services',
+      'nav-work':             'Our Work',
+      'nav-about':            'About',
+      'nav-cta':              "Let's Talk",
+      'hero-kicker':          'Social Media Agency — Warsaw, Poland',
+      'hero-headline':        "We turn your brand<br>into content people<br><span class=\"hero-hl\">can't stop watching.</span>",
+      'hero-sub':             "Short-form video and organic social media management that grows your audience for free — or paid ad campaigns that scale your brand to the next level. One team. Your choice.",
+      'hero-btn1':            'See How We Grow You  →',
+      'hero-btn2':            'Book a Free Call',
+      'stat1-label':          'Organic views<br>in month 1',
+      'stat2-label':          'Days to see<br>real results',
+      'stat3-label':          'Done for<br>you',
+      'stat4-label':          'Ad spend<br>required*',
+      'pillars-label':        'Our Services',
+      'pillars-title':        'Two ways to grow<br>your brand.',
+      'pillars-sub':          "Whether you need organic content or paid growth — we have a pillar built for where your brand is right now.",
+      'p1-num':               'Pillar 01',
+      'p1-title':             'The Organic<br>Pillar',
+      'p1-platforms':         'Instagram · TikTok · YouTube Shorts',
+      'p1-desc':              "Full social media management — we film, edit, post and grow your audience through short-form content. No ad spend needed. Every month you get a consistent stream of content built around your brand that drives real organic reach.",
+      'p1-item1':             'Full social media management across all platforms',
+      'p1-item2':             'Professional on-location filming & video editing',
+      'p1-item3':             'Custom Reels, TikToks & YouTube Shorts',
+      'p1-item4':             'Content calendar & posting schedule',
+      'p1-item5':             'Hashtag strategy & caption optimisation',
+      'p1-item6':             'Community engagement & DM management',
+      'p1-item7':             'Monthly analytics & performance report',
+      'p1-item8':             '<strong>10,000+ organic views guaranteed in month 1</strong>',
+      'p1-btn1':              'Start Organic  →',
+      'p1-btn2':              'Free Trial',
+      'p1-btn3':              'How it works →',
+      'p2-num':               'Pillar 02',
+      'p2-title':             'The Scale<br>Offer',
+      'p2-platforms':         'Organic · Paid Ads · Or Both',
+      'p2-desc':              "When you're ready to grow beyond organic reach, we build a custom growth plan tailored to your goals. This can mean paid ad campaigns, a reinforced organic layer, or a combination of both — we assess what your brand actually needs and execute it.",
+      'p2-item1':             'Custom brand growth strategy & audit',
+      'p2-item2':             'Paid ad campaigns (Meta Ads & TikTok Ads)',
+      'p2-item3':             'Ad creative production — video + static formats',
+      'p2-item4':             'Audience targeting, retargeting & lookalikes',
+      'p2-item5':             'Budget optimisation & ROAS tracking',
+      'p2-item6':             'A/B testing & ongoing creative iteration',
+      'p2-item7':             'Optional organic content layer included',
+      'p2-item8':             '<strong>Monthly performance report & strategy review</strong>',
+      'p2-btn1':              'Get a Custom Quote  →',
+      'work-label':           'Portfolio',
+      'work-title':           "Content we've created.",
+      'work-sub':             "Real brands. Real results. We film and edit everything in-house — built to stop the scroll and drive genuine engagement.",
+      'work-slogan':          'We can create for <em>any industry, any business.</em>',
+      'work-vid1':            'Asian Restaurant',
+      'work-vid2':            'Barbershop',
+      'work-vid3':            'English School',
+      'trust-label':          'Trusted by local brands',
+      'about-label':          'About',
+      'about-role':           'Founder, Pulse Media',
+      'about-bio':            "I started Pulse Media because I kept seeing the same story — businesses with something real to offer, completely invisible online. No consistent content. No strategy. No results.<br><br>I film, edit, strategise and post — taking the entire content operation off your plate. Whether you need organic growth or paid acceleration, I build the plan around what your brand actually needs right now. Not a one-size-fits-all package. A real strategy.",
+      'about-tag1':           'Short-form video',
+      'about-tag2':           'Social media strategy',
+      'about-tag3':           'Content creation',
+      'about-tag4':           'Meta Ads',
+      'about-tag5':           'TikTok Ads',
+      'about-tag6':           'Brand growth',
+      'contact-label':        'Get in Touch',
+      'contact-title':        "Let's build<br>something.",
+      'contact-sub':          "Tell me about your brand and I'll come back within 24 hours with a clear, no-fluff plan.",
+      'contact-email-lbl':    'Email',
+      'contact-location-lbl': 'Based in',
+      'contact-location-val': 'Wilanów, Warsaw, Poland',
+      'contact-trial-lbl':    'Free Trial Available',
+      'contact-trial-desc':   "Not ready to commit? Start with a free trial of the Organic Pillar — no contract, no credit card. See real results before signing anything.",
+      'form-name-lbl':        'Your Name',
+      'form-name-ph':         'John Smith',
+      'form-email-lbl':       'Email',
+      'form-email-ph':        'your@email.com',
+      'form-service-lbl':     'What are you interested in?',
+      'form-service-ph':      'Choose a service...',
+      'opt1':                 'The Organic Pillar — direct partnership',
+      'opt2':                 'The Organic Pillar — free trial',
+      'opt3':                 'The Scale Offer — organic + ads',
+      'opt4':                 'The Scale Offer — paid ads only',
+      'opt5':                 "Not sure — let's talk",
+      'form-msg-lbl':         'Tell me about your brand',
+      'form-msg-ph':          'What do you do? What are your goals? Where are you right now on social media?',
+      'form-submit':          'Send Message  →',
+      'form-error':           'Please fill in all required fields.',
+      'form-success-h':       'Message received.',
+      'form-success-p':       "I'll get back to you within 24 hours with a clear, tailored plan.",
+      'form-err-server':      'Something went wrong — please email warsawmedia.pl@gmail.com directly.',
+      'form-err-conn':        'Connection error — please email warsawmedia.pl@gmail.com directly.',
+      'footer-copy':          '© 2026 Pulse Media. All rights reserved.',
+      'footer-services':      'Services',
+      'footer-work':          'Our Work',
+      'footer-about':         'About',
+      'footer-contact':       'Contact',
+      'sending':              'Sending…',
+    }
+  };
+
+  /* ── CURRENT LANG ── */
+  let currentLang = localStorage.getItem('pulseLang') || 'pl';
+
+  /* ── HEADLINE ANIMATION ── */
+  function animateHeadline(animate) {
+    const h = document.querySelector('.hero-headline');
+    if (!h) return;
+    // strip old hero-word spans first
+    h.querySelectorAll('.hero-word').forEach(s => {
+      const parent = s.parentNode;
+      while (s.firstChild) parent.insertBefore(s.firstChild, s);
+      parent.removeChild(s);
+    });
+    // re-wrap
+    function wrapWords(node) {
+      if (node.nodeType === 3) {
+        const parts = node.textContent.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach(p => {
+          if (/\s+/.test(p)) { frag.appendChild(document.createTextNode(p)); }
+          else if (p) { const s = document.createElement('span'); s.className='hero-word'; s.textContent=p; frag.appendChild(s); }
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1 && node.classList.contains('hero-hl')) {
+        node.classList.add('hero-word'); node.style.display='inline-block';
+      } else if (node.nodeType === 1) {
+        Array.from(node.childNodes).forEach(wrapWords);
+      }
+    }
+    Array.from(h.childNodes).forEach(wrapWords);
+    const words = h.querySelectorAll('.hero-word');
+    if (animate) {
+      words.forEach((w, i) => { w.style.transitionDelay = (0.2 + i * 0.07) + 's'; });
+      requestAnimationFrame(() => requestAnimationFrame(() => { words.forEach(w => w.classList.add('vis')); }));
+    } else {
+      words.forEach(w => { w.style.transitionDelay = '0s'; w.classList.add('vis'); });
+    }
+  }
+
+  /* ── SET LANGUAGE ── */
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('pulseLang', lang);
+    document.documentElement.lang = lang;
+    document.title = translations[lang]['page-title'];
+
+    // textContent updates
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = translations[lang][el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+
+    // innerHTML updates (includes hero-headline, pillar titles, stat labels, etc.)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nHtml];
+      if (val !== undefined) el.innerHTML = val;
+    });
+
+    // placeholder updates
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nPh];
+      if (val !== undefined) el.placeholder = val;
+    });
+
+    // select option text updates
+    document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nOpt];
+      if (val !== undefined) el.textContent = val;
+    });
+
+    // lang button active state
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // re-animate headline without stagger (instant on switch)
+    animateHeadline(false);
+  }
+
+  /* ── INIT LANG ── */
+  (function () {
+    // apply saved/default lang silently on load, then do initial animation
+    const lang = currentLang;
+    document.documentElement.lang = lang;
+    document.title = translations[lang]['page-title'];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = translations[lang][el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nHtml];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nPh];
+      if (val !== undefined) el.placeholder = val;
+    });
+    document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+      const val = translations[lang][el.dataset.i18nOpt];
+      if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    // initial animated headline
+    animateHeadline(true);
+  })();
+
   /* ── Navbar scroll ── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }, { passive:true });
@@ -549,31 +873,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-  /* ── Hero word-by-word animation ── */
-  (function () {
-    const h = document.querySelector('.hero-headline');
-    if (!h) return;
-    function wrapWords(node) {
-      if (node.nodeType === 3) {
-        const parts = node.textContent.split(/(\s+)/);
-        const frag = document.createDocumentFragment();
-        parts.forEach(p => {
-          if (/\s+/.test(p)) { frag.appendChild(document.createTextNode(p)); }
-          else if (p) { const s = document.createElement('span'); s.className='hero-word'; s.textContent=p; frag.appendChild(s); }
-        });
-        node.parentNode.replaceChild(frag, node);
-      } else if (node.nodeType === 1 && node.classList.contains('hero-hl')) {
-        node.classList.add('hero-word'); node.style.display='inline-block';
-      } else if (node.nodeType === 1) {
-        Array.from(node.childNodes).forEach(wrapWords);
-      }
-    }
-    Array.from(h.childNodes).forEach(wrapWords);
-    const words = h.querySelectorAll('.hero-word');
-    words.forEach((w, i) => { w.style.transitionDelay = (0.2 + i * 0.07) + 's'; });
-    requestAnimationFrame(() => requestAnimationFrame(() => { words.forEach(w => w.classList.add('vis')); }));
-  })();
 
   /* ── Video toggle ── */
   window.toggleVideo = function (wrapId) {
@@ -616,10 +915,15 @@
     const service = document.getElementById('serviceSelect').value;
     const message = document.getElementById('inputMessage').value.trim();
     const errBox  = document.getElementById('formError');
-    if (!name || !email || !service || !message) { errBox.style.display='block'; return; }
+    if (!name || !email || !service || !message) {
+      errBox.textContent = translations[currentLang]['form-error'];
+      errBox.style.display = 'block';
+      return;
+    }
     errBox.style.display = 'none';
     const btn = document.querySelector('#contactForm .btn-solid');
-    btn.textContent='Sending…'; btn.disabled=true;
+    btn.textContent = translations[currentLang]['sending'];
+    btn.disabled = true;
     const body = new FormData();
     body.append('access_key',  'YOUR_WEB3FORMS_KEY');
     body.append('subject',     'New enquiry — ' + service + ' | Pulse Media');
@@ -635,15 +939,17 @@
           document.getElementById('contactForm').style.display='none';
           document.getElementById('formSuccess').style.display='block';
         } else {
-          btn.textContent='Send Message →'; btn.disabled=false;
-          errBox.textContent='Something went wrong — please email warsawmedia.pl@gmail.com directly.';
-          errBox.style.display='block';
+          btn.textContent = translations[currentLang]['form-submit'];
+          btn.disabled = false;
+          errBox.textContent = translations[currentLang]['form-err-server'];
+          errBox.style.display = 'block';
         }
       })
       .catch(() => {
-        btn.textContent='Send Message →'; btn.disabled=false;
-        errBox.textContent='Connection error — please email warsawmedia.pl@gmail.com directly.';
-        errBox.style.display='block';
+        btn.textContent = translations[currentLang]['form-submit'];
+        btn.disabled = false;
+        errBox.textContent = translations[currentLang]['form-err-conn'];
+        errBox.style.display = 'block';
       });
   };
 </script>

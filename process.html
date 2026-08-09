@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
@@ -53,20 +53,29 @@
       font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: .06em;
     }
     .nav-logo img { width: 26px; height: 26px; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+    /* ── LANG PICKER ── */
+    .lang-picker { display: flex; align-items: center; gap: .2rem; }
+    .lang-sep { color: var(--dim); font-size: .7rem; user-select: none; padding: 0 .1rem; }
+    .lang-btn { background: none; border: none; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; color: var(--dim); cursor: pointer; padding: .28rem .48rem; border-radius: 5px; transition: color .2s, background .2s; letter-spacing: .06em; line-height: 1; }
+    .lang-btn.active { color: var(--blue); background: rgba(137,62,245,.09); }
+    .lang-btn:hover:not(.active) { color: var(--text); }
+
     .back-btn {
       display: inline-flex; align-items: center; gap: .5rem;
       padding: .6rem 1.4rem;
       border: 1px solid rgba(137,62,245,.55);
       border-radius: 8px;
-      color: #c49eff;
-      background: rgba(137,62,245,.1);
+      color: #893ef5;
+      background: rgba(137,62,245,.08);
       text-decoration: none;
       font-size: .82rem;
       font-weight: 500;
       letter-spacing: .03em;
-      transition: color .2s, border-color .2s;
+      transition: color .2s, border-color .2s, background .2s;
     }
-    .back-btn:hover { color: #fff; border-color: var(--blue); background: rgba(137,62,245,.22); }
+    .back-btn:hover { color: var(--blue-h); border-color: var(--blue); background: rgba(137,62,245,.15); }
     .back-btn svg { transition: transform .2s; }
     .back-btn:hover svg { transform: translateX(-3px); }
 
@@ -228,6 +237,7 @@
       text-decoration: none;
       transition: all .2s;
       cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
     .btn-solid {
       background: var(--blue);
@@ -272,20 +282,27 @@
       <img src="logo-pulse.png" alt="Pulse Media" style="border-radius:6px;"/>
       Pulse Media
     </a>
-    <a href="index.html" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Powrót do strony głównej
-    </a>
+    <div class="nav-right">
+      <div class="lang-picker">
+        <button class="lang-btn active" data-lang="pl" onclick="setLang('pl')">PL</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="index.html" class="back-btn" id="backBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span data-i18n="back-btn">Powrót do strony głównej</span>
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="process-hero">
     <div class="process-eyebrow">
       <span></span>
-      Zarządzanie mediami społecznościowymi
+      <span data-i18n="eyebrow">Zarządzanie mediami społecznościowymi</span>
     </div>
-    <h1>Jak <em>proces</em><br>naprawdę wygląda</h1>
-    <p>Od zera do w pełni zarządzanej, rosnącej obecności w social mediach — oto dokładnie co się dzieje po podpisaniu współpracy.</p>
+    <h1 data-i18n-html="hero-h1">Jak <em>proces</em><br>naprawdę wygląda</h1>
+    <p data-i18n="hero-p">Od zera do w pełni zarządzanej, rosnącej obecności w social mediach — oto dokładnie co się dzieje po podpisaniu współpracy.</p>
   </section>
 
   <!-- TIMELINE -->
@@ -294,14 +311,14 @@
     <div class="step reveal">
       <div class="step-num">01</div>
       <div class="step-body">
-        <div class="step-tag">Tydzień 1</div>
-        <h2>Audyt marki</h2>
-        <p>Zaczynamy od dokładnego przyjrzenia się Twojej obecnej obecności — istniejącym profilom, wcześniejszym treściom, konkurencji i odbiorcom. Daje nam to jasny obraz tego, gdzie jesteś i co sprawia, że Twoja marka jest wyjątkowa, zanim cokolwiek zmienimy.</p>
+        <div class="step-tag" data-i18n="step1-tag">Tydzień 1</div>
+        <h2 data-i18n="step1-title">Audyt marki</h2>
+        <p data-i18n="step1-desc">Zaczynamy od dokładnego przyjrzenia się Twojej obecnej obecności — istniejącym profilom, wcześniejszym treściom, konkurencji i odbiorcom. Daje nam to jasny obraz tego, gdzie jesteś i co sprawia, że Twoja marka jest wyjątkowa, zanim cokolwiek zmienimy.</p>
         <div class="step-details">
-          <span class="step-detail">Przegląd profili</span>
-          <span class="step-detail">Analiza konkurencji</span>
-          <span class="step-detail">Badanie odbiorców</span>
-          <span class="step-detail">Odkrycie głosu marki</span>
+          <span class="step-detail" data-i18n="step1-d1">Przegląd profili</span>
+          <span class="step-detail" data-i18n="step1-d2">Analiza konkurencji</span>
+          <span class="step-detail" data-i18n="step1-d3">Badanie odbiorców</span>
+          <span class="step-detail" data-i18n="step1-d4">Odkrycie głosu marki</span>
         </div>
       </div>
     </div>
@@ -309,14 +326,14 @@
     <div class="step reveal">
       <div class="step-num">02</div>
       <div class="step-body">
-        <div class="step-tag">Tydzień 1–2</div>
-        <h2>Strategia treści</h2>
-        <p>Po zakończeniu audytu budujemy niestandardowy plan treści: platformy, częstotliwość publikacji, filary contentu i ton komunikacji. Otrzymujesz przejrzysty dokument strategiczny, dzięki któremu wiesz dokładnie, co nadchodzi i dlaczego zadziała dla Twoich konkretnych celów.</p>
+        <div class="step-tag" data-i18n="step2-tag">Tydzień 1–2</div>
+        <h2 data-i18n="step2-title">Strategia treści</h2>
+        <p data-i18n="step2-desc">Po zakończeniu audytu budujemy niestandardowy plan treści: platformy, częstotliwość publikacji, filary contentu i ton komunikacji. Otrzymujesz przejrzysty dokument strategiczny, dzięki któremu wiesz dokładnie, co nadchodzi i dlaczego zadziała dla Twoich konkretnych celów.</p>
         <div class="step-details">
-          <span class="step-detail">Wybór platform</span>
-          <span class="step-detail">Kalendarz treści</span>
-          <span class="step-detail">Harmonogram publikacji</span>
-          <span class="step-detail">Wyznaczanie celów</span>
+          <span class="step-detail" data-i18n="step2-d1">Wybór platform</span>
+          <span class="step-detail" data-i18n="step2-d2">Kalendarz treści</span>
+          <span class="step-detail" data-i18n="step2-d3">Harmonogram publikacji</span>
+          <span class="step-detail" data-i18n="step2-d4">Wyznaczanie celów</span>
         </div>
       </div>
     </div>
@@ -324,14 +341,14 @@
     <div class="step reveal">
       <div class="step-num">03</div>
       <div class="step-body">
-        <div class="step-tag">Na bieżąco</div>
-        <h2>Filmowanie i tworzenie</h2>
-        <p>Tu wszystko ożywa. Zajmuję się pełnym procesem kreatywnym — filmowaniem, montażem, grafiką, podpisami i hashtagami — wszystko zbudowane wokół Twojej marki. Każda treść jest tworzona, by zatrzymać scroll i generować realne zaangażowanie.</p>
+        <div class="step-tag" data-i18n="step3-tag">Na bieżąco</div>
+        <h2 data-i18n="step3-title">Filmowanie i tworzenie</h2>
+        <p data-i18n="step3-desc">Tu wszystko ożywa. Zajmuję się pełnym procesem kreatywnym — filmowaniem, montażem, grafiką, podpisami i hashtagami — wszystko zbudowane wokół Twojej marki. Każda treść jest tworzona, by zatrzymać scroll i generować realne zaangażowanie.</p>
         <div class="step-details">
-          <span class="step-detail">Produkcja wideo</span>
-          <span class="step-detail">Projekt graficzny</span>
-          <span class="step-detail">Pisanie podpisów</span>
-          <span class="step-detail">Strategia hashtagów</span>
+          <span class="step-detail" data-i18n="step3-d1">Produkcja wideo</span>
+          <span class="step-detail" data-i18n="step3-d2">Projekt graficzny</span>
+          <span class="step-detail" data-i18n="step3-d3">Pisanie podpisów</span>
+          <span class="step-detail" data-i18n="step3-d4">Strategia hashtagów</span>
         </div>
       </div>
     </div>
@@ -339,14 +356,14 @@
     <div class="step reveal">
       <div class="step-num">04</div>
       <div class="step-body">
-        <div class="step-tag">Co miesiąc</div>
-        <h2>Publikuj, rośnij i raportuj</h2>
-        <p>Treści wychodzą zgodnie z harmonogramem, zaangażowanie społeczności jest aktywnie zarządzane, a Ty otrzymujesz miesięczny raport wyników. Śledzimy co działa, wzmacniamy to i ciągle udoskonalamy strategię, by Twoja publiczność rosła miesiąc po miesiącu.</p>
+        <div class="step-tag" data-i18n="step4-tag">Co miesiąc</div>
+        <h2 data-i18n="step4-title">Publikuj, rośnij i raportuj</h2>
+        <p data-i18n="step4-desc">Treści wychodzą zgodnie z harmonogramem, zaangażowanie społeczności jest aktywnie zarządzane, a Ty otrzymujesz miesięczny raport wyników. Śledzimy co działa, wzmacniamy to i ciągle udoskonalamy strategię, by Twoja publiczność rosła miesiąc po miesiącu.</p>
         <div class="step-details">
-          <span class="step-detail">Zaplanowane publikacje</span>
-          <span class="step-detail">Zarządzanie społecznością</span>
-          <span class="step-detail">Miesięczne raporty</span>
-          <span class="step-detail">Doskonalenie strategii</span>
+          <span class="step-detail" data-i18n="step4-d1">Zaplanowane publikacje</span>
+          <span class="step-detail" data-i18n="step4-d2">Zarządzanie społecznością</span>
+          <span class="step-detail" data-i18n="step4-d3">Miesięczne raporty</span>
+          <span class="step-detail" data-i18n="step4-d4">Doskonalenie strategii</span>
         </div>
       </div>
     </div>
@@ -355,18 +372,122 @@
 
   <!-- BOTTOM CTA -->
   <div class="process-cta">
-    <p>Gotowy, żeby to zacząć? Wybierz ścieżkę poniżej.</p>
+    <p data-i18n="cta-p">Gotowy, żeby to zacząć? Wybierz ścieżkę poniżej.</p>
     <div class="cta-group">
-      <a href="index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem('openSvc','sm-direct');">Zacznijmy bezpośrednio →</a>
-      <a href="index.html#contact" class="btn btn-ghost" onclick="sessionStorage.setItem('openSvc','sm-trial');">Zacznij od bezpłatnego trialu</a>
+      <a href="index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem('openSvc','organic-direct');" data-i18n="cta-btn1">Zacznijmy bezpośrednio →</a>
+      <a href="index.html#contact" class="btn btn-ghost" onclick="sessionStorage.setItem('openSvc','organic-trial');" data-i18n="cta-btn2">Zacznij od bezpłatnego trialu</a>
     </div>
   </div>
 
   <footer>
-    &copy; 2026 Pulse Media — Wszelkie prawa zastrzeżone.
+    <span data-i18n="footer-copy">&copy; 2026 Pulse Media — Wszelkie prawa zastrzeżone.</span>
   </footer>
 
   <script>
+    const translations = {
+      pl: {
+        'page-title':  'Jak to działa — Pulse Media',
+        'back-btn':    'Powrót do strony głównej',
+        'eyebrow':     'Zarządzanie mediami społecznościowymi',
+        'hero-h1':     'Jak <em>proces</em><br>naprawdę wygląda',
+        'hero-p':      'Od zera do w pełni zarządzanej, rosnącej obecności w social mediach — oto dokładnie co się dzieje po podpisaniu współpracy.',
+        'step1-tag':   'Tydzień 1',
+        'step1-title': 'Audyt marki',
+        'step1-desc':  'Zaczynamy od dokładnego przyjrzenia się Twojej obecnej obecności — istniejącym profilom, wcześniejszym treściom, konkurencji i odbiorcom. Daje nam to jasny obraz tego, gdzie jesteś i co sprawia, że Twoja marka jest wyjątkowa, zanim cokolwiek zmienimy.',
+        'step1-d1':    'Przegląd profili',
+        'step1-d2':    'Analiza konkurencji',
+        'step1-d3':    'Badanie odbiorców',
+        'step1-d4':    'Odkrycie głosu marki',
+        'step2-tag':   'Tydzień 1–2',
+        'step2-title': 'Strategia treści',
+        'step2-desc':  'Po zakończeniu audytu budujemy niestandardowy plan treści: platformy, częstotliwość publikacji, filary contentu i ton komunikacji. Otrzymujesz przejrzysty dokument strategiczny, dzięki któremu wiesz dokładnie, co nadchodzi i dlaczego zadziała dla Twoich konkretnych celów.',
+        'step2-d1':    'Wybór platform',
+        'step2-d2':    'Kalendarz treści',
+        'step2-d3':    'Harmonogram publikacji',
+        'step2-d4':    'Wyznaczanie celów',
+        'step3-tag':   'Na bieżąco',
+        'step3-title': 'Filmowanie i tworzenie',
+        'step3-desc':  'Tu wszystko ożywa. Zajmuję się pełnym procesem kreatywnym — filmowaniem, montażem, grafiką, podpisami i hashtagami — wszystko zbudowane wokół Twojej marki. Każda treść jest tworzona, by zatrzymać scroll i generować realne zaangażowanie.',
+        'step3-d1':    'Produkcja wideo',
+        'step3-d2':    'Projekt graficzny',
+        'step3-d3':    'Pisanie podpisów',
+        'step3-d4':    'Strategia hashtagów',
+        'step4-tag':   'Co miesiąc',
+        'step4-title': 'Publikuj, rośnij i raportuj',
+        'step4-desc':  'Treści wychodzą zgodnie z harmonogramem, zaangażowanie społeczności jest aktywnie zarządzane, a Ty otrzymujesz miesięczny raport wyników. Śledzimy co działa, wzmacniamy to i ciągle udoskonalamy strategię, by Twoja publiczność rosła miesiąc po miesiącu.',
+        'step4-d1':    'Zaplanowane publikacje',
+        'step4-d2':    'Zarządzanie społecznością',
+        'step4-d3':    'Miesięczne raporty',
+        'step4-d4':    'Doskonalenie strategii',
+        'cta-p':       'Gotowy, żeby to zacząć? Wybierz ścieżkę poniżej.',
+        'cta-btn1':    'Zacznijmy bezpośrednio →',
+        'cta-btn2':    'Zacznij od bezpłatnego trialu',
+        'footer-copy': '© 2026 Pulse Media — Wszelkie prawa zastrzeżone.',
+      },
+      en: {
+        'page-title':  'How It Works — Pulse Media',
+        'back-btn':    'Back to Homepage',
+        'eyebrow':     'Social Media Management',
+        'hero-h1':     'How the <em>process</em><br>really works',
+        'hero-p':      'From zero to a fully managed, growing social media presence — here is exactly what happens after you sign on.',
+        'step1-tag':   'Week 1',
+        'step1-title': 'Brand Audit',
+        'step1-desc':  "We start with a deep look at your current presence — existing profiles, past content, competitors and audience. This gives us a clear picture of where you are and what makes your brand unique before we change anything.",
+        'step1-d1':    'Profile review',
+        'step1-d2':    'Competitor analysis',
+        'step1-d3':    'Audience research',
+        'step1-d4':    'Brand voice discovery',
+        'step2-tag':   'Weeks 1–2',
+        'step2-title': 'Content Strategy',
+        'step2-desc':  "Once the audit is done, we build a custom content plan: platforms, posting frequency, content pillars and tone of voice. You get a clear strategy document so you know exactly what's coming and why it will work for your specific goals.",
+        'step2-d1':    'Platform selection',
+        'step2-d2':    'Content calendar',
+        'step2-d3':    'Posting schedule',
+        'step2-d4':    'Goal setting',
+        'step3-tag':   'Ongoing',
+        'step3-title': 'Filming & Creation',
+        'step3-desc':  "This is where everything comes alive. I handle the full creative process — filming, editing, graphics, captions and hashtags — all built around your brand. Every piece of content is made to stop the scroll and drive real engagement.",
+        'step3-d1':    'Video production',
+        'step3-d2':    'Graphic design',
+        'step3-d3':    'Caption writing',
+        'step3-d4':    'Hashtag strategy',
+        'step4-tag':   'Monthly',
+        'step4-title': 'Post, Grow & Report',
+        'step4-desc':  "Content goes out on schedule, community engagement is actively managed, and you receive a monthly performance report. We track what works, double down on it and continuously refine the strategy so your audience grows month after month.",
+        'step4-d1':    'Scheduled posts',
+        'step4-d2':    'Community management',
+        'step4-d3':    'Monthly reports',
+        'step4-d4':    'Strategy refinement',
+        'cta-p':       'Ready to get started? Choose your path below.',
+        'cta-btn1':    'Start Direct →',
+        'cta-btn2':    'Start with a Free Trial',
+        'footer-copy': '© 2026 Pulse Media — All rights reserved.',
+      }
+    };
+
+    let currentLang = localStorage.getItem('pulseLang') || 'pl';
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pulseLang', lang);
+      document.documentElement.lang = lang;
+      document.title = translations[lang]['page-title'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const val = translations[lang][el.dataset.i18n];
+        if (val !== undefined) el.textContent = val;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const val = translations[lang][el.dataset.i18nHtml];
+        if (val !== undefined) el.innerHTML = val;
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    // Init
+    setLang(currentLang);
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
