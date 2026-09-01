@@ -97,13 +97,7 @@
 
     .hero-sub { font-size:clamp(.98rem,1.4vw,1.1rem); color:var(--muted); line-height:1.8; max-width:560px; margin:0 auto 2.8rem; opacity:0; animation:enterUp .6s .9s forwards; }
 
-    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:5rem; opacity:0; animation:enterUp .6s 1s forwards; }
-
-    .hero-stats { display:flex; justify-content:center; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:3rem; max-width:800px; margin:0 auto; opacity:0; animation:enterUp .6s 1.12s forwards; }
-    .hero-stat { flex:1; min-width:130px; display:flex; flex-direction:column; align-items:center; gap:.4rem; padding:0 2rem; position:relative; }
-    .hero-stat + .hero-stat::before { content:''; position:absolute; left:0; top:15%; height:70%; width:1px; background:var(--border); }
-    .hero-stat-num { font-size:clamp(2rem,3.5vw,2.8rem); font-weight:800; color:var(--blue); letter-spacing:-.03em; line-height:1; }
-    .hero-stat-label { font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); text-align:center; line-height:1.55; }
+    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:0; opacity:0; animation:enterUp .6s 1s forwards; }
 
     /* ── PILLARS ── */
     #pillars { background:var(--bg-alt); }
@@ -219,9 +213,23 @@
     .footer-links a { font-size:.76rem; font-weight:500; color:rgba(255,255,255,.42); text-decoration:none; transition:color .2s; }
     .footer-links a:hover { color:#fff; }
 
+    /* ── RESULTS ── */
+    #results { background: var(--bg-alt); }
+    .results-header { text-align: center; max-width: 560px; margin: 0 auto 4rem; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .result-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 20px; padding: 2.4rem 2.2rem; position: relative; overflow: hidden; transition: box-shadow .3s, transform .3s; }
+    .result-card:hover { box-shadow: 0 20px 56px rgba(137,62,245,.1); transform: translateY(-4px); }
+    .result-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--blue-l)); }
+    .result-tag { font-size: .6rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .5rem; }
+    .result-client { font-size: 1.05rem; font-weight: 800; color: var(--text); letter-spacing: -.02em; margin-bottom: 1.4rem; }
+    .result-num { font-size: clamp(2.8rem, 4vw, 3.6rem); font-weight: 800; color: var(--blue); letter-spacing: -.04em; line-height: 1; margin-bottom: .5rem; }
+    .result-desc { font-size: .86rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.4rem; flex: 1; }
+    .result-detail { font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; }
+
     /* ── RESPONSIVE ── */
     @media (max-width:1100px) {
       .pillars-grid { grid-template-columns:1fr; }
+      .results-grid { grid-template-columns:1fr; max-width:420px; margin:0 auto; }
       .about-grid { grid-template-columns:1fr; gap:3.5rem; }
       .about-photo-col { align-items:flex-start; }
       .about-photo-wrap { max-width:260px; }
@@ -278,24 +286,6 @@
     <div class="hero-btns">
       <a href="#pillars" class="btn btn-solid" data-i18n="hero-btn1">Zobacz jak Cię rozwijamy &nbsp;→</a>
       <a href="#contact" class="btn btn-ghost" data-i18n="hero-btn2">Umów bezpłatną rozmowę</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num">10K+</span>
-        <span class="hero-stat-label" data-i18n-html="stat1-label">Organicznych wyświetleń<br>w 1. miesiącu</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">30</span>
-        <span class="hero-stat-label" data-i18n-html="stat2-label">Dni do<br>prawdziwych wyników</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">100%</span>
-        <span class="hero-stat-label" data-i18n-html="stat3-label">W pełni<br>dla Ciebie</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">$0</span>
-        <span class="hero-stat-label" data-i18n-html="stat4-label">Bez wydatków<br>na reklamy*</span>
-      </div>
     </div>
   </div>
 </section>
@@ -366,12 +356,54 @@
   </div>
 </section>
 
+<!-- ═══ RESULTS ══════════════════════════════════════ -->
+<section id="results">
+  <div class="section-inner">
+
+    <div class="results-header reveal">
+      <p class="section-label center" data-i18n="results-label">Wyniki</p>
+      <h2 class="section-title" data-i18n-html="results-title">Prawdziwe marki.<br>Prawdziwe wyniki.</h2>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- ── RESULT CARD 1 — edit: tag, client, num, desc, detail ── -->
+      <div class="result-card reveal">
+        <div class="result-tag">Branża</div>
+        <div class="result-client">Klient 1</div>
+        <div class="result-num">—</div>
+        <p class="result-desc">Opis wyniku — np. wyświetleń w pierwszym miesiącu.</p>
+        <div class="result-detail">Instagram · TikTok · 4 tygodnie</div>
+      </div>
+
+      <!-- ── RESULT CARD 2 ── -->
+      <div class="result-card reveal rd1">
+        <div class="result-tag">Branża</div>
+        <div class="result-client">Klient 2</div>
+        <div class="result-num">—</div>
+        <p class="result-desc">Opis wyniku — np. nowych obserwujących w 2 miesiące.</p>
+        <div class="result-detail">Instagram · 8 tygodni</div>
+      </div>
+
+      <!-- ── RESULT CARD 3 ── -->
+      <div class="result-card reveal rd2">
+        <div class="result-tag">Branża</div>
+        <div class="result-client">Klient 3</div>
+        <div class="result-num">—</div>
+        <p class="result-desc">Opis wyniku — np. wzrost sprzedaży dzięki kampanii.</p>
+        <div class="result-detail">Meta Ads · TikTok Ads · 6 tygodni</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══ WORK ════════════════════════════════════════ -->
 <section id="work">
   <div class="section-inner">
     <div class="work-header reveal">
       <p class="section-label center" data-i18n="work-label">Portfolio</p>
-      <h2 class="section-title" data-i18n="work-title">Treści, które stworzyliśmy.</h2>
+      <h2 class="section-title" data-i18n="work-title">Żeby dać Ci pojęcie, co tworzymy...</h2>
       <p class="section-sub" data-i18n="work-sub">Prawdziwe marki. Prawdziwe wyniki. Wszystko filmujemy i montujemy wewnętrznie — stworzone, by zatrzymać scroll i generować prawdziwe zaangażowanie.</p>
     </div>
     <p class="work-slogan reveal" data-i18n-html="work-slogan">Tworzymy dla <em>każdej branży, każdego biznesu.</em></p>
@@ -589,8 +621,10 @@
       'p2-item7':             'Opcjonalna warstwa treści organicznych w pakiecie',
       'p2-item8':             '<strong>Miesięczny raport wyników i przegląd strategii</strong>',
       'p2-btn1':              'Uzyskaj indywidualną wycenę  →',
+      'results-label':        'Wyniki',
+      'results-title':        'Prawdziwe marki.<br>Prawdziwe wyniki.',
       'work-label':           'Portfolio',
-      'work-title':           'Treści, które stworzyliśmy.',
+      'work-title':           'Żeby dać Ci pojęcie, co tworzymy...',
       'work-sub':             'Prawdziwe marki. Prawdziwe wyniki. Wszystko filmujemy i montujemy wewnętrznie — stworzone, by zatrzymać scroll i generować prawdziwe zaangażowanie.',
       'work-slogan':          'Tworzymy dla <em>każdej branży, każdego biznesu.</em>',
       'work-vid1':            'Restauracja Azjatycka',
@@ -686,8 +720,10 @@
       'p2-item7':             'Optional organic content layer included',
       'p2-item8':             '<strong>Monthly performance report & strategy review</strong>',
       'p2-btn1':              'Get a Custom Quote  →',
+      'results-label':        'Results',
+      'results-title':        'Real brands.<br>Real results.',
       'work-label':           'Portfolio',
-      'work-title':           "Content we've created.",
+      'work-title':           'To give you an idea of what we create...',
       'work-sub':             "Real brands. Real results. We film and edit everything in-house — built to stop the scroll and drive genuine engagement.",
       'work-slogan':          'We can create for <em>any industry, any business.</em>',
       'work-vid1':            'Asian Restaurant',
