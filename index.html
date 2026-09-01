@@ -490,8 +490,8 @@
 
       <div class="contact-info reveal">
         <p class="section-label" data-i18n="contact-label">Kontakt</p>
-        <h2 class="section-title" data-i18n-html="contact-title">Zbudujmy<br>coś razem.</h2>
-        <p class="section-sub" style="margin-bottom:2.2rem;" data-i18n="contact-sub">Opowiedz mi o swojej marce, a odezwę się w ciągu 24 godzin z jasnym, konkretnym planem.</p>
+        <h2 class="section-title" data-i18n-html="contact-title">Umów<br>rozmowę.</h2>
+        <p class="section-sub" style="margin-bottom:2.2rem;" data-i18n="contact-sub">Wybierz termin, który Ci odpowiada — pojawię się gotowy z konkretnym planem dla Twojej marki.</p>
         <div class="contact-detail">
           <div class="contact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div>
@@ -507,45 +507,15 @@
           </div>
         </div>
         <div class="contact-info-box">
-          <div class="contact-info-lbl" data-i18n="contact-trial-lbl">Dostępny Bezpłatny Trial</div>
-          <div class="contact-info-desc" data-i18n="contact-trial-desc">Nie gotowy na zobowiązanie? Zacznij od bezpłatnego trialu Filara Organicznego — bez umowy, bez karty kredytowej. Zobacz prawdziwe wyniki, zanim cokolwiek podpiszesz.</div>
+          <div class="contact-info-lbl" data-i18n="contact-trial-lbl">Rozmowa jest bezpłatna</div>
+          <div class="contact-info-desc" data-i18n="contact-trial-desc">30 minut, zero presji. Porozmawiamy o Twojej marce i zobaczysz, czy to ma sens — zanim cokolwiek podpiszesz.</div>
         </div>
       </div>
 
       <div class="reveal rd1">
-        <div id="contactForm">
-          <div class="form-group">
-            <label class="form-lbl"><span data-i18n="form-name-lbl">Twoje imię i nazwisko</span> <span class="req">*</span></label>
-            <input id="inputName" type="text" class="form-input" data-i18n-ph="form-name-ph" placeholder="Jan Kowalski">
-          </div>
-          <div class="form-group">
-            <label class="form-lbl"><span data-i18n="form-email-lbl">Email</span> <span class="req">*</span></label>
-            <input id="inputEmail" type="email" class="form-input" data-i18n-ph="form-email-ph" placeholder="twój@email.com">
-          </div>
-          <div class="form-group">
-            <label class="form-lbl"><span data-i18n="form-service-lbl">Co Cię interesuje?</span> <span class="req">*</span></label>
-            <select class="form-select" id="serviceSelect">
-              <option value="" disabled selected data-i18n-opt="form-service-ph">Wybierz usługę...</option>
-              <option value="The Organic Pillar — direct partnership" data-i18n-opt="opt1">Filar Organiczny — bezpośrednia współpraca</option>
-              <option value="The Organic Pillar — free trial" data-i18n-opt="opt2">Filar Organiczny — bezpłatny trial</option>
-              <option value="The Scale Offer — organic + ads" data-i18n-opt="opt3">Oferta Skalowania — organiczne + reklamy</option>
-              <option value="The Scale Offer — paid ads only" data-i18n-opt="opt4">Oferta Skalowania — tylko reklamy</option>
-              <option value="Not sure — let's talk" data-i18n-opt="opt5">Nie jestem pewny — porozmawiajmy</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-lbl"><span data-i18n="form-msg-lbl">Opowiedz mi o swojej marce</span> <span class="req">*</span></label>
-            <textarea id="inputMessage" class="form-textarea" data-i18n-ph="form-msg-ph" placeholder="Czym się zajmujesz? Jakie masz cele? Gdzie jesteś teraz w social mediach?"></textarea>
-          </div>
-          <div id="formError" style="display:none;font-size:.82rem;color:#d94f4f;margin-bottom:1rem;padding:.7rem 1rem;background:rgba(217,79,79,.07);border:1px solid rgba(217,79,79,.2);border-radius:8px;" data-i18n="form-error">Proszę wypełnić wszystkie wymagane pola.</div>
-          <div class="form-submit">
-            <button class="btn btn-solid" onclick="submitForm()" data-i18n="form-submit">Wyślij wiadomość &nbsp;→</button>
-          </div>
-        </div>
-        <div class="form-success" id="formSuccess">
-          <div class="form-success-ico">✓</div>
-          <h3 data-i18n="form-success-h">Wiadomość otrzymana.</h3>
-          <p data-i18n="form-success-p">Odezwę się w ciągu 24 godzin z jasnym, dopasowanym planem.</p>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/destrebecqsmm/discovery-call?hide_gdpr_banner=1&primary_color=893ef5"
+             style="min-width:320px;height:680px;border-radius:16px;overflow:hidden;">
         </div>
       </div>
 
@@ -641,13 +611,13 @@
       'about-tag5':           'TikTok Ads',
       'about-tag6':           'Rozwój marki',
       'contact-label':        'Kontakt',
-      'contact-title':        'Zbudujmy<br>coś razem.',
-      'contact-sub':          'Opowiedz mi o swojej marce, a odezwę się w ciągu 24 godzin z jasnym, konkretnym planem.',
+      'contact-title':        'Umów<br>rozmowę.',
+      'contact-sub':          'Wybierz termin, który Ci odpowiada — pojawię się gotowy z konkretnym planem dla Twojej marki.',
       'contact-email-lbl':    'Email',
       'contact-location-lbl': 'Siedziba',
       'contact-location-val': 'Wilanów, Warszawa, Polska',
-      'contact-trial-lbl':    'Dostępny Bezpłatny Trial',
-      'contact-trial-desc':   'Nie gotowy na zobowiązanie? Zacznij od bezpłatnego trialu Filara Organicznego — bez umowy, bez karty kredytowej. Zobacz prawdziwe wyniki, zanim cokolwiek podpiszesz.',
+      'contact-trial-lbl':    'Rozmowa jest bezpłatna',
+      'contact-trial-desc':   '30 minut, zero presji. Porozmawiamy o Twojej marce i zobaczysz, czy to ma sens — zanim cokolwiek podpiszesz.',
       'form-name-lbl':        'Twoje imię i nazwisko',
       'form-name-ph':         'Jan Kowalski',
       'form-email-lbl':       'Email',
@@ -740,13 +710,13 @@
       'about-tag5':           'TikTok Ads',
       'about-tag6':           'Brand growth',
       'contact-label':        'Get in Touch',
-      'contact-title':        "Let's build<br>something.",
-      'contact-sub':          "Tell me about your brand and I'll come back within 24 hours with a clear, no-fluff plan.",
+      'contact-title':        'Book<br>a call.',
+      'contact-sub':          "Pick a slot that works for you — I'll show up ready with a clear plan for your brand.",
       'contact-email-lbl':    'Email',
       'contact-location-lbl': 'Based in',
       'contact-location-val': 'Wilanów, Warsaw, Poland',
-      'contact-trial-lbl':    'Free Trial Available',
-      'contact-trial-desc':   "Not ready to commit? Start with a free trial of the Organic Pillar — no contract, no credit card. See real results before signing anything.",
+      'contact-trial-lbl':    'The call is free',
+      'contact-trial-desc':   "30 minutes, zero pressure. We talk about your brand and you'll know if it's a fit — before signing anything.",
       'form-name-lbl':        'Your Name',
       'form-name-ph':         'John Smith',
       'form-email-lbl':       'Email',
@@ -989,5 +959,6 @@
       });
   };
 </script>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
