@@ -149,8 +149,9 @@
     .proof-img {
       position: absolute; top: 0; width: 155px; border-radius: 18px;
       box-shadow: 0 16px 48px rgba(0,0,0,.18); animation: proof-fall linear infinite;
-      --rot: 0deg; pointer-events: none; object-fit: cover;
+      animation-play-state: paused; --rot: 0deg; pointer-events: none; object-fit: cover;
     }
+    #social-proof.rain-active .proof-img { animation-play-state: running; }
 
     /* ── WORK ── */
     #work { background:var(--bg); }
@@ -404,7 +405,7 @@
   <div class="section-inner">
     <div class="proof-header reveal">
       <p class="section-label center">Opinie &amp; Dowód Społeczny</p>
-      <h2 class="section-title" style="text-align:center;">Co mówią o nas klienci.</h2>
+      <h2 class="section-title" style="text-align:center;">Rezultaty są.</h2>
     </div>
   </div>
   <div class="proof-rain">
@@ -819,6 +820,16 @@
       'sending':              'Sending…',
     }
   };
+
+  /* ── SOCIAL PROOF RAIN TRIGGER ── */
+  (function () {
+    const section = document.getElementById('social-proof');
+    if (!section) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => section.classList.toggle('rain-active', e.isIntersecting));
+    }, { threshold: 0.15 });
+    obs.observe(section);
+  })();
 
   /* ── PILLAR ACCORDION ── */
   function togglePillar(toggleEl) {
