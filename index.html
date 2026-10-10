@@ -827,7 +827,7 @@
     if (!section) return;
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => section.classList.toggle('rain-active', e.isIntersecting));
-    }, { threshold: 0.15 });
+    }, { threshold: 0 });
     obs.observe(section);
   })();
 
