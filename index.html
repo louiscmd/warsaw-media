@@ -90,7 +90,7 @@
     .hero-kicker { display:inline-flex; align-items:center; gap:.5rem; font-size:.68rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:2rem; opacity:0; animation:enterUp .5s .1s forwards; }
     .hero-kicker-dot { width:6px; height:6px; border-radius:50%; background:#22c55e; animation:blink 2s ease-in-out infinite; flex-shrink:0; }
 
-    .hero-headline { font-size:clamp(2.8rem,7.5vw,7rem); font-weight:800; line-height:1.04; letter-spacing:-.045em; color:var(--text); margin-bottom:2rem; }
+    .hero-headline { font-size:clamp(2.52rem,6.75vw,6.3rem); font-weight:800; line-height:1.04; letter-spacing:-.045em; color:var(--text); margin-bottom:2rem; }
     .hero-word { display:inline-block; opacity:0; transform:translateY(32px); transition:opacity .5s cubic-bezier(.25,1,.4,1),transform .5s cubic-bezier(.25,1,.4,1); }
     .hero-word.vis { opacity:1; transform:none; }
     .hero-hl { display:inline; background:linear-gradient(100deg,var(--blue) 0%,var(--blue-l) 50%,var(--blue) 100%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; }
@@ -123,6 +123,34 @@
     /* Scale card visual distinction */
     .pillar-scale .pillar-check { background:rgba(137,62,245,.12); border-color:rgba(137,62,245,.5); }
     .pillar-scale .pillar-icon { background:rgba(137,62,245,.12); border-color:rgba(137,62,245,.3); }
+
+    /* ── PILLAR ACCORDION ── */
+    .pillar-toggle { cursor: pointer; position: relative; padding-right: 2rem; }
+    .pillar-chevron { position: absolute; top: .15rem; right: 0; color: var(--blue); transition: transform .35s cubic-bezier(.25,1,.4,1); }
+    .pillar-body { overflow: hidden; max-height: 0; transition: max-height .5s cubic-bezier(.25,1,.4,1), opacity .4s; opacity: 0; }
+    .pillar-card.open .pillar-body { max-height: 1200px; opacity: 1; }
+    .pillar-card.open .pillar-chevron { transform: rotate(180deg); }
+    .pillar-card:hover { box-shadow: 0 24px 64px rgba(137,62,245,.1); transform: none; }
+
+    /* ── SOCIAL PROOF RAIN ── */
+    #social-proof { background: var(--bg); padding: 7rem 5% 0; }
+    .proof-header { text-align: center; max-width: 560px; margin: 0 auto 0; }
+    .proof-rain {
+      position: relative; height: 680px; overflow: hidden; margin-top: 4rem;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    }
+    @keyframes proof-fall {
+      0%   { transform: translateY(-320px) rotate(var(--rot)); opacity: 0; }
+      6%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { transform: translateY(1000px) rotate(var(--rot)); opacity: 0; }
+    }
+    .proof-img {
+      position: absolute; top: 0; width: 155px; border-radius: 18px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.18); animation: proof-fall linear infinite;
+      --rot: 0deg; pointer-events: none; object-fit: cover;
+    }
 
     /* ── WORK ── */
     #work { background:var(--bg); }
@@ -286,8 +314,7 @@
       Krótkie filmy i zarządzanie social mediami, które bezpłatnie rozwijają Twoją publiczność — lub płatne kampanie reklamowe, które skalują Twoją markę na wyższy poziom. Jeden zespół. Twój wybór.
     </p>
     <div class="hero-btns">
-      <a href="#pillars" class="btn btn-solid" data-i18n="hero-btn1">Zobacz jak Cię rozwijamy &nbsp;→</a>
-      <a href="#contact" class="btn btn-ghost" data-i18n="hero-btn2">Umów bezpłatną rozmowę</a>
+      <a href="#contact" class="btn btn-solid" data-i18n="hero-btn2">Umów bezpłatną rozmowę</a>
     </div>
   </div>
 </section>
@@ -306,55 +333,98 @@
 
       <!-- ── PILLAR 1: ORGANIC ── -->
       <div class="pillar-card pillar-organic reveal">
-        <div class="pillar-num" data-i18n="p1-num">Filar 01</div>
-        <div class="pillar-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2v6h6"/></svg>
+        <div class="pillar-toggle" onclick="togglePillar(this)">
+          <div class="pillar-num" data-i18n="p1-num">Filar 01</div>
+          <div class="pillar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2v6h6"/></svg>
+          </div>
+          <h3 class="pillar-title" data-i18n-html="p1-title">Filar<br>Organiczny</h3>
+          <p class="pillar-platforms" data-i18n="p1-platforms">Instagram · TikTok · YouTube Shorts</p>
+          <div class="pillar-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
         </div>
-        <h3 class="pillar-title" data-i18n-html="p1-title">Filar<br>Organiczny</h3>
-        <p class="pillar-platforms" data-i18n="p1-platforms">Instagram · TikTok · YouTube Shorts</p>
-        <p class="pillar-desc" data-i18n="p1-desc">Pełne zarządzanie mediami społecznościowymi — filmujemy, edytujemy, publikujemy i rozwijamy Twoją publiczność poprzez krótkie formy wideo. Bez wydatków na reklamy. Co miesiąc dostajesz stały strumień treści zbudowanych wokół Twojej marki, generujących prawdziwy zasięg organiczny.</p>
-        <div class="pillar-list">
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item1">Pełne zarządzanie social media na wszystkich platformach</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item2">Profesjonalne filmowanie na miejscu i montaż wideo</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item3">Autorskie Reelsy, TikToki i YouTube Shorts</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item4">Kalendarz treści i harmonogram publikacji</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item5">Strategia hashtagów i optymalizacja opisów</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item6">Zarządzanie społecznością i obsługa wiadomości DM</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item7">Miesięczna analityka i raport wyników</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p1-item8"><strong>10 000+ organicznych wyświetleń gwarantowanych w 1. miesiącu</strong></span></div>
-        </div>
-        <div class="pillar-footer">
-          <a href="#contact" class="btn btn-solid" onclick="selectService('organic-direct')" data-i18n="p1-btn1">Zacznij organicznie &nbsp;→</a>
-          <a href="#contact" class="btn btn-ghost" onclick="selectService('organic-trial')" data-i18n="p1-btn2">Bezpłatny Trial</a>
-          <a href="process.html" class="btn-subtle" data-i18n="p1-btn3">Jak to działa →</a>
+        <div class="pillar-body">
+          <p class="pillar-desc" style="margin-top:1.4rem;" data-i18n="p1-desc">Pełne zarządzanie mediami społecznościowymi — filmujemy, edytujemy, publikujemy i rozwijamy Twoją publiczność poprzez krótkie formy wideo. Bez wydatków na reklamy. Co miesiąc dostajesz stały strumień treści zbudowanych wokół Twojej marki, generujących prawdziwy zasięg organiczny.</p>
+          <div class="pillar-list">
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item1">Pełne zarządzanie social media na wszystkich platformach</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item2">Profesjonalne filmowanie na miejscu i montaż wideo</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item3">Autorskie Reelsy, TikToki i YouTube Shorts</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item4">Kalendarz treści i harmonogram publikacji</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item5">Strategia hashtagów i optymalizacja opisów</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item6">Zarządzanie społecznością i obsługa wiadomości DM</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p1-item7">Miesięczna analityka i raport wyników</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p1-item8"><strong>10 000+ organicznych wyświetleń gwarantowanych w 1. miesiącu</strong></span></div>
+          </div>
+          <div class="pillar-footer">
+            <a href="#contact" class="btn btn-solid" onclick="selectService('organic-direct')" data-i18n="p1-btn1">Zacznij organicznie &nbsp;→</a>
+            <a href="#contact" class="btn btn-ghost" onclick="selectService('organic-trial')" data-i18n="p1-btn2">Bezpłatny Trial</a>
+            <a href="process.html" class="btn-subtle" data-i18n="p1-btn3">Jak to działa →</a>
+          </div>
         </div>
       </div>
 
       <!-- ── PILLAR 2: SCALE ── -->
       <div class="pillar-card pillar-scale reveal rd1">
-        <div class="pillar-num" data-i18n="p2-num">Filar 02</div>
-        <div class="pillar-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <div class="pillar-toggle" onclick="togglePillar(this)">
+          <div class="pillar-num" data-i18n="p2-num">Filar 02</div>
+          <div class="pillar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3 class="pillar-title" data-i18n-html="p2-title">Oferta<br>Skalowania</h3>
+          <p class="pillar-platforms" data-i18n="p2-platforms">Organiczne · Płatne Reklamy · Lub Oba</p>
+          <div class="pillar-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
         </div>
-        <h3 class="pillar-title" data-i18n-html="p2-title">Oferta<br>Skalowania</h3>
-        <p class="pillar-platforms" data-i18n="p2-platforms">Organiczne · Płatne Reklamy · Lub Oba</p>
-        <p class="pillar-desc" data-i18n="p2-desc">Gdy jesteś gotowy wyjść poza organiczny zasięg, budujemy niestandardowy plan wzrostu dopasowany do Twoich celów. Mogą to być płatne kampanie reklamowe, wzmocniona warstwa organiczna lub kombinacja obu — oceniamy, czego Twoja marka naprawdę potrzebuje i to realizujemy.</p>
-        <div class="pillar-list">
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item1">Niestandardowa strategia wzrostu marki i audyt</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item2">Płatne kampanie reklamowe (Meta Ads i TikTok Ads)</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item3">Produkcja kreacji reklamowych — formaty wideo i statyczne</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item4">Targetowanie odbiorców, retargeting i grupy podobnych</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item5">Optymalizacja budżetu i śledzenie ROAS</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item6">Testy A/B i ciągłe doskonalenie kreacji</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item7">Opcjonalna warstwa treści organicznych w pakiecie</span></div>
-          <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p2-item8"><strong>Miesięczny raport wyników i przegląd strategii</strong></span></div>
-        </div>
-        <div class="pillar-footer">
-          <a href="#contact" class="btn btn-solid" onclick="selectService('scale')" data-i18n="p2-btn1">Uzyskaj indywidualną wycenę &nbsp;→</a>
+        <div class="pillar-body">
+          <p class="pillar-desc" style="margin-top:1.4rem;" data-i18n="p2-desc">Gdy jesteś gotowy wyjść poza organiczny zasięg, budujemy niestandardowy plan wzrostu dopasowany do Twoich celów. Mogą to być płatne kampanie reklamowe, wzmocniona warstwa organiczna lub kombinacja obu — oceniamy, czego Twoja marka naprawdę potrzebuje i to realizujemy.</p>
+          <div class="pillar-list">
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item1">Niestandardowa strategia wzrostu marki i audyt</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item2">Płatne kampanie reklamowe (Meta Ads i TikTok Ads)</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item3">Produkcja kreacji reklamowych — formaty wideo i statyczne</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item4">Targetowanie odbiorców, retargeting i grupy podobnych</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item5">Optymalizacja budżetu i śledzenie ROAS</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item6">Testy A/B i ciągłe doskonalenie kreacji</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n="p2-item7">Opcjonalna warstwa treści organicznych w pakiecie</span></div>
+            <div class="pillar-item"><div class="pillar-check">✓</div><span data-i18n-html="p2-item8"><strong>Miesięczny raport wyników i przegląd strategii</strong></span></div>
+          </div>
+          <div class="pillar-footer">
+            <a href="#contact" class="btn btn-solid" onclick="selectService('scale')" data-i18n="p2-btn1">Uzyskaj indywidualną wycenę &nbsp;→</a>
+          </div>
         </div>
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ═══ SOCIAL PROOF RAIN ════════════════════════════ -->
+<section id="social-proof">
+  <div class="section-inner">
+    <div class="proof-header reveal">
+      <p class="section-label center">Opinie &amp; Dowód Społeczny</p>
+      <h2 class="section-title" style="text-align:center;">Co mówią o nas klienci.</h2>
+    </div>
+  </div>
+  <div class="proof-rain">
+    <!-- Screenshots provided by client — drop image files into the project folder -->
+    <!-- and update the src attributes below. onerror hides any missing images.   -->
+    <img class="proof-img" src="social-proof-1.jpg"  onerror="this.style.display='none'" style="left:2%;animation-duration:9s;animation-delay:0s;--rot:-2deg">
+    <img class="proof-img" src="social-proof-2.jpg"  onerror="this.style.display='none'" style="left:14%;animation-duration:7s;animation-delay:2.5s;--rot:1.5deg">
+    <img class="proof-img" src="social-proof-3.jpg"  onerror="this.style.display='none'" style="left:26%;animation-duration:10s;animation-delay:1s;--rot:-1deg">
+    <img class="proof-img" src="social-proof-4.jpg"  onerror="this.style.display='none'" style="left:38%;animation-duration:7.5s;animation-delay:4s;--rot:2.5deg">
+    <img class="proof-img" src="social-proof-5.jpg"  onerror="this.style.display='none'" style="left:50%;animation-duration:8.5s;animation-delay:0.5s;--rot:-1.5deg">
+    <img class="proof-img" src="social-proof-6.jpg"  onerror="this.style.display='none'" style="left:62%;animation-duration:6.5s;animation-delay:3s;--rot:1deg">
+    <img class="proof-img" src="social-proof-7.jpg"  onerror="this.style.display='none'" style="left:74%;animation-duration:9.5s;animation-delay:1.5s;--rot:-2.5deg">
+    <img class="proof-img" src="social-proof-8.jpg"  onerror="this.style.display='none'" style="left:84%;animation-duration:8s;animation-delay:5s;--rot:2deg">
+    <img class="proof-img" src="social-proof-9.jpg"  onerror="this.style.display='none'" style="left:8%;animation-duration:7s;animation-delay:6s;--rot:1deg">
+    <img class="proof-img" src="social-proof-10.jpg" onerror="this.style.display='none'" style="left:20%;animation-duration:11s;animation-delay:3.5s;--rot:-1deg">
+    <img class="proof-img" src="social-proof-11.jpg" onerror="this.style.display='none'" style="left:32%;animation-duration:6s;animation-delay:7s;--rot:2deg">
+    <img class="proof-img" src="social-proof-12.jpg" onerror="this.style.display='none'" style="left:44%;animation-duration:9s;animation-delay:2s;--rot:-2deg">
+    <img class="proof-img" src="social-proof-13.jpg" onerror="this.style.display='none'" style="left:56%;animation-duration:7.5s;animation-delay:4.5s;--rot:1.5deg">
+    <img class="proof-img" src="social-proof-14.jpg" onerror="this.style.display='none'" style="left:68%;animation-duration:8s;animation-delay:1s;--rot:-1deg">
+    <img class="proof-img" src="social-proof-15.jpg" onerror="this.style.display='none'" style="left:78%;animation-duration:10s;animation-delay:6.5s;--rot:2.5deg">
   </div>
 </section>
 
@@ -749,6 +819,11 @@
       'sending':              'Sending…',
     }
   };
+
+  /* ── PILLAR ACCORDION ── */
+  function togglePillar(toggleEl) {
+    toggleEl.closest('.pillar-card').classList.toggle('open');
+  }
 
   /* ── CURRENT LANG ── */
   let currentLang = localStorage.getItem('pulseLang') || 'pl';
